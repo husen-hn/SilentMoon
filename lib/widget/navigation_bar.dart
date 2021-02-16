@@ -53,26 +53,23 @@ class _NavigationBarState extends State<NavigationBar> {
             color: iconColor,
           )),
       label: title,
-      activeIcon: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15.0),
-              topRight: Radius.circular(15.0),
-              bottomLeft: Radius.circular(15.0),
-              bottomRight: Radius.circular(15.0),
-            ),
-            child: Container(
-              color: selectedBoxbg,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ImageIcon(
-                  AssetImage(icon),
-                  color: selectedIconColor,
-                ),
+      activeIcon: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15.0),
+            topRight: Radius.circular(15.0),
+            bottomLeft: Radius.circular(15.0),
+            bottomRight: Radius.circular(15.0),
+          ),
+          child: Container(
+            color: selectedBoxbg,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ImageIcon(
+                AssetImage(icon),
+                color: selectedIconColor,
               ),
-            )),
-      ),
+            ),
+          )),
       backgroundColor: widget.bgColor,
     );
   }
