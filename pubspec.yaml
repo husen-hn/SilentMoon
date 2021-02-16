@@ -53,6 +53,8 @@ flutter:
     - images/meditate.png
     - images/music.png
     - images/profile.png
+    - images/logo.png
+    - images/apple.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
