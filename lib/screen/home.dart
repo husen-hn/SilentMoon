@@ -8,6 +8,47 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List musicBoxs = [
+    MusicBox(
+      darkMood: false,
+      bgColor: Colors.grey[50],
+      imgLocalPath: "images/focus.png",
+      imgBg: Color(0xffAFDBC5),
+      title: 'Focus',
+      titleColor: Color(0xff3F414E),
+      time: '3-10 MIN',
+      timeColor: Color(0xffA1A4B2),
+      dotColor: Color(0xffA1A4B2),
+      type: 'MEDITATION',
+      typeColor: Color(0xffA1A4B2),
+    ),
+    MusicBox(
+      darkMood: false,
+      bgColor: Colors.grey[50],
+      imgLocalPath: "images/happiness.png",
+      imgBg: Color(0xffAFDBC5),
+      title: 'Happiness',
+      titleColor: Color(0xff3F414E),
+      time: '3-10 MIN',
+      timeColor: Color(0xffA1A4B2),
+      dotColor: Color(0xffA1A4B2),
+      type: 'MEDITATION',
+      typeColor: Color(0xffA1A4B2),
+    ),
+    MusicBox(
+      darkMood: false,
+      bgColor: Colors.grey[50],
+      imgLocalPath: "images/nature.png",
+      imgBg: Color(0xfff8bbd0),
+      title: 'Nature',
+      titleColor: Color(0xff3F414E),
+      time: '3-10 MIN',
+      timeColor: Color(0xffA1A4B2),
+      dotColor: Color(0xffA1A4B2),
+      type: 'MEDITATION',
+      typeColor: Color(0xffA1A4B2),
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -215,28 +256,26 @@ class _HomeState extends State<Home> {
                       color: Color(0xff3F414E))),
             ),
             Container(
-              height: 150.0,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (BuildContext context, int index) {
-                    return MusicBox(
-                      darkMood: false,
-                      bgColor: Colors.grey[50],
-                      imgLocalPath: "images/lmusbox1.png",
-                      imgBg: Color(0xffAFDBC5),
-                      title: 'Focus',
-                      titleColor: Color(0xff3F414E),
-                      time: '3-10 MIN',
-                      timeColor: Color(0xffA1A4B2),
-                      dotColor: Color(0xffA1A4B2),
-                      type: 'MEDITATION',
-                      typeColor: Color(0xffA1A4B2),
-                    );
-                  }),
+              height: 161.0,
+              child: ListView.separated(
+                padding: EdgeInsets.only(right: 12.0, left: 12.0),
+                // shrinkWrap: true,
+                // physics: ScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: (BuildContext context, int index) {
+                  return musicBoxs[index];
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: 10.0,
+                  );
+                },
+              ),
             ),
+            Container(
+              height: 15.0,
+            )
           ],
         ),
       ),

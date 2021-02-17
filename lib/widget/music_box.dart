@@ -36,7 +36,7 @@ class _MusicBoxState extends State<MusicBox> {
     return FittedBox(
         child: Container(
       width: 162,
-      height: 161,
+      height: 161.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: widget.bgColor,
@@ -59,30 +59,34 @@ class _MusicBoxState extends State<MusicBox> {
           ),
           // Text Title
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0, left: 15.0, right: 15.0),
+            padding:
+                EdgeInsets.only(bottom: 5.0, left: 5.0, right: 15.0, top: 10.0),
             child: Text(
               widget.title,
               style: TextStyle(
                   color: widget.titleColor,
-                  fontSize: 24.0,
+                  fontSize: 18.0,
                   fontWeight: FontWeight.bold),
             ),
           ),
 
           Container(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.only(left: 5.0),
               child: Row(
                 children: [
                   // Box Type
                   Text(
                     widget.type,
-                    style: TextStyle(color: widget.typeColor, fontSize: 14.0),
+                    style: TextStyle(
+                      color: widget.typeColor,
+                      fontSize: 11.0,
+                    ),
                   ),
                   // Dot
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
-                      padding: EdgeInsets.all(3.0),
+                      padding: EdgeInsets.all(1.5),
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.all(Radius.circular(10)), //here
@@ -93,10 +97,13 @@ class _MusicBoxState extends State<MusicBox> {
                   // Box Time
                   Text(
                     widget.time,
-                    style: TextStyle(color: widget.timeColor, fontSize: 14.0),
+                    style: TextStyle(
+                      color: widget.timeColor,
+                      fontSize: 11.0,
+                    ),
                   )
                 ],
-              ))
+              )),
         ],
       ),
     ));
