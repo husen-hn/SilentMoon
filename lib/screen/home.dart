@@ -1,4 +1,5 @@
 import 'package:feedTest/widget/banner_box.dart';
+import 'package:feedTest/widget/music_box.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> {
                   Text(
                     'Silent',
                     style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 18.0,
                         letterSpacing: 2.0,
                         color: Color(0xff3F414E),
                         fontWeight: FontWeight.bold),
@@ -41,7 +42,7 @@ class _HomeState extends State<Home> {
                   Text(
                     'Moon',
                     style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 18.0,
                         letterSpacing: 2.0,
                         color: Color(0xff3F414E),
                         fontWeight: FontWeight.bold),
@@ -115,7 +116,7 @@ class _HomeState extends State<Home> {
                   height: 95,
                   decoration: BoxDecoration(
                       color: Color(0xff333242),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       image: DecorationImage(
                           image: AssetImage("images/boxbg.png"))),
                   child: Container(
@@ -161,23 +162,49 @@ class _HomeState extends State<Home> {
                         ),
                         Expanded(child: Container()),
                         Container(
-                          padding: EdgeInsets.all(16.0),
-                          decoration: ShapeDecoration(
-                            shape: CircleBorder(),
+                          decoration: const ShapeDecoration(
                             color: Colors.white,
+                            shape: CircleBorder(),
                           ),
-                          child: Image(
-                            image: AssetImage("images/play.png"),
-                            width: 12.0,
+                          child: IconButton(
+                            autofocus: true,
+                            icon: Image(
+                              image: AssetImage("images/play.png"),
+                              width: 12.0,
+                            ),
+                            onPressed: () {},
                           ),
-                        )
+                        ),
+
+                        //     TextButton(
+                        //   child: Text(widget.btnText),
+                        //   style: TextButton.styleFrom(
+                        //     backgroundColor: widget.btnColor,
+                        //     primary: widget.btnTxtColor,
+                        //     shape: const RoundedRectangleBorder(
+                        //         borderRadius:
+                        //             BorderRadius.all(Radius.circular(25.0))),
+                        //   ),
+                        //   onPressed: () {},
+                        // ),
+                        // Container(
+                        //   padding: EdgeInsets.all(16.0),
+                        //   decoration: ShapeDecoration(
+                        //     shape: CircleBorder(),
+                        //     color: Colors.white,
+                        //   ),
+                        //   child: Image(
+                        //     image: AssetImage("images/play.png"),
+                        //     width: 12.0,
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            // Recomended
+            // Recomended List
             Padding(
               padding:
                   const EdgeInsets.only(left: 12.0, top: 30.0, bottom: 15.0),
@@ -187,10 +214,29 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.bold,
                       color: Color(0xff3F414E))),
             ),
-            // ListView.builder(
-            //   scrollDirection: Axis.horizontal,
-            //   itemCount: ,
-            //   itemBuilder: itemBuilder)
+            Container(
+              height: 150.0,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: ScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MusicBox(
+                      darkMood: false,
+                      bgColor: Colors.grey[50],
+                      imgLocalPath: "images/lmusbox1.png",
+                      imgBg: Color(0xffAFDBC5),
+                      title: 'Focus',
+                      titleColor: Color(0xff3F414E),
+                      time: '3-10 MIN',
+                      timeColor: Color(0xffA1A4B2),
+                      dotColor: Color(0xffA1A4B2),
+                      type: 'MEDITATION',
+                      typeColor: Color(0xffA1A4B2),
+                    );
+                  }),
+            ),
           ],
         ),
       ),

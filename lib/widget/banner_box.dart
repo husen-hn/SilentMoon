@@ -39,7 +39,7 @@ class _BannerBoxState extends State<BannerBox> {
         width: 177,
         height: 230,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
           color: widget.bgColor,
         ),
         child: Column(
@@ -56,7 +56,7 @@ class _BannerBoxState extends State<BannerBox> {
                   child: Align(
                     alignment: Alignment.topRight,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(10.0),
                       child: Image(
                         image: AssetImage(widget.iconLocalPath),
                         width: widget.iconWidth,
