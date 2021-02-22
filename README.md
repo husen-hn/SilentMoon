@@ -4,6 +4,8 @@
 meditation app, Explore the app, Find some peace of mind to prepare for meditation.
 using [Flutter](https://flutter.dev) and [MUSOPEN](https://musopen.org/) music services.
 
+*ui designed by [Afsar](https://www.figma.com/community/file/882888114457713282)*
+
 ## Features ⌑
 * Meditation Moods (sleep, relaxation, ...)
 
