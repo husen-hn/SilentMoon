@@ -1,5 +1,5 @@
-import 'package:feedTest/widget/banner_box.dart';
-import 'package:feedTest/widget/music_box.dart';
+import 'package:SilentMoon/widget/banner_box.dart';
+import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -9,6 +9,19 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List musicBoxs = [
+    MusicBox(
+      darkMood: false,
+      bgColor: Colors.grey[50],
+      imgLocalPath: "images/nature.png",
+      imgBg: Color(0xfff8bbd0),
+      title: 'Nature',
+      titleColor: Color(0xff3F414E),
+      time: '3-10 MIN',
+      timeColor: Color(0xffA1A4B2),
+      dotColor: Color(0xffA1A4B2),
+      type: 'MEDITATION',
+      typeColor: Color(0xffA1A4B2),
+    ),
     MusicBox(
       darkMood: false,
       bgColor: Colors.grey[50],
@@ -26,21 +39,8 @@ class _HomeState extends State<Home> {
       darkMood: false,
       bgColor: Colors.grey[50],
       imgLocalPath: "images/happiness.png",
-      imgBg: Color(0xffAFDBC5),
+      imgBg: Color(0xffFFC97E),
       title: 'Happiness',
-      titleColor: Color(0xff3F414E),
-      time: '3-10 MIN',
-      timeColor: Color(0xffA1A4B2),
-      dotColor: Color(0xffA1A4B2),
-      type: 'MEDITATION',
-      typeColor: Color(0xffA1A4B2),
-    ),
-    MusicBox(
-      darkMood: false,
-      bgColor: Colors.grey[50],
-      imgLocalPath: "images/nature.png",
-      imgBg: Color(0xfff8bbd0),
-      title: 'Nature',
       titleColor: Color(0xff3F414E),
       time: '3-10 MIN',
       timeColor: Color(0xffA1A4B2),
@@ -115,9 +115,7 @@ class _HomeState extends State<Home> {
                       child: BannerBox(
                           bgColor: Color(0xff8E97FD),
                           iconLocalPath: "images/apple.png",
-                          iconWidth: Orientation == Orientation.portrait
-                              ? MediaQuery.of(context).size.width * .2
-                              : MediaQuery.of(context).size.width * .3,
+                          iconWidth: MediaQuery.of(context).size.width * .3,
                           title: 'Basics',
                           titleColor: Color(0xffFFECCC),
                           description: 'COURSE',
@@ -133,9 +131,7 @@ class _HomeState extends State<Home> {
                     child: BannerBox(
                         bgColor: Color(0xffFFDB9D),
                         iconLocalPath: "images/listen.png",
-                        iconWidth: Orientation == Orientation.portrait
-                            ? MediaQuery.of(context).size.width * .3
-                            : MediaQuery.of(context).size.width * .4,
+                        iconWidth: MediaQuery.of(context).size.width * .4,
                         title: 'Relaxation',
                         titleColor: Color(0xff3F414E),
                         description: 'MUSIC',
@@ -216,29 +212,6 @@ class _HomeState extends State<Home> {
                             onPressed: () {},
                           ),
                         ),
-
-                        //     TextButton(
-                        //   child: Text(widget.btnText),
-                        //   style: TextButton.styleFrom(
-                        //     backgroundColor: widget.btnColor,
-                        //     primary: widget.btnTxtColor,
-                        //     shape: const RoundedRectangleBorder(
-                        //         borderRadius:
-                        //             BorderRadius.all(Radius.circular(25.0))),
-                        //   ),
-                        //   onPressed: () {},
-                        // ),
-                        // Container(
-                        //   padding: EdgeInsets.all(16.0),
-                        //   decoration: ShapeDecoration(
-                        //     shape: CircleBorder(),
-                        //     color: Colors.white,
-                        //   ),
-                        //   child: Image(
-                        //     image: AssetImage("images/play.png"),
-                        //     width: 12.0,
-                        //   ),
-                        // )
                       ],
                     ),
                   ),
@@ -256,11 +229,9 @@ class _HomeState extends State<Home> {
                       color: Color(0xff3F414E))),
             ),
             Container(
-              height: 161.0,
+              height: MediaQuery.of(context).size.height * .3,
               child: ListView.separated(
                 padding: EdgeInsets.only(right: 12.0, left: 12.0),
-                // shrinkWrap: true,
-                // physics: ScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
                 itemBuilder: (BuildContext context, int index) {

@@ -36,7 +36,7 @@ class _MusicBoxState extends State<MusicBox> {
     return FittedBox(
         child: Container(
       width: 162,
-      height: 161.0,
+      height: 181.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: widget.bgColor,
@@ -52,6 +52,7 @@ class _MusicBoxState extends State<MusicBox> {
               child: Container(
                 color: widget.imgBg,
                 child: Image(
+                  height: 115.0,
                   image: AssetImage(widget.imgLocalPath),
                 ),
               ),
