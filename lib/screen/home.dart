@@ -8,6 +8,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // used in Recomended List
   List musicBoxs = [
     MusicBox(
       darkMood: false,
@@ -113,17 +114,19 @@ class _HomeState extends State<Home> {
                 children: [
                   Expanded(
                       child: BannerBox(
-                          bgColor: Color(0xff8E97FD),
-                          iconLocalPath: "images/apple.png",
-                          iconWidth: MediaQuery.of(context).size.width * .3,
-                          title: 'Basics',
-                          titleColor: Color(0xffFFECCC),
-                          description: 'COURSE',
-                          descriptionColor: Color(0xffF7E8D0),
-                          time: '3-10 MIN',
-                          timeColor: Color(0xffEBEAEC),
-                          btnColor: Color(0xffEBEAEC),
-                          btnTxtColor: Color(0xff3F414E))),
+                    bgColor: Color(0xff8E97FD),
+                    iconLocalPath: "images/apple.png",
+                    iconWidth: MediaQuery.of(context).size.width * .3,
+                    title: 'Basics',
+                    titleColor: Color(0xffFFECCC),
+                    description: 'COURSE',
+                    descriptionColor: Color(0xffF7E8D0),
+                    time: '3-10 MIN',
+                    timeColor: Color(0xffEBEAEC),
+                    btnColor: Color(0xffEBEAEC),
+                    btnTxtColor: Color(0xff3F414E),
+                    onTap: this._basicsBannerBoxTap,
+                  )),
                   SizedBox(
                     width: 15.0,
                   ),
@@ -251,5 +254,9 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  _basicsBannerBoxTap() {
+    Navigator.pushNamed(context, '/play_list');
   }
 }

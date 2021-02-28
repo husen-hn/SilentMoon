@@ -61,6 +61,11 @@ flutter:
     - images/focus.png
     - images/happiness.png
     - images/nature.png
+    - images/cloud.png
+    - images/cloud_top.png
+    - images/cloud_center.png
+    - images/cloud_bottom.png
+    - images/fin.png
    
 
   # An image asset can refer to one or more resolution-specific "variants", see

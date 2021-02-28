@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 
 class BannerBox extends StatefulWidget {
-  Color bgColor;
-  String iconLocalPath;
-  double iconWidth;
-  String title;
-  Color titleColor;
-  String description;
-  Color descriptionColor;
-  String time;
-  Color timeColor;
-  String btnText;
-  Color btnColor;
-  Color btnTxtColor;
-  BannerBox({
-    this.bgColor,
-    this.iconLocalPath,
-    this.iconWidth,
-    this.title,
-    this.titleColor,
-    this.description,
-    this.descriptionColor,
-    this.time,
-    this.timeColor,
-    this.btnText = 'START',
-    this.btnColor,
-    this.btnTxtColor,
-  });
+  final Color bgColor;
+  final String iconLocalPath;
+  final double iconWidth;
+  final String title;
+  final Color titleColor;
+  final String description;
+  final Color descriptionColor;
+  final String time;
+  final Color timeColor;
+  final String btnText;
+  final Color btnColor;
+  final Color btnTxtColor;
+  final Function onTap;
+  BannerBox(
+      {this.bgColor,
+      this.iconLocalPath,
+      this.iconWidth,
+      this.title,
+      this.titleColor,
+      this.description,
+      this.descriptionColor,
+      this.time,
+      this.timeColor,
+      this.btnText = 'START',
+      this.btnColor,
+      this.btnTxtColor,
+      this.onTap});
   @override
   _BannerBoxState createState() => _BannerBoxState();
 }
@@ -113,7 +114,9 @@ class _BannerBoxState extends State<BannerBox> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(25.0))),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        widget.onTap();
+                      },
                     ),
                   )
                 ],
