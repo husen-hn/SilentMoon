@@ -4,10 +4,12 @@ class NavigationBar extends StatefulWidget {
   Color unselectedLabelColor;
   bool showUnselectedLabels;
   Color bgColor;
+  Function onTap;
   NavigationBar(
       {this.unselectedLabelColor = const Color(0xffA0A3B1),
       this.showUnselectedLabels = true,
-      this.bgColor = Colors.white});
+      this.bgColor = Colors.white,
+      this.onTap});
   @override
   _NavigationBarState createState() => _NavigationBarState();
 }
@@ -16,6 +18,7 @@ class _NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
+      widget.onTap(index);
       _selectedIndex = index;
     });
   }

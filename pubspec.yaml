@@ -66,6 +66,16 @@ flutter:
     - images/cloud_center.png
     - images/cloud_bottom.png
     - images/fin.png
+    - images/sleep_bg.png
+    - images/all.png
+    - images/favorite.png
+    - images/anxious.png
+    - images/sleep_tab.png
+    - images/kids.png
+    - images/sleep_banner.png
+    - images/download.png
+    - images/back.png
+
    
 
   # An image asset can refer to one or more resolution-specific "variants", see
