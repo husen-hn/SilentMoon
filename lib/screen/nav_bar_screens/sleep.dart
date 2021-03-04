@@ -32,7 +32,7 @@ class _SleepState extends State<Sleep> {
       "title": 'Night Island',
       "time": '45 MIN',
       "type": 'SLEEP MUSIC',
-    }, 
+    },
   ];
 
   @override
@@ -128,9 +128,9 @@ class _SleepState extends State<Sleep> {
               // Grid List
               GridView.count(
                 crossAxisCount: 2,
-                childAspectRatio: (2 / 1),
+                // childAspectRatio: (2 / 1),
                 crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
+                mainAxisSpacing: 10,
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 padding: EdgeInsets.all(10.0),
