@@ -43,13 +43,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.15.0"
-  convert:
-    dependency: transitive
-    description:
-      name: convert
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.1.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -69,32 +62,18 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  http:
-    dependency: "direct main"
-    description:
-      name: http
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.12.2"
-  http_parser:
-    dependency: transitive
-    description:
-      name: http_parser
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.1.4"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.16.1"
   matcher:
     dependency: transitive
     description:
@@ -116,20 +95,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.0"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.10.0"
-  petitparser:
-    dependency: transitive
-    description:
-      name: petitparser
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.1.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -141,7 +106,7 @@ packages:
       name: source_span
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.0"
   stack_trace:
     dependency: transitive
     description:
@@ -191,19 +156,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
-  webfeed:
-    dependency: "direct main"
-    description:
-      name: webfeed
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.6.0"
-  xml:
-    dependency: transitive
-    description:
-      name: xml
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "4.5.1"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
+  flutter: ">=1.17.0"

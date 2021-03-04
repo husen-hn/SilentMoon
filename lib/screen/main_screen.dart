@@ -1,4 +1,5 @@
 import 'package:SilentMoon/screen/nav_bar_screens/home.dart';
+import 'package:SilentMoon/screen/nav_bar_screens/meditate.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/sleep.dart';
 import 'package:SilentMoon/widget/navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,9 @@ class _MainScreenState extends State<MainScreen> {
             ? Home()
             : _selectedIndex == 1
                 ? Sleep()
-                : Container(),
+                : _selectedIndex == 2
+                    ? Meditate()
+                    : Container(),
       ),
       bottomNavigationBar: NavigationBar(
         onTap: this._onTap,

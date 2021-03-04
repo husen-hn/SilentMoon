@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PlayList extends StatefulWidget {
+  String title;
+  String type;
+  String description;
+
+  PlayList(
+      {this.title = "Title",
+      this.description = "Descritpion",
+      this.type = "COURSE"});
   @override
   _PlayListState createState() => _PlayListState();
 }
@@ -46,14 +54,14 @@ class _PlayListState extends State<PlayList>
                       children: [
                         //top image
                         Container(
-                          height: 288.0,
-                          decoration: BoxDecoration(
+                          height: 250.0,
+                          decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(10),
                                   bottomRight: Radius.circular(10)),
                               image: DecorationImage(
-                                  image: AssetImage("images/nature.png"),
-                                  fit: BoxFit.cover)),
+                                  image: AssetImage("images/daily_thought.png"),
+                                  fit: BoxFit.fill)),
                           child: Stack(
                             children: [
                               // action buttons
@@ -224,7 +232,7 @@ class _PlayListState extends State<PlayList>
                           padding: const EdgeInsets.only(top: 25.0, left: 10.0),
                           child: RichText(
                             text: TextSpan(
-                              text: 'Happy Morning\n',
+                              text: '${widget.title}\n',
                               style: TextStyle(
                                   color: Color(0xff3F414E),
                                   fontSize: 34,
@@ -239,8 +247,7 @@ class _PlayListState extends State<PlayList>
                                       color: Color(0xffA1A4B2),
                                     )),
                                 TextSpan(
-                                    text:
-                                        'Ease the mind into a restful night’s sleep  with these deep, amblent tones.',
+                                    text: '${widget.description}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 13.0,
@@ -298,7 +305,7 @@ class _PlayListState extends State<PlayList>
               ),
               //Voice List
               SliverFixedExtentList(
-                itemExtent: 50.0,
+                itemExtent: 70.0,
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     return TabBarView(
@@ -306,13 +313,15 @@ class _PlayListState extends State<PlayList>
                       children: [
                         // Voice Tab
                         Container(
-                          padding: EdgeInsets.all(10.0),
+                          padding:
+                              EdgeInsets.only(bottom: 10, left: 10, top: 10),
                           color: Colors.white,
                           child: InkWell(
                             child: Column(
                               children: [
                                 Row(
                                   children: [
+                                    // play btn
                                     Container(
                                       width: 40.0,
                                       height: 40.0,
@@ -332,53 +341,94 @@ class _PlayListState extends State<PlayList>
                                         onPressed: () {},
                                       ),
                                     ),
-                                    Column(
-                                      children: [Text('data'), Text('data')],
-                                    )
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[0]["name"],
+                                            style: TextStyle(
+                                                color: Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            musics[0]["time"],
+                                            style: TextStyle(
+                                                color: Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   ],
-                                ),
-                                Container(
-                                  // padding: EdgeInsets.all(20.0),
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 1,
-                                  color: Color(0xffADB8D9).withOpacity(.5),
                                 ),
                               ],
                             ),
                           ),
                         ),
                         // Favorite Tab
-                        InkWell(
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: const ShapeDecoration(
-                                      color: Colors.white,
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: IconButton(
-                                      autofocus: true,
-                                      icon: Image(
-                                        image: AssetImage("images/play.png"),
-                                        width: 12.0,
+                        Container(
+                          padding:
+                              EdgeInsets.only(bottom: 10, left: 10, top: 10),
+                          color: Colors.white,
+                          child: InkWell(
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: Color(0xffA1A4B2),
+                                          width: 12.0,
+                                        ),
+                                        onPressed: () {},
                                       ),
-                                      onPressed: () {},
                                     ),
-                                  ),
-                                  Column(
-                                    children: [Text('data'), Text('data')],
-                                  )
-                                ],
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(20.0),
-                                width: MediaQuery.of(context).size.width,
-                                height: 1,
-                                color: Color(0xffADB8D9).withOpacity(.5),
-                              ),
-                            ],
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[0]["name"],
+                                            style: TextStyle(
+                                                color: Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            musics[0]["time"],
+                                            style: TextStyle(
+                                                color: Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

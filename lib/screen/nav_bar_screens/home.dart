@@ -8,50 +8,54 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // used in Recomended List
-  List musicBoxs = [
-    MusicBox(
-      darkMood: false,
-      bgColor: Colors.grey[50],
-      imgLocalPath: "images/nature.png",
-      imgBg: Color(0xfff8bbd0),
-      title: 'Nature',
-      titleColor: Color(0xff3F414E),
-      time: '3-10 MIN',
-      timeColor: Color(0xffA1A4B2),
-      dotColor: Color(0xffA1A4B2),
-      type: 'MEDITATION',
-      typeColor: Color(0xffA1A4B2),
-    ),
-    MusicBox(
-      darkMood: false,
-      bgColor: Colors.grey[50],
-      imgLocalPath: "images/focus.png",
-      imgBg: Color(0xffAFDBC5),
-      title: 'Focus',
-      titleColor: Color(0xff3F414E),
-      time: '3-10 MIN',
-      timeColor: Color(0xffA1A4B2),
-      dotColor: Color(0xffA1A4B2),
-      type: 'MEDITATION',
-      typeColor: Color(0xffA1A4B2),
-    ),
-    MusicBox(
-      darkMood: false,
-      bgColor: Colors.grey[50],
-      imgLocalPath: "images/happiness.png",
-      imgBg: Color(0xffFFC97E),
-      title: 'Happiness',
-      titleColor: Color(0xff3F414E),
-      time: '3-10 MIN',
-      timeColor: Color(0xffA1A4B2),
-      dotColor: Color(0xffA1A4B2),
-      type: 'MEDITATION',
-      typeColor: Color(0xffA1A4B2),
-    )
-  ];
   @override
   Widget build(BuildContext context) {
+    // used in Recomended List
+    List musicBoxs = [
+      MusicBox(
+        darkMood: false,
+        bgColor: Colors.grey[50],
+        imgLocalPath: "images/nature.png",
+        imgBg: Color(0xfff8bbd0),
+        title: 'Nature',
+        titleColor: Color(0xff3F414E),
+        time: '3-10 MIN',
+        timeColor: Color(0xffA1A4B2),
+        dotColor: Color(0xffA1A4B2),
+        type: 'MEDITATION',
+        typeColor: Color(0xffA1A4B2),
+        // onTap: this._natureBoxTap(),
+      ),
+      MusicBox(
+        darkMood: false,
+        bgColor: Colors.grey[50],
+        imgLocalPath: "images/focus.png",
+        imgBg: Color(0xffAFDBC5),
+        title: 'Focus',
+        titleColor: Color(0xff3F414E),
+        time: '3-10 MIN',
+        timeColor: Color(0xffA1A4B2),
+        dotColor: Color(0xffA1A4B2),
+        type: 'MEDITATION',
+        typeColor: Color(0xffA1A4B2),
+        // onTap: this._focusBoxTap(),
+      ),
+      MusicBox(
+        darkMood: false,
+        bgColor: Colors.grey[50],
+        imgLocalPath: "images/happiness.png",
+        imgBg: Color(0xffFFC97E),
+        title: 'Happiness',
+        titleColor: Color(0xff3F414E),
+        time: '3-10 MIN',
+        timeColor: Color(0xffA1A4B2),
+        dotColor: Color(0xffA1A4B2),
+        type: 'MEDITATION',
+        typeColor: Color(0xffA1A4B2),
+        // onTap: this._happinessBoxTap(),
+      )
+    ];
+
     return Scaffold(
       body: Theme(
         data: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
@@ -132,17 +136,19 @@ class _HomeState extends State<Home> {
                   ),
                   Expanded(
                     child: BannerBox(
-                        bgColor: Color(0xffFFDB9D),
-                        iconLocalPath: "images/listen.png",
-                        iconWidth: MediaQuery.of(context).size.width * .4,
-                        title: 'Relaxation',
-                        titleColor: Color(0xff3F414E),
-                        description: 'MUSIC',
-                        descriptionColor: Color(0xff524F53),
-                        time: '3-10 MIN',
-                        timeColor: Color(0xff524F53),
-                        btnColor: Color(0xff3F414E),
-                        btnTxtColor: Color(0xffFEFFFE)),
+                      bgColor: Color(0xffFFDB9D),
+                      iconLocalPath: "images/listen.png",
+                      iconWidth: MediaQuery.of(context).size.width * .4,
+                      title: 'Relaxation',
+                      titleColor: Color(0xff3F414E),
+                      description: 'MUSIC',
+                      descriptionColor: Color(0xff524F53),
+                      time: '3-10 MIN',
+                      timeColor: Color(0xff524F53),
+                      btnColor: Color(0xff3F414E),
+                      btnTxtColor: Color(0xffFEFFFE),
+                      onTap: this._relaxationBannerBoxTap,
+                    ),
                   )
                 ],
               ),
@@ -185,8 +191,8 @@ class _HomeState extends State<Home> {
                                   child: Container(
                                     padding: EdgeInsets.all(3.0),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10)), //here
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
                                       color: Color(0xffEBEAEC),
                                     ),
                                   ),
@@ -212,7 +218,13 @@ class _HomeState extends State<Home> {
                               image: AssetImage("images/play.png"),
                               width: 12.0,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/play_list',
+                                  arguments: {
+                                    "title": "Daily Thought",
+                                    "description": "description"
+                                  });
+                            },
                           ),
                         ),
                       ],
@@ -257,6 +269,27 @@ class _HomeState extends State<Home> {
   }
 
   _basicsBannerBoxTap() {
-    Navigator.pushNamed(context, '/play_list');
+    Navigator.pushNamed(context, '/play_list',
+        arguments: {"title": "Basics", "description": "description"});
+  }
+
+  _relaxationBannerBoxTap() {
+    Navigator.pushNamed(context, '/play_list',
+        arguments: {"title": "Relaxation", "description": "description"});
+  }
+
+  _natureBoxTap() {
+    Navigator.pushNamed(context, '/play_list',
+        arguments: {"title": "Nature", "description": "description"});
+  }
+
+  _focusBoxTap() {
+    Navigator.pushNamed(context, '/play_list',
+        arguments: {"title": "Focus", "description": "description"});
+  }
+
+  _happinessBoxTap() {
+    Navigator.pushNamed(context, '/play_list',
+        arguments: {"title": "Happiness", "description": "description"});
   }
 }

@@ -5,12 +5,16 @@ import 'package:flutter/widgets.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    var arguament = settings.arguments;
+    Map arguament = settings.arguments;
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => MainScreen());
       case '/play_list':
-        return MaterialPageRoute(builder: (_) => PlayList());
+        return MaterialPageRoute(
+            builder: (_) => PlayList(
+                  title: arguament["title"],
+                  description: arguament["description"],
+                ));
 
       default:
         return MaterialPageRoute(builder: (_) => MainScreen());
