@@ -1,3 +1,4 @@
+import 'package:SilentMoon/data/model/music_box_model.dart';
 import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
 
@@ -8,31 +9,15 @@ class Sleep extends StatefulWidget {
 
 class _SleepState extends State<Sleep> {
   // used in Grid List
-  List musicBoxs = [
-    {
-      "img_loc": "images/sleep_grid_banner_one.png",
-      "title": 'Night Island',
-      "time": '45 MIN',
-      "type": 'SLEEP MUSIC',
-    },
-    {
-      "img_loc": "images/sleep_grid_banner_two.png",
-      "title": 'Night Island',
-      "time": '45 MIN',
-      "type": 'SLEEP MUSIC',
-    },
-    {
-      "img_loc": "images/sleep_grid_banner_three.png",
-      "title": 'Night Island',
-      "time": '45 MIN',
-      "type": 'SLEEP MUSIC',
-    },
-    {
-      "img_loc": "images/sleep_grid_banner_four.png",
-      "title": 'Night Island',
-      "time": '45 MIN',
-      "type": 'SLEEP MUSIC',
-    },
+  List<MusicBoxModel> musicBoxs = [
+    MusicBoxModel("images/sleep_grid_banner_one.png", Color(0xfff8bbd0),
+        'Night Island', '45 MIN', 'SLEEP MUSIC'),
+    MusicBoxModel("images/sleep_grid_banner_two.png", Color(0xffAFDBC5),
+        'Night Island', '45 MIN', 'SLEEP MUSIC'),
+    MusicBoxModel("images/sleep_grid_banner_three.png", Color(0xffFFC97E),
+        'Night Island', '45 MIN', 'SLEEP MUSIC'),
+    MusicBoxModel("images/sleep_grid_banner_four.png", Color(0xffFFC97E),
+        'Night Island', '45 MIN', 'SLEEP MUSIC'),
   ];
 
   @override
@@ -42,7 +27,7 @@ class _SleepState extends State<Sleep> {
           data: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
           child: ListView(
             children: [
-              //top image & title & description & horizon list
+              //top image & title & description & tabbar
               Container(
                 height: 300.0,
                 decoration: BoxDecoration(
@@ -128,7 +113,6 @@ class _SleepState extends State<Sleep> {
               // Grid List
               GridView.count(
                 crossAxisCount: 2,
-                // childAspectRatio: (2 / 1),
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 10,
                 physics: NeverScrollableScrollPhysics(),
@@ -138,16 +122,16 @@ class _SleepState extends State<Sleep> {
                   return MusicBox(
                     darkMood: false,
                     bgColor: Colors.grey[50],
-                    imgLocalPath: e["img_loc"],
+                    imgLocalPath: e.img,
                     imgBg: Color(0xff4C53B4),
-                    title: e["title"],
+                    title: e.title,
                     titleColor: Color(0xff3F414E),
-                    time: e["time"],
+                    time: e.time,
                     timeColor: Color(0xffA1A4B2),
                     dotColor: Color(0xffA1A4B2),
-                    type: e["type"],
+                    type: e.type,
                     typeColor: Color(0xffA1A4B2),
-                    // onTap: this._natureBoxTap(),
+                    onTap: this._musicBoxTap,
                   );
                 }).toList(),
               )
@@ -187,7 +171,14 @@ class _SleepState extends State<Sleep> {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        //TODO use bloc to change tabs
+      },
     );
+  }
+
+  _musicBoxTap(String title, String type) {
+    Navigator.pushNamed(context, '/play_list',
+        arguments: {"title": title, "type": type});
   }
 }

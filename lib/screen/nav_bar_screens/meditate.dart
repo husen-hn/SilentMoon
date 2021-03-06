@@ -129,8 +129,8 @@ class _MeditateState extends State<Meditate> {
                                   child: Container(
                                     padding: EdgeInsets.all(3.0),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10)), //here
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
                                       color: Color(0xff5A6175),
                                     ),
                                   ),
@@ -157,7 +157,13 @@ class _MeditateState extends State<Meditate> {
                               width: 12.0,
                               color: Color(0xffF0F1F2),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/play_list',
+                                  arguments: {
+                                    "title": "Daily Calm",
+                                    "type": "APR 30"
+                                  });
+                            },
                           ),
                         ),
                       ],
@@ -175,37 +181,44 @@ class _MeditateState extends State<Meditate> {
                     crossAxisCount: 4,
                     itemCount: boxs.length,
                     itemBuilder: (BuildContext context, int index) =>
-                        new Container(
-                            child: new Container(
-                          // height: index % 2 == 0 ? 167 : 210,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0)),
-                              image: DecorationImage(
-                                image: AssetImage(boxs[index]["img"]),
-                                fit: BoxFit.cover,
-                              )),
-                          child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(15.0),
-                                        bottomRight: Radius.circular(15.0)),
-                                    color: Colors.black.withOpacity(0.5),
-                                  ),
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 50,
-                                  child: Center(
-                                      child: Text(
-                                    boxs[index]["title"],
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 1.0),
-                                  )))),
-                        )),
+                        new InkWell(
+                          child: new Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0)),
+                                image: DecorationImage(
+                                  image: AssetImage(boxs[index]["img"]),
+                                  fit: BoxFit.cover,
+                                )),
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(15.0),
+                                          bottomRight: Radius.circular(15.0)),
+                                      color: Colors.black.withOpacity(0.5),
+                                    ),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 50,
+                                    child: Center(
+                                        child: Text(
+                                      boxs[index]["title"],
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1.0),
+                                    )))),
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/play_list',
+                                arguments: {
+                                  "title": boxs[index]["title"],
+                                  "type": "MEDITATION"
+                                });
+                          },
+                        ),
                     staggeredTileBuilder: (int index) =>
                         new StaggeredTile.count(2, index.isEven ? 2 : 1),
                     crossAxisSpacing: 20.0,
