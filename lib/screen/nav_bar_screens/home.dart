@@ -1,3 +1,4 @@
+import 'package:SilentMoon/data/model/music_box_model.dart';
 import 'package:SilentMoon/widget/banner_box.dart';
 import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
@@ -11,51 +12,18 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     // used in Recomended List
-    List musicBoxs = [
-      MusicBox(
-        darkMood: false,
-        bgColor: Colors.grey[50],
-        imgLocalPath: "images/nature.png",
-        imgBg: Color(0xfff8bbd0),
-        title: 'Nature',
-        titleColor: Color(0xff3F414E),
-        time: '3-10 MIN',
-        timeColor: Color(0xffA1A4B2),
-        dotColor: Color(0xffA1A4B2),
-        type: 'MEDITATION',
-        typeColor: Color(0xffA1A4B2),
-        // onTap: this._natureBoxTap(),
-      ),
-      MusicBox(
-        darkMood: false,
-        bgColor: Colors.grey[50],
-        imgLocalPath: "images/focus.png",
-        imgBg: Color(0xffAFDBC5),
-        title: 'Focus',
-        titleColor: Color(0xff3F414E),
-        time: '3-10 MIN',
-        timeColor: Color(0xffA1A4B2),
-        dotColor: Color(0xffA1A4B2),
-        type: 'MEDITATION',
-        typeColor: Color(0xffA1A4B2),
-        // onTap: this._focusBoxTap(),
-      ),
-      MusicBox(
-        darkMood: false,
-        bgColor: Colors.grey[50],
-        imgLocalPath: "images/happiness.png",
-        imgBg: Color(0xffFFC97E),
-        title: 'Happiness',
-        titleColor: Color(0xff3F414E),
-        time: '3-10 MIN',
-        timeColor: Color(0xffA1A4B2),
-        dotColor: Color(0xffA1A4B2),
-        type: 'MEDITATION',
-        typeColor: Color(0xffA1A4B2),
-        // onTap: this._happinessBoxTap(),
-      )
+    List<MusicBoxModel> musicBoxs = [
+      MusicBoxModel("images/nature.png", Color(0xfff8bbd0), 'Nature',
+          '3-10 MIN', 'MEDITATION'),
+      MusicBoxModel("images/focus.png", Color(0xffAFDBC5), 'Focus', '3-10 MIN',
+          'MEDITATION'),
+      MusicBoxModel("images/happiness.png", Color(0xffFFC97E), 'Happiness',
+          '3-10 MIN', 'MEDITATION'),
     ];
-
+    //fuck dart, what is it?
+    List morning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    List afternoon = [12, 13, 14, 15, 16, 17, 18];
+    List night = [19, 20, 21, 22, 23, 24, 1, 2, 3, 4, 5, 6];
     return Scaffold(
       body: Theme(
         data: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
@@ -99,7 +67,12 @@ class _HomeState extends State<Home> {
             // Welcome
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Text('Good Morning,',
+              child: Text(
+                  morning.contains(DateTime.now().hour)
+                      ? 'Good Morning,'
+                      : afternoon.contains(DateTime.now().hour)
+                          ? 'Good Afternoon'
+                          : 'Good Evening',
                   style: TextStyle(
                       fontSize: 28.0,
                       fontWeight: FontWeight.bold,
@@ -108,7 +81,10 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.only(
                   top: 8.0, right: 8.0, left: 12.0, bottom: 12.0),
-              child: Text('We Wish you have a good day',
+              child: Text(
+                  night.contains(DateTime.now().hour)
+                      ? 'We Wish you have a good night'
+                      : 'We Wish you have a good day',
                   style: TextStyle(fontSize: 20.0, color: Color(0xffA1A4B2))),
             ),
             // Basics & Relaxation
@@ -123,8 +99,8 @@ class _HomeState extends State<Home> {
                     iconWidth: MediaQuery.of(context).size.width * .3,
                     title: 'Basics',
                     titleColor: Color(0xffFFECCC),
-                    description: 'COURSE',
-                    descriptionColor: Color(0xffF7E8D0),
+                    type: 'COURSE',
+                    typeColor: Color(0xffF7E8D0),
                     time: '3-10 MIN',
                     timeColor: Color(0xffEBEAEC),
                     btnColor: Color(0xffEBEAEC),
@@ -141,8 +117,8 @@ class _HomeState extends State<Home> {
                       iconWidth: MediaQuery.of(context).size.width * .4,
                       title: 'Relaxation',
                       titleColor: Color(0xff3F414E),
-                      description: 'MUSIC',
-                      descriptionColor: Color(0xff524F53),
+                      type: 'MUSIC',
+                      typeColor: Color(0xff524F53),
                       time: '3-10 MIN',
                       timeColor: Color(0xff524F53),
                       btnColor: Color(0xff3F414E),
@@ -222,7 +198,7 @@ class _HomeState extends State<Home> {
                               Navigator.pushNamed(context, '/play_list',
                                   arguments: {
                                     "title": "Daily Thought",
-                                    "description": "description"
+                                    "type": "MEDITATION"
                                   });
                             },
                           ),
@@ -248,9 +224,22 @@ class _HomeState extends State<Home> {
               child: ListView.separated(
                 padding: EdgeInsets.only(right: 12.0, left: 12.0),
                 scrollDirection: Axis.horizontal,
-                itemCount: 3,
+                itemCount: musicBoxs.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return musicBoxs[index];
+                  return MusicBox(
+                    darkMood: false,
+                    bgColor: Colors.grey[50],
+                    imgLocalPath: musicBoxs[index].img,
+                    imgBg: musicBoxs[index].bgColor,
+                    title: musicBoxs[index].title,
+                    titleColor: Color(0xff3F414E),
+                    time: musicBoxs[index].time,
+                    timeColor: Color(0xffA1A4B2),
+                    dotColor: Color(0xffA1A4B2),
+                    type: musicBoxs[index].type,
+                    typeColor: Color(0xffA1A4B2),
+                    onTap: this._musicBoxTap,
+                  );
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(
@@ -268,28 +257,18 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _basicsBannerBoxTap() {
+  _basicsBannerBoxTap(String title, String type) {
     Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": "Basics", "description": "description"});
+        arguments: {"title": title, "type": type});
   }
 
-  _relaxationBannerBoxTap() {
+  _relaxationBannerBoxTap(String title, String type) {
     Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": "Relaxation", "description": "description"});
+        arguments: {"title": title, "type": type});
   }
 
-  _natureBoxTap() {
+  _musicBoxTap(String title, String type) {
     Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": "Nature", "description": "description"});
-  }
-
-  _focusBoxTap() {
-    Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": "Focus", "description": "description"});
-  }
-
-  _happinessBoxTap() {
-    Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": "Happiness", "description": "description"});
+        arguments: {"title": title, "type": type});
   }
 }

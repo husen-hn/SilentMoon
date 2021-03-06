@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 class PlayList extends StatefulWidget {
   String title;
   String type;
-  String description;
 
-  PlayList(
-      {this.title = "Title",
-      this.description = "Descritpion",
-      this.type = "COURSE"});
+  PlayList({this.title = "Title", this.type = "COURSE"});
   @override
   _PlayListState createState() => _PlayListState();
 }
@@ -16,6 +12,7 @@ class PlayList extends StatefulWidget {
 class _PlayListState extends State<PlayList>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  Map recivedData;
   List<Map> musics = [
     {"name": "Focus Attention", "time": "10 MIN"},
     {"name": "Body Scan", "time": "4 MIN"},
@@ -35,6 +32,7 @@ class _PlayListState extends State<PlayList>
 
   @override
   Widget build(BuildContext context) {
+    recivedData = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: SafeArea(
         child: DefaultTabController(
@@ -239,7 +237,7 @@ class _PlayListState extends State<PlayList>
                                   fontWeight: FontWeight.bold),
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: 'COURSE\n',
+                                    text: '${widget.type}\n',
                                     style: TextStyle(
                                       height: 3.0,
                                       fontWeight: FontWeight.bold,
@@ -247,7 +245,7 @@ class _PlayListState extends State<PlayList>
                                       color: Color(0xffA1A4B2),
                                     )),
                                 TextSpan(
-                                    text: '${widget.description}',
+                                    text: 'Description',
                                     style: TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 13.0,

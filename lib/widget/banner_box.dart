@@ -6,8 +6,8 @@ class BannerBox extends StatefulWidget {
   final double iconWidth;
   final String title;
   final Color titleColor;
-  final String description;
-  final Color descriptionColor;
+  final String type;
+  final Color typeColor;
   final String time;
   final Color timeColor;
   final String btnText;
@@ -20,8 +20,8 @@ class BannerBox extends StatefulWidget {
       this.iconWidth,
       this.title,
       this.titleColor,
-      this.description,
-      this.descriptionColor,
+      this.type,
+      this.typeColor,
       this.time,
       this.timeColor,
       this.btnText = 'START',
@@ -83,9 +83,8 @@ class _BannerBoxState extends State<BannerBox> {
             Padding(
               padding: EdgeInsets.only(left: 15.0),
               child: Text(
-                widget.description,
-                style:
-                    TextStyle(color: widget.descriptionColor, fontSize: 14.0),
+                widget.type,
+                style: TextStyle(color: widget.typeColor, fontSize: 14.0),
               ),
             ),
             Expanded(child: Container()),
@@ -115,7 +114,7 @@ class _BannerBoxState extends State<BannerBox> {
                                 BorderRadius.all(Radius.circular(25.0))),
                       ),
                       onPressed: () {
-                        widget.onTap();
+                        widget.onTap(widget.title, widget.type);
                       },
                     ),
                   )

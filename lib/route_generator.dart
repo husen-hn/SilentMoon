@@ -13,7 +13,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => PlayList(
                   title: arguament["title"],
-                  description: arguament["description"],
+                  type: arguament["type"],
                 ));
 
       default:

@@ -112,7 +112,7 @@ class _MusicBoxState extends State<MusicBox> {
         ),
       ),
       onTap: () {
-        widget.onTap();
+        widget.onTap(widget.title, widget.type);
       },
     ));
   }

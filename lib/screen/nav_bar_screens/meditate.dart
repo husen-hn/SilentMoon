@@ -169,7 +169,7 @@ class _MeditateState extends State<Meditate> {
             // Voice ListView
             Container(
                 padding: EdgeInsets.only(top: 30.0, left: 8.0, right: 8.0),
-                height: 500,
+                height: 300,
                 child: new StaggeredGridView.countBuilder(
                     physics: NeverScrollableScrollPhysics(),
                     crossAxisCount: 4,
@@ -187,8 +187,24 @@ class _MeditateState extends State<Meditate> {
                               )),
                           child: Align(
                               alignment: Alignment.bottomCenter,
-                              child:
-                                  Container(child: Text(boxs[index]["title"]))),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(15.0),
+                                        bottomRight: Radius.circular(15.0)),
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 50,
+                                  child: Center(
+                                      child: Text(
+                                    boxs[index]["title"],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1.0),
+                                  )))),
                         )),
                     staggeredTileBuilder: (int index) =>
                         new StaggeredTile.count(2, index.isEven ? 2 : 1),
