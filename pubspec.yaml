@@ -47,43 +47,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/home.png
-    - images/sleep.png
-    - images/meditate.png
-    - images/music.png
-    - images/profile.png
-    - images/logo.png
-    - images/apple.png
-    - images/listen.png
-    - images/boxbg.png
-    - images/play.png
-    - images/focus.png
-    - images/happiness.png
-    - images/nature.png
-    - images/cloud.png
-    - images/cloud_top.png
-    - images/cloud_center.png
-    - images/cloud_bottom.png
-    - images/fin.png
-    - images/sleep_bg.png
-    - images/all.png
-    - images/favorite.png
-    - images/anxious.png
-    - images/sleep_tab.png
-    - images/kids.png
-    - images/sleep_banner.png
-    - images/download.png
-    - images/back.png
-    - images/daily_calm.png
-    - images/meditate_one.png
-    - images/meditate_two.png
-    - images/meditate_three.png
-    - images/meditate_four.png
-    - images/daily_thought.png
-    - images/sleep_grid_banner_one.png
-    - images/sleep_grid_banner_two.png
-    - images/sleep_grid_banner_three.png
-    - images/sleep_grid_banner_four.png
+    - images/
 
    
 
