@@ -1,6 +1,7 @@
 import 'package:SilentMoon/screen/nav_bar_screens/home.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/meditate.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/music.dart';
+import 'package:SilentMoon/screen/nav_bar_screens/profile/profile.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/sleep.dart';
 import 'package:SilentMoon/widget/navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,9 @@ class _MainScreenState extends State<MainScreen> {
                     ? Meditate()
                     : _selectedIndex == 3
                         ? Music()
-                        : Container(),
+                        : _selectedIndex == 4
+                            ? Profile()
+                            : Container(),
       ),
       bottomNavigationBar: NavigationBar(
         onTap: this._onTap,
