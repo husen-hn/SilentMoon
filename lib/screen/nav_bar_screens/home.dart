@@ -222,6 +222,7 @@ class _HomeState extends State<Home> {
             Container(
               height: MediaQuery.of(context).size.height * .3,
               child: ListView.separated(
+                physics: BouncingScrollPhysics(),
                 padding: EdgeInsets.only(right: 12.0, left: 12.0),
                 scrollDirection: Axis.horizontal,
                 itemCount: musicBoxs.length,

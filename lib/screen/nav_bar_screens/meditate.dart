@@ -63,6 +63,7 @@ class _MeditateState extends State<Meditate> {
                   child: TabBar(
                       indicatorColor: Colors.transparent,
                       isScrollable: true,
+                      physics: BouncingScrollPhysics(),
                       tabs: [
                         _horizonListViewItem(
                             imgAsset: "images/all.png",

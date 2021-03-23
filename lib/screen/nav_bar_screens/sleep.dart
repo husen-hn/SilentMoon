@@ -76,6 +76,7 @@ class _SleepState extends State<Sleep> {
                                     child: TabBar(
                                         indicatorColor: Colors.transparent,
                                         isScrollable: true,
+                                        physics: BouncingScrollPhysics(),
                                         tabs: [
                                           _horizonListViewItem(
                                               imgAsset: "images/all.png",
@@ -103,11 +104,48 @@ class _SleepState extends State<Sleep> {
                                               bgColor: Color(0xff586894),
                                               titleColor: Color(0xff98A1BD)),
                                         ]),
-                                  ))
+                                  )), // banner
                             ],
                           ),
                         ))
                   ],
+                ),
+              ),
+              // banner
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
+                child: Container(
+                  width: 373.6,
+                  height: 233,
+                  decoration: BoxDecoration(
+                      color: Color(0xfff9dfce),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      image: DecorationImage(
+                        image: AssetImage("images/sleep_banner.png"),
+                        fit: BoxFit.cover,
+                      )),
+                  child: Center(
+                    child: RichText(
+                        text: TextSpan(
+                            text: 'The Ocean Moon\n',
+                            style: TextStyle(
+                                fontSize: 36.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xffFFE7BF),
+                                letterSpacing: 1.0),
+                            children: [
+                          TextSpan(
+                              text:
+                                  'Non-stop 8- hour mixes of our most popular sleep audio',
+                              // textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Color(0xffF9F9FF),
+                                fontWeight: FontWeight.normal,
+                              ))
+                        ])),
+                  ),
                 ),
               ),
               // Grid List
