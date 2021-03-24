@@ -27,205 +27,201 @@ class _MeditateState extends State<Meditate> {
         "title": "Anxiet Release",
       }
     ];
-    return Scaffold(
-      body: Theme(
-        data: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
-        child: ListView(
-          children: [
-            // title
-            Padding(
-              padding: const EdgeInsets.only(top: 66.0),
-              child: Center(
-                child: Text(
-                  'Meditate',
-                  style: TextStyle(fontSize: 28.0, color: Color(0xff3F414E)),
-                ),
+    return Theme(
+      data: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
+      child: ListView(
+        children: [
+          // title
+          Padding(
+            padding: const EdgeInsets.only(top: 66.0),
+            child: Center(
+              child: Text(
+                'Meditate',
+                style: TextStyle(fontSize: 28.0, color: Color(0xff3F414E)),
               ),
             ),
-            //description
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 50.0, right: 50.0, top: 10.0),
-              child: Center(
-                child: Text(
-                  'Soothing bedtime stories to help you fall into a deep and natural sleep',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16.0, color: Color(0xffA0A3B1)),
-                ),
+          ),
+          //description
+          Padding(
+            padding: const EdgeInsets.only(left: 50.0, right: 50.0, top: 10.0),
+            child: Center(
+              child: Text(
+                'Soothing bedtime stories to help you fall into a deep and natural sleep',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16.0, color: Color(0xffA0A3B1)),
               ),
             ),
-            // tabbar
-            Container(
-                padding: const EdgeInsets.only(top: 20.0),
-                height: 120.0,
-                child: DefaultTabController(
-                  length: 5,
-                  child: TabBar(
-                      indicatorColor: Colors.transparent,
-                      isScrollable: true,
-                      physics: BouncingScrollPhysics(),
-                      tabs: [
-                        _horizonListViewItem(
-                            imgAsset: "images/all.png",
-                            title: 'All',
-                            bgColor: Color(0xffA0A3B1),
-                            titleColor: Color(0xffA0A3B1)),
-                        _horizonListViewItem(
-                            imgAsset: "images/favorite.png",
-                            title: 'My',
-                            bgColor: Color(0xffA0A3B1),
-                            titleColor: Color(0xffA0A3B1)),
-                        _horizonListViewItem(
-                            imgAsset: "images/anxious.png",
-                            title: 'Anxious',
-                            bgColor: Color(0xffA0A3B1),
-                            titleColor: Color(0xffA0A3B1)),
-                        _horizonListViewItem(
-                            imgAsset: "images/sleep_tab.png",
-                            title: 'Sleep',
-                            bgColor: Color(0xffA0A3B1),
-                            titleColor: Color(0xffA0A3B1)),
-                        _horizonListViewItem(
-                            imgAsset: "images/kids.png",
-                            title: 'Kids',
-                            bgColor: Color(0xffA0A3B1),
-                            titleColor: Color(0xffA0A3B1)),
-                      ]),
-                )), //Daily Calm
-            // Daily Calm
-            Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-              child: FittedBox(
+          ),
+          // tabbar
+          Container(
+              padding: const EdgeInsets.only(top: 20.0),
+              height: 120.0,
+              child: DefaultTabController(
+                length: 5,
+                child: TabBar(
+                    indicatorColor: Colors.transparent,
+                    isScrollable: true,
+                    physics: BouncingScrollPhysics(),
+                    tabs: [
+                      _horizonListViewItem(
+                          imgAsset: "images/all.png",
+                          title: 'All',
+                          bgColor: Color(0xffA0A3B1),
+                          titleColor: Color(0xffA0A3B1)),
+                      _horizonListViewItem(
+                          imgAsset: "images/favorite.png",
+                          title: 'My',
+                          bgColor: Color(0xffA0A3B1),
+                          titleColor: Color(0xffA0A3B1)),
+                      _horizonListViewItem(
+                          imgAsset: "images/anxious.png",
+                          title: 'Anxious',
+                          bgColor: Color(0xffA0A3B1),
+                          titleColor: Color(0xffA0A3B1)),
+                      _horizonListViewItem(
+                          imgAsset: "images/sleep_tab.png",
+                          title: 'Sleep',
+                          bgColor: Color(0xffA0A3B1),
+                          titleColor: Color(0xffA0A3B1)),
+                      _horizonListViewItem(
+                          imgAsset: "images/kids.png",
+                          title: 'Kids',
+                          bgColor: Color(0xffA0A3B1),
+                          titleColor: Color(0xffA0A3B1)),
+                    ]),
+              )), //Daily Calm
+          // Daily Calm
+          Padding(
+            padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+            child: FittedBox(
+              child: Container(
+                width: 374,
+                height: 95,
+                decoration: BoxDecoration(
+                    color: Color(0xfff9dfce),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    image: DecorationImage(
+                        image: AssetImage("images/daily_calm.png"))),
                 child: Container(
-                  width: 374,
-                  height: 95,
-                  decoration: BoxDecoration(
-                      color: Color(0xfff9dfce),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      image: DecorationImage(
-                          image: AssetImage("images/daily_calm.png"))),
-                  child: Container(
-                    padding: EdgeInsets.all(25.0),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Daily Calm',
-                              style: TextStyle(
-                                  color: Color(0xff3F414E),
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'APR 30',
-                                  style: TextStyle(
-                                      color: Color(0xff5A6175), fontSize: 14.0),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Container(
-                                    padding: EdgeInsets.all(3.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      color: Color(0xff5A6175),
-                                    ),
+                  padding: EdgeInsets.all(25.0),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Daily Calm',
+                            style: TextStyle(
+                                color: Color(0xff3F414E),
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'APR 30',
+                                style: TextStyle(
+                                    color: Color(0xff5A6175), fontSize: 14.0),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Container(
+                                  padding: EdgeInsets.all(3.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    color: Color(0xff5A6175),
                                   ),
                                 ),
-                                Text(
-                                  'PAUSE PRACTICE',
-                                  style: TextStyle(
-                                      color: Color(0xff5A6175), fontSize: 14.0),
-                                )
-                              ],
-                            )
-                          ],
+                              ),
+                              Text(
+                                'PAUSE PRACTICE',
+                                style: TextStyle(
+                                    color: Color(0xff5A6175), fontSize: 14.0),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      Expanded(child: Container()),
+                      Container(
+                        decoration: const ShapeDecoration(
+                          color: Color(0xff3F414E),
+                          shape: CircleBorder(),
                         ),
-                        Expanded(child: Container()),
-                        Container(
-                          decoration: const ShapeDecoration(
-                            color: Color(0xff3F414E),
-                            shape: CircleBorder(),
+                        child: IconButton(
+                          autofocus: true,
+                          icon: Image(
+                            image: AssetImage("images/play.png"),
+                            width: 12.0,
+                            color: Color(0xffF0F1F2),
                           ),
-                          child: IconButton(
-                            autofocus: true,
-                            icon: Image(
-                              image: AssetImage("images/play.png"),
-                              width: 12.0,
-                              color: Color(0xffF0F1F2),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/play_list',
-                                  arguments: {
-                                    "title": "Daily Calm",
-                                    "type": "APR 30"
-                                  });
-                            },
-                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/play_list',
+                                arguments: {
+                                  "title": "Daily Calm",
+                                  "type": "APR 30"
+                                });
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-            // Voice ListView
-            Container(
-                padding: EdgeInsets.only(top: 30.0, left: 8.0, right: 8.0),
-                height: 300,
-                child: new StaggeredGridView.countBuilder(
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisCount: 4,
-                    itemCount: boxs.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        new InkWell(
-                          child: new Container(
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0)),
-                                image: DecorationImage(
-                                  image: AssetImage(boxs[index]["img"]),
-                                  fit: BoxFit.cover,
-                                )),
-                            child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(15.0),
-                                          bottomRight: Radius.circular(15.0)),
-                                      color: Colors.black.withOpacity(0.5),
-                                    ),
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 50,
-                                    child: Center(
-                                        child: Text(
-                                      boxs[index]["title"],
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 1.0),
-                                    )))),
-                          ),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/play_list',
-                                arguments: {
-                                  "title": boxs[index]["title"],
-                                  "type": "MEDITATION"
-                                });
-                          },
+          ),
+          // Voice ListView
+          Container(
+              padding: EdgeInsets.only(top: 30.0, left: 8.0, right: 8.0),
+              height: 300,
+              child: new StaggeredGridView.countBuilder(
+                  physics: NeverScrollableScrollPhysics(),
+                  crossAxisCount: 4,
+                  itemCount: boxs.length,
+                  itemBuilder: (BuildContext context, int index) => new InkWell(
+                        child: new Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.0)),
+                              image: DecorationImage(
+                                image: AssetImage(boxs[index]["img"]),
+                                fit: BoxFit.cover,
+                              )),
+                          child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(15.0),
+                                        bottomRight: Radius.circular(15.0)),
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 50,
+                                  child: Center(
+                                      child: Text(
+                                    boxs[index]["title"],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1.0),
+                                  )))),
                         ),
-                    staggeredTileBuilder: (int index) =>
-                        new StaggeredTile.count(2, index.isEven ? 2 : 1),
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 15.0))
-          ],
-        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/play_list',
+                              arguments: {
+                                "title": boxs[index]["title"],
+                                "type": "MEDITATION"
+                              });
+                        },
+                      ),
+                  staggeredTileBuilder: (int index) =>
+                      new StaggeredTile.count(2, index.isEven ? 2 : 1),
+                  crossAxisSpacing: 20.0,
+                  mainAxisSpacing: 15.0))
+        ],
       ),
     );
   }

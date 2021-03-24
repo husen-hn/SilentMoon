@@ -1,4 +1,5 @@
 import 'package:SilentMoon/screen/main_screen.dart';
+import 'package:SilentMoon/screen/nav_bar_screens/profile/recent_changes.dart';
 import 'package:SilentMoon/screen/play_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -15,6 +16,8 @@ class RouteGenerator {
                   title: arguament["title"],
                   type: arguament["type"],
                 ));
+      case '/profile_recent_changes':
+        return MaterialPageRoute(builder: (_) => RecentChanges());
 
       default:
         return MaterialPageRoute(builder: (_) => MainScreen());

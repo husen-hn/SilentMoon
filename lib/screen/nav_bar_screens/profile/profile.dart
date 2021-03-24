@@ -1,3 +1,4 @@
+import 'package:SilentMoon/widget/profile_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
@@ -63,58 +64,51 @@ class _ProfileState extends State<Profile> {
           ),
         ), // Introduction
         // Introduction
-        InkWell(
-          child: _profile_item('Introduction', Color(0xff565D70),
-              Color(0xffFFDB9D), Icons.keyboard_arrow_right),
-        ),
+        ProfileBtn(
+            btnTitle: 'Introduction',
+            btnColor: Color(0xffFFDB9D),
+            btnTxtColor: Color(0xff565D70),
+            icon: Icons.keyboard_arrow_right),
         // Suggestions
-        InkWell(
-          child: _profile_item('Suggestions', Color(0xffFFECCC),
-              Color(0xff8E97FD), Icons.keyboard_arrow_right),
-          // onTap: () => _sendSuggestionMail(),
-        ),
+        ProfileBtn(
+            btnTitle: 'Suggestions',
+            btnColor: Color(0xff8E97FD),
+            btnTxtColor: Color(0xffFFECCC),
+            icon: Icons.keyboard_arrow_right),
+
         // AboutUs
-        InkWell(
-          child: _profile_item('About us', Color(0xffFFECCC), Color(0xffFA6E5A),
-              Icons.keyboard_arrow_right),
-        ),
+        ProfileBtn(
+            btnTitle: 'About us',
+            btnColor: Color(0xffFA6E5A),
+            btnTxtColor: Color(0xffFFECCC),
+            icon: Icons.keyboard_arrow_right),
+
         // Share
-        InkWell(
-          child: _profile_item(
-              'share', Color(0xffFFECCC), Color(0xff6CB28E), Icons.share),
-          onTap: () => _onShare(),
+        ProfileBtn(
+          btnTitle: 'Share',
+          btnColor: Color(0xff6CB28E),
+          btnTxtColor: Color(0xffFFECCC),
+          icon: Icons.share,
+          onTap: this._onItemPress,
         ),
+
         // Recent changes
-        InkWell(
-          child: _profile_item('Recent changes', Color(0xffFFECCC),
-              Color(0xffD9A5B5), Icons.keyboard_arrow_right),
+        ProfileBtn(
+          btnTitle: 'Recent changes',
+          btnColor: Color(0xffD9A5B5),
+          btnTxtColor: Color(0xffFFECCC),
+          icon: Icons.keyboard_arrow_right,
         ),
+
         // DayMode/NightMode
       ],
     );
   }
 
-  Widget _profile_item(
-      String title, Color titleColor, Color bgColor, IconData icon) {
-    return Container(
-      margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 10.0),
-      padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)), color: bgColor),
-      child: Row(
-        children: [
-          Text(
-            title,
-            style: TextStyle(color: titleColor),
-          ),
-          Expanded(child: Container()),
-          Icon(
-            icon,
-            color: titleColor,
-          )
-        ],
-      ),
-    );
+  _onItemPress(String title) {
+    if (title == 'Share') {
+      _onShare();
+    }
   }
 
   _onShare() async {
