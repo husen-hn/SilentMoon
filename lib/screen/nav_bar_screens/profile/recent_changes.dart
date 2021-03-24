@@ -20,8 +20,9 @@ class _RecentChangesState extends State<RecentChanges> {
       appBar: AppBar(
         title: Text(
           'Recent Changes',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: const Color(0xff3F414E)),
         ),
+        iconTheme: IconThemeData(color: const Color(0xff3F414E)),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.grey[50],
@@ -43,13 +44,13 @@ class _RecentChangesState extends State<RecentChanges> {
                         decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(100)),
-                            color: Color(0xff3F414E)),
+                            color: const Color(0xff3F414E)),
                       ),
                       // vertical line
                       Container(
                         height: changesList[index].changes.length * 30.0,
                         width: 2.0,
-                        color: Color(0xff3F414E),
+                        color: const Color(0xff3F414E),
                       ),
                     ],
                   ),
