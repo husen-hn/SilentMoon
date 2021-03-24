@@ -98,6 +98,7 @@ class _ProfileState extends State<Profile> {
           btnColor: Color(0xffD9A5B5),
           btnTxtColor: Color(0xffFFECCC),
           icon: Icons.keyboard_arrow_right,
+          onTap: this._onItemPress,
         ),
 
         // DayMode/NightMode
@@ -108,6 +109,8 @@ class _ProfileState extends State<Profile> {
   _onItemPress(String title) {
     if (title == 'Share') {
       _onShare();
+    } else if (title == 'Recent changes') {
+      Navigator.pushNamed(context, '/profile_recent_changes');
     }
   }
 
