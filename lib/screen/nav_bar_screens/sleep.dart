@@ -20,6 +20,16 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
     MusicBoxModel("images/sleep_grid_banner_four.png", Color(0xffFFC97E),
         'Night Island', '45 MIN', 'SLEEP MUSIC'),
   ];
+  List<Map> musics = [
+    {"name": "Focus Attention", "time": "10 MIN"},
+    {"name": "Body Scan", "time": "4 MIN"},
+    {"name": "Making Happiness ", "time": "3 MIN"},
+    {"name": "Focus Attention", "time": "6 MIN"},
+    {"name": "Body Scan", "time": "2 MIN"},
+    {"name": "Making Happiness", "time": "7 MIN"},
+    {"name": "Focus Attention", "time": "7 MIN"},
+    {"name": "Body Scan", "time": "7 MIN"},
+  ];
   TabController _nestedTabController;
 
   @override
@@ -110,12 +120,12 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
               // Tabs Contents
               Container(
                 //TODO set height size
-                height: MediaQuery.of(context).size.height * .6,
+                height: MediaQuery.of(context).size.height * .8,
                 child: TabBarView(
                     controller: _nestedTabController,
                     physics: BouncingScrollPhysics(),
                     children: [
-                      // First Tab (All)
+                      // Tab One (All)
                       ListView(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
@@ -167,10 +177,235 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                           )
                         ],
                       ),
-                      Center(child: Text('data2')),
-                      Center(child: Text('data3')),
-                      Center(child: Text('data4')),
-                      Center(child: Text('data5')),
+                      // Tab Two (My)
+                      ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: musics.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20.0, left: 30.0, right: 30.0),
+                              child: Row(
+                                children: [
+                                  // play btn
+                                  Container(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Color(0xffA1A4B2))),
+                                    child: IconButton(
+                                      autofocus: true,
+                                      icon: Image(
+                                        image: AssetImage("images/play.png"),
+                                        color: Color(0xffA1A4B2),
+                                        width: 12.0,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                  // voice title & time
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          musics[index]["name"],
+                                          style: TextStyle(
+                                              color: Color(0xff3F414E),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0),
+                                        ),
+                                        Text(
+                                          musics[index]["time"],
+                                          style: TextStyle(
+                                              color: Color(0xffA1A4B2),
+                                              fontSize: 11.0),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                      // Tab Three (Anxios)
+                      ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: musics.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20.0, left: 30.0, right: 30.0),
+                              child: Row(
+                                children: [
+                                  // play btn
+                                  Container(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Color(0xffA1A4B2))),
+                                    child: IconButton(
+                                      autofocus: true,
+                                      icon: Image(
+                                        image: AssetImage("images/play.png"),
+                                        color: Color(0xffA1A4B2),
+                                        width: 12.0,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                  // voice title & time
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          musics[index]["name"],
+                                          style: TextStyle(
+                                              color: Color(0xff3F414E),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0),
+                                        ),
+                                        Text(
+                                          musics[index]["time"],
+                                          style: TextStyle(
+                                              color: Color(0xffA1A4B2),
+                                              fontSize: 11.0),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+
+                      // Tab Four (Sleep)
+                      ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: musics.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20.0, left: 30.0, right: 30.0),
+                              child: Row(
+                                children: [
+                                  // play btn
+                                  Container(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Color(0xffA1A4B2))),
+                                    child: IconButton(
+                                      autofocus: true,
+                                      icon: Image(
+                                        image: AssetImage("images/play.png"),
+                                        color: Color(0xffA1A4B2),
+                                        width: 12.0,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                  // voice title & time
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          musics[index]["name"],
+                                          style: TextStyle(
+                                              color: Color(0xff3F414E),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0),
+                                        ),
+                                        Text(
+                                          musics[index]["time"],
+                                          style: TextStyle(
+                                              color: Color(0xffA1A4B2),
+                                              fontSize: 11.0),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                      // Tab Five (Kids)
+                      ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: musics.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20.0, left: 30.0, right: 30.0),
+                              child: Row(
+                                children: [
+                                  // play btn
+                                  Container(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Color(0xffA1A4B2))),
+                                    child: IconButton(
+                                      autofocus: true,
+                                      icon: Image(
+                                        image: AssetImage("images/play.png"),
+                                        color: Color(0xffA1A4B2),
+                                        width: 12.0,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                  // voice title & time
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          musics[index]["name"],
+                                          style: TextStyle(
+                                              color: Color(0xff3F414E),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0),
+                                        ),
+                                        Text(
+                                          musics[index]["time"],
+                                          style: TextStyle(
+                                              color: Color(0xffA1A4B2),
+                                              fontSize: 11.0),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
                     ]),
               )
             ],
