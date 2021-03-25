@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Meditate extends StatefulWidget {
@@ -174,31 +175,41 @@ class _MeditateState extends State<Meditate> {
           // Voice ListView
           Container(
               padding: EdgeInsets.only(top: 30.0, left: 8.0, right: 8.0),
-              height: 300,
-              child: new StaggeredGridView.countBuilder(
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: 4,
-                  itemCount: boxs.length,
-                  itemBuilder: (BuildContext context, int index) => new InkWell(
-                        child: new Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0)),
-                              image: DecorationImage(
-                                image: AssetImage(boxs[index]["img"]),
-                                fit: BoxFit.cover,
-                              )),
-                          child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(15.0),
-                                        bottomRight: Radius.circular(15.0)),
-                                    color: Colors.black.withOpacity(0.5),
+              height: 500,
+              child: StaggeredGridView.countBuilder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                crossAxisCount: 4,
+                crossAxisSpacing: 20.0,
+                mainAxisSpacing: 20.0,
+                staggeredTileBuilder: (int index) =>
+                    StaggeredTile.count(2, index.isEven ? 3 : 2),
+                itemCount: boxs.length,
+                itemBuilder: (BuildContext context, int index) => new InkWell(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                        image: DecorationImage(
+                          image: AssetImage(boxs[index]["img"]),
+                          fit: BoxFit.cover,
+                        )),
+                    child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15.0),
+                                  bottomRight: Radius.circular(15.0)),
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: ClipRect(
+                              child: SizedBox(
+                                child: BackdropFilter(
+                                  filter: ui.ImageFilter.blur(
+                                    sigmaX: 10.0,
+                                    sigmaY: 5.0,
                                   ),
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 50,
                                   child: Center(
                                       child: Text(
                                     boxs[index]["title"],
@@ -207,20 +218,19 @@ class _MeditateState extends State<Meditate> {
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 1.0),
-                                  )))),
-                        ),
-                        onTap: () {
-                          Navigator.pushNamed(context, '/play_list',
-                              arguments: {
-                                "title": boxs[index]["title"],
-                                "type": "MEDITATION"
-                              });
-                        },
-                      ),
-                  staggeredTileBuilder: (int index) =>
-                      new StaggeredTile.count(2, index.isEven ? 2 : 1),
-                  crossAxisSpacing: 20.0,
-                  mainAxisSpacing: 15.0))
+                                  )),
+                                ),
+                              ),
+                            ))),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/play_list', arguments: {
+                      "title": boxs[index]["title"],
+                      "type": "MEDITATION"
+                    });
+                  },
+                ),
+              ))
         ],
       ),
     );

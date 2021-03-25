@@ -90,7 +90,7 @@ class _IntroductionUserBringsState extends State<IntroductionUserBrings> {
                       crossAxisCount: 2,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 8,
-                      childAspectRatio: 1,
+                      childAspectRatio: .8,
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(

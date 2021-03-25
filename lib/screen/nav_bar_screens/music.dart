@@ -150,50 +150,57 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                       child: InkWell(
                         child: Column(
                           children: [
-                            Row(
-                              children: [
-                                // play btn
-                                Container(
-                                  width: 40.0,
-                                  height: 40.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
-                                      border: Border.all(
-                                          width: 1, color: Color(0xffA1A4B2))),
-                                  child: IconButton(
-                                    autofocus: true,
-                                    icon: Image(
-                                      image: AssetImage("images/play.png"),
-                                      color: Color(0xffA1A4B2),
-                                      width: 12.0,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                ),
-                                // voice title & time
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        musics[index]["name"],
-                                        style: TextStyle(
-                                            color: Color(0xff3F414E),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.0),
+                            InkWell(
+                              child: Row(
+                                children: [
+                                  // play btn
+                                  Container(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Color(0xffA1A4B2))),
+                                    child: IconButton(
+                                      autofocus: true,
+                                      icon: Image(
+                                        image: AssetImage("images/play.png"),
+                                        color: Color(0xffA1A4B2),
+                                        width: 12.0,
                                       ),
-                                      Text(
-                                        musics[index]["time"],
-                                        style: TextStyle(
-                                            color: Color(0xffA1A4B2),
-                                            fontSize: 11.0),
-                                      )
-                                    ],
+                                      onPressed: () {},
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  // voice title & time
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          musics[index]["name"],
+                                          style: TextStyle(
+                                              color: Color(0xff3F414E),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0),
+                                        ),
+                                        Text(
+                                          musics[index]["time"],
+                                          style: TextStyle(
+                                              color: Color(0xffA1A4B2),
+                                              fontSize: 11.0),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.pushNamed(context, '/sound_player');
+                              },
                             ),
                           ],
                         ),
