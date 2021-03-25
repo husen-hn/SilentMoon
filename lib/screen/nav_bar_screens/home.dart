@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
       MusicBoxModel("images/happiness.png", Color(0xffFFC97E), 'Happiness',
           '3-10 MIN', 'MEDITATION'),
     ];
-    //fuck dart, what is it?
+    //hours to say welcome
     List morning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     List afternoon = [12, 13, 14, 15, 16, 17, 18];
     List night = [19, 20, 21, 22, 23, 24, 1, 2, 3, 4, 5, 6];

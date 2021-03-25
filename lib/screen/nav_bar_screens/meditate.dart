@@ -94,80 +94,78 @@ class _MeditateState extends State<Meditate> {
           // Daily Calm
           Padding(
             padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-            child: FittedBox(
+            child: Container(
+              width: 374,
+              height: 95,
+              decoration: BoxDecoration(
+                  color: Color(0xfff9dfce),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  image: DecorationImage(
+                      image: AssetImage("images/daily_calm.png"))),
               child: Container(
-                width: 374,
-                height: 95,
-                decoration: BoxDecoration(
-                    color: Color(0xfff9dfce),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    image: DecorationImage(
-                        image: AssetImage("images/daily_calm.png"))),
-                child: Container(
-                  padding: EdgeInsets.all(25.0),
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Daily Calm',
-                            style: TextStyle(
-                                color: Color(0xff3F414E),
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'APR 30',
-                                style: TextStyle(
-                                    color: Color(0xff5A6175), fontSize: 14.0),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Container(
-                                  padding: EdgeInsets.all(3.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xff5A6175),
-                                  ),
+                padding: EdgeInsets.all(25.0),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Daily Calm',
+                          style: TextStyle(
+                              color: Color(0xff3F414E),
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'APR 30',
+                              style: TextStyle(
+                                  color: Color(0xff5A6175), fontSize: 14.0),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Container(
+                                padding: EdgeInsets.all(3.0),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  color: Color(0xff5A6175),
                                 ),
                               ),
-                              Text(
-                                'PAUSE PRACTICE',
-                                style: TextStyle(
-                                    color: Color(0xff5A6175), fontSize: 14.0),
-                              )
-                            ],
-                          )
-                        ],
+                            ),
+                            Text(
+                              'PAUSE PRACTICE',
+                              style: TextStyle(
+                                  color: Color(0xff5A6175), fontSize: 14.0),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    Expanded(child: Container()),
+                    Container(
+                      decoration: const ShapeDecoration(
+                        color: Color(0xff3F414E),
+                        shape: CircleBorder(),
                       ),
-                      Expanded(child: Container()),
-                      Container(
-                        decoration: const ShapeDecoration(
-                          color: Color(0xff3F414E),
-                          shape: CircleBorder(),
+                      child: IconButton(
+                        autofocus: true,
+                        icon: Image(
+                          image: AssetImage("images/play.png"),
+                          width: 12.0,
+                          color: Color(0xffF0F1F2),
                         ),
-                        child: IconButton(
-                          autofocus: true,
-                          icon: Image(
-                            image: AssetImage("images/play.png"),
-                            width: 12.0,
-                            color: Color(0xffF0F1F2),
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/play_list',
-                                arguments: {
-                                  "title": "Daily Calm",
-                                  "type": "APR 30"
-                                });
-                          },
-                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/play_list',
+                              arguments: {
+                                "title": "Daily Calm",
+                                "type": "APR 30"
+                              });
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -175,7 +173,7 @@ class _MeditateState extends State<Meditate> {
           // Voice ListView
           Container(
               padding: EdgeInsets.only(top: 30.0, left: 8.0, right: 8.0),
-              height: 500,
+              height: MediaQuery.of(context).size.height * .65,
               child: StaggeredGridView.countBuilder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -196,14 +194,12 @@ class _MeditateState extends State<Meditate> {
                     child: Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
-                            decoration: BoxDecoration(
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: ClipRRect(
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(15.0),
                                   bottomRight: Radius.circular(15.0)),
-                            ),
-                            width: MediaQuery.of(context).size.width,
-                            height: 50,
-                            child: ClipRect(
                               child: SizedBox(
                                 child: BackdropFilter(
                                   filter: ui.ImageFilter.blur(
