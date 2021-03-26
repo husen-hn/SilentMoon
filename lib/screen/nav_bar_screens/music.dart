@@ -12,18 +12,21 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
     {"name": "Focus Attention", "time": "10 MIN"},
     {"name": "Body Scan", "time": "4 MIN"},
     {"name": "Making Happiness ", "time": "3 MIN"},
+    {"name": "Making Happiness ", "time": "3 MIN"},
+    {"name": "Focus Attention", "time": "6 MIN"},
     {"name": "Focus Attention", "time": "6 MIN"},
     {"name": "Body Scan", "time": "2 MIN"},
     {"name": "Making Happiness", "time": "7 MIN"},
+    {"name": "Making Happiness", "time": "7 MIN"},
+    {"name": "Making Happiness", "time": "7 MIN"},
     {"name": "Focus Attention", "time": "7 MIN"},
-    {"name": "Body Scan", "time": "7 MIN"},
+    {"name": "5Body Scan", "time": "7 MIN"},
+    {"name": "4Body Scan", "time": "7 MIN"},
+    {"name": "3Body Scan", "time": "7 MIN"},
+    {"name": "2Body Scan", "time": "7 MIN"},
+    {"name": "11Body Scan", "time": "7 MIN"},
   ];
   List<Map> favMusics = [
-    {"name": "Body Scan", "time": "10 MIN"},
-    {"name": "Body Scan", "time": "10 MIN"},
-    {"name": "Body Scan", "time": "10 MIN"},
-    {"name": "Body Scan", "time": "10 MIN"},
-    {"name": "Body Scan", "time": "10 MIN"},
     {"name": "Body Scan", "time": "10 MIN"},
     {"name": "Body Scan", "time": "10 MIN"},
   ];
@@ -136,136 +139,154 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
               ),
             ),
             //Voice List
-            SliverFixedExtentList(
-              itemExtent: 70.0,
-              delegate:
-                  SliverChildBuilderDelegate((BuildContext context, int index) {
-                return TabBarView(
-                  controller: _tabController,
-                  children: [
-                    // Voice Tab
-                    Container(
-                      padding: EdgeInsets.only(bottom: 10, left: 10, top: 10),
-                      color: Colors.white,
-                      child: InkWell(
-                        child: Column(
-                          children: [
-                            InkWell(
-                              child: Row(
-                                children: [
-                                  // play btn
-                                  Container(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        border: Border.all(
-                                            width: 1,
-                                            color: Color(0xffA1A4B2))),
-                                    child: IconButton(
-                                      autofocus: true,
-                                      icon: Image(
-                                        image: AssetImage("images/play.png"),
-                                        color: Color(0xffA1A4B2),
-                                        width: 12.0,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  // voice title & time
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          musics[index]["name"],
-                                          style: TextStyle(
-                                              color: Color(0xff3F414E),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16.0),
+            SliverFillRemaining(
+                child: TabBarView(
+              controller: _tabController,
+              children: [
+                // Voice Tab
+                Container(
+                  color: Colors.white,
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: musics.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                            bottom: 10,
+                            left: 10,
+                            top: 10,
+                          ),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: Color(0xffA1A4B2),
+                                          width: 12.0,
                                         ),
-                                        Text(
-                                          musics[index]["time"],
-                                          style: TextStyle(
-                                              color: Color(0xffA1A4B2),
-                                              fontSize: 11.0),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              onTap: () {
-                                Navigator.pushNamed(context, '/sound_player');
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    // Favorite Tab
-                    Container(
-                      padding: EdgeInsets.only(bottom: 10, left: 10, top: 10),
-                      color: Colors.white,
-                      child: InkWell(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                // play btn
-                                Container(
-                                  width: 40.0,
-                                  height: 40.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
-                                      border: Border.all(
-                                          width: 1, color: Color(0xffA1A4B2))),
-                                  child: IconButton(
-                                    autofocus: true,
-                                    icon: Image(
-                                      image: AssetImage("images/play.png"),
-                                      color: Color(0xffA1A4B2),
-                                      width: 12.0,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                ),
-                                // voice title & time
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        favMusics[index]["name"],
-                                        style: TextStyle(
-                                            color: Color(0xff3F414E),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.0),
+                                        onPressed: () {},
                                       ),
-                                      Text(
-                                        favMusics[index]["time"],
-                                        style: TextStyle(
-                                            color: Color(0xffA1A4B2),
-                                            fontSize: 11.0),
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[index]["name"],
+                                            style: TextStyle(
+                                                color: Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            musics[index]["time"],
+                                            style: TextStyle(
+                                                color: Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              }, childCount: favMusics.length),
-            ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player');
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                ),
+                // Favorite Tab
+                Container(
+                  color: Colors.white,
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: favMusics.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          padding:
+                              EdgeInsets.only(bottom: 10, left: 10, top: 10),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: Color(0xffA1A4B2),
+                                          width: 12.0,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            favMusics[index]["name"],
+                                            style: TextStyle(
+                                                color: Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            favMusics[index]["time"],
+                                            style: TextStyle(
+                                                color: Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            ))
           ],
         ),
       ),
