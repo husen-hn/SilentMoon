@@ -20,7 +20,7 @@ class BannerNight extends StatefulWidget {
       @required this.btnTitle,
       @required this.btnColor,
       @required this.btnTxtColor,
-      @required this.onTap});
+      this.onTap});
 
   @override
   _BannerNightState createState() => _BannerNightState();
