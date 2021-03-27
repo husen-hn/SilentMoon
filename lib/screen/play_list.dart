@@ -71,11 +71,8 @@ class _PlayListState extends State<PlayList>
                             // action buttons
                             Positioned(
                               top: 40,
-                              right: 10,
                               left: 30,
-                              child: Row(
-                                children: [
-                                  //back
+                              child: //back
                                   Container(
                                       decoration: ShapeDecoration(
                                         color: const Color(0xffF2F2F2),
@@ -92,58 +89,6 @@ class _PlayListState extends State<PlayList>
                                           Navigator.pop(context);
                                         },
                                       )),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * .4,
-                                  ),
-                                  //favorite
-                                  Container(
-                                    decoration: ShapeDecoration(
-                                      color: const Color(0xff03174C)
-                                          .withOpacity(0.5),
-                                      shape: const CircleBorder(),
-                                    ),
-                                    child: IconButton(
-                                      autofocus: true,
-                                      icon: Image(
-                                        image:
-                                            AssetImage("images/favorite.png"),
-                                        color: isFavorite
-                                            ? Colors.pink
-                                            : Color(0xffE6E7F2),
-                                        width: 20.0,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          isFavorite == false
-                                              ? isFavorite = true
-                                              : isFavorite = false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  //download
-                                  Container(
-                                      decoration: ShapeDecoration(
-                                        color: const Color(0xff03174C)
-                                            .withOpacity(0.5),
-                                        shape: const CircleBorder(),
-                                      ),
-                                      child: IconButton(
-                                        autofocus: true,
-                                        icon: Image(
-                                          image:
-                                              AssetImage("images/download.png"),
-                                          color: Color(0xffE6E7F2),
-                                          width: 20.0,
-                                        ),
-                                        onPressed: () {},
-                                      )),
-                                ],
-                              ),
                             ),
                             //cloud
                             Positioned(

@@ -8,10 +8,7 @@ class RecentChanges extends StatefulWidget {
 
 class _RecentChangesState extends State<RecentChanges> {
   List<RecentChangesModel> changesList = [
-    RecentChangesModel(version: '1.0.0', changes: ['1', '2', '3', '4']),
-    RecentChangesModel(version: '1.3.0', changes: ['1', '2']),
-    RecentChangesModel(
-        version: '1.8.0', changes: ['1', '2', '3', '4', '3', '4']),
+    RecentChangesModel(version: '0.0.1 alpha', changes: ['UI completed']),
   ];
 
   @override

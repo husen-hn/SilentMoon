@@ -1,5 +1,6 @@
 import 'package:SilentMoon/data/model/music_box_model.dart';
 import 'package:SilentMoon/data/model/play_list_model.dart';
+import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:SilentMoon/widget/banner_night.dart';
 import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
@@ -186,52 +187,61 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                             return Padding(
                               padding: const EdgeInsets.only(
                                   top: 20.0, left: 30.0, right: 30.0),
-                              child: Row(
-                                children: [
-                                  // play btn
-                                  Container(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        border: Border.all(
-                                            width: 1,
-                                            color: Color(0xffA1A4B2))),
-                                    child: IconButton(
-                                      autofocus: true,
-                                      icon: Image(
-                                        image: AssetImage("images/play.png"),
-                                        color: Color(0xffA1A4B2),
-                                        width: 12.0,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  // voice title & time
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          musics[index]["name"],
-                                          style: TextStyle(
-                                              color: Color(0xff3F414E),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16.0),
+                              child: InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: Color(0xffA1A4B2),
+                                          width: 12.0,
                                         ),
-                                        Text(
-                                          musics[index]["time"],
-                                          style: TextStyle(
-                                              color: Color(0xffA1A4B2),
-                                              fontSize: 11.0),
-                                        )
-                                      ],
+                                        onPressed: () {},
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[index]["name"],
+                                            style: TextStyle(
+                                                color: Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            musics[index]["time"],
+                                            style: TextStyle(
+                                                color: Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: SoundPlayModel(
+                                          title: musics[index]["name"],
+                                          boxTitle: 'Sleep'));
+                                },
                               ),
                             );
                           }),
@@ -243,56 +253,64 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                             return Padding(
                               padding: const EdgeInsets.only(
                                   top: 20.0, left: 30.0, right: 30.0),
-                              child: Row(
-                                children: [
-                                  // play btn
-                                  Container(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        border: Border.all(
-                                            width: 1,
-                                            color: Color(0xffA1A4B2))),
-                                    child: IconButton(
-                                      autofocus: true,
-                                      icon: Image(
-                                        image: AssetImage("images/play.png"),
-                                        color: Color(0xffA1A4B2),
-                                        width: 12.0,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  // voice title & time
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          musics[index]["name"],
-                                          style: TextStyle(
-                                              color: Color(0xff3F414E),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16.0),
+                              child: InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: Color(0xffA1A4B2),
+                                          width: 12.0,
                                         ),
-                                        Text(
-                                          musics[index]["time"],
-                                          style: TextStyle(
-                                              color: Color(0xffA1A4B2),
-                                              fontSize: 11.0),
-                                        )
-                                      ],
+                                        onPressed: () {},
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[index]["name"],
+                                            style: TextStyle(
+                                                color: Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            musics[index]["time"],
+                                            style: TextStyle(
+                                                color: Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: SoundPlayModel(
+                                          title: musics[index]["name"],
+                                          boxTitle: 'Sleep'));
+                                },
                               ),
                             );
                           }),
-
                       // Tab Four (Sleep)
                       ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
@@ -301,52 +319,61 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                             return Padding(
                               padding: const EdgeInsets.only(
                                   top: 20.0, left: 30.0, right: 30.0),
-                              child: Row(
-                                children: [
-                                  // play btn
-                                  Container(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        border: Border.all(
-                                            width: 1,
-                                            color: Color(0xffA1A4B2))),
-                                    child: IconButton(
-                                      autofocus: true,
-                                      icon: Image(
-                                        image: AssetImage("images/play.png"),
-                                        color: Color(0xffA1A4B2),
-                                        width: 12.0,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  // voice title & time
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          musics[index]["name"],
-                                          style: TextStyle(
-                                              color: Color(0xff3F414E),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16.0),
+                              child: InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: Color(0xffA1A4B2),
+                                          width: 12.0,
                                         ),
-                                        Text(
-                                          musics[index]["time"],
-                                          style: TextStyle(
-                                              color: Color(0xffA1A4B2),
-                                              fontSize: 11.0),
-                                        )
-                                      ],
+                                        onPressed: () {},
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[index]["name"],
+                                            style: TextStyle(
+                                                color: Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            musics[index]["time"],
+                                            style: TextStyle(
+                                                color: Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: SoundPlayModel(
+                                          title: musics[index]["name"],
+                                          boxTitle: 'Sleep'));
+                                },
                               ),
                             );
                           }),
@@ -358,52 +385,61 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                             return Padding(
                               padding: const EdgeInsets.only(
                                   top: 20.0, left: 30.0, right: 30.0),
-                              child: Row(
-                                children: [
-                                  // play btn
-                                  Container(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        border: Border.all(
-                                            width: 1,
-                                            color: Color(0xffA1A4B2))),
-                                    child: IconButton(
-                                      autofocus: true,
-                                      icon: Image(
-                                        image: AssetImage("images/play.png"),
-                                        color: Color(0xffA1A4B2),
-                                        width: 12.0,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  // voice title & time
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          musics[index]["name"],
-                                          style: TextStyle(
-                                              color: Color(0xff3F414E),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16.0),
+                              child: InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: Color(0xffA1A4B2),
+                                          width: 12.0,
                                         ),
-                                        Text(
-                                          musics[index]["time"],
-                                          style: TextStyle(
-                                              color: Color(0xffA1A4B2),
-                                              fontSize: 11.0),
-                                        )
-                                      ],
+                                        onPressed: () {},
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[index]["name"],
+                                            style: TextStyle(
+                                                color: Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            musics[index]["time"],
+                                            style: TextStyle(
+                                                color: Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: SoundPlayModel(
+                                          title: musics[index]["name"],
+                                          boxTitle: 'Sleep'));
+                                },
                               ),
                             );
                           }),

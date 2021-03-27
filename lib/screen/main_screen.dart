@@ -6,6 +6,7 @@ import 'package:SilentMoon/screen/nav_bar_screens/sleep.dart';
 import 'package:SilentMoon/widget/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -13,12 +14,34 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen == false) {
+      await prefs.setBool('seen', true);
+      Navigator.of(context).pushNamed('/profile_introduction');
+    }
+  }
+
   int _selectedIndex = 0;
   void _onTap(index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
+  @override
+  void initState() {
+    checkFirstSeen();
+    super.initState();
+  }
+
+  // @override
+  // void didChangeDependencies() {
+  //   checkFirstSeen();
+  //   super.didChangeDependencies();
+  // }
 
   @override
   Widget build(BuildContext context) {

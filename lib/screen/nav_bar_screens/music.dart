@@ -50,7 +50,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
               data: Theme.of(context).copyWith(
                   accentColor: Color(0xff8E97FD), primaryColor: Colors.white),
               child: SliverAppBar(
-                expandedHeight: 350,
+                expandedHeight: 330,
                 automaticallyImplyLeading: false,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Column(
@@ -111,6 +111,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                 snap: false,
                 pinned: true,
                 floating: true,
+                expandedHeight: 0,
                 bottom: TabBar(
                   controller: _tabController,
                   isScrollable: false,
@@ -135,7 +136,6 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                     ),
                   ],
                 ),
-                expandedHeight: 30,
               ),
             ),
             //Voice & Favorite List
@@ -149,7 +149,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      padding: EdgeInsets.only(bottom: 50.0),
+                      padding: EdgeInsets.only(bottom: 60.0),
                       itemCount: musics.length,
                       itemBuilder: (BuildContext context, int index) {
                         return InkWell(
@@ -226,6 +226,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
+                      padding: EdgeInsets.only(bottom: 60.0),
                       itemCount: favMusics.length,
                       itemBuilder: (BuildContext context, int index) {
                         return InkWell(
