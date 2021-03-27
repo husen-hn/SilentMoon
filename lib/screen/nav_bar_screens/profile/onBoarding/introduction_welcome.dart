@@ -121,8 +121,10 @@ class _IntroductionWelcomeState extends State<IntroductionWelcome> {
               bottom: 80,
               left: 20.0,
               right: 20.0,
-              child:
-                  Lottie.asset('assets/swipe_right_platform.json', height: 60)),
+              child: Lottie.asset(
+                'assets/swipe_right_platform.json',
+                height: 60,
+              )),
         ],
       ),
     );

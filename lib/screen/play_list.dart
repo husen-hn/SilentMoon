@@ -1,10 +1,10 @@
+import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:flutter/material.dart';
 
 class PlayList extends StatefulWidget {
-  String title;
-  String type;
+  final PlayListModel playListArgs;
 
-  PlayList({this.title = "Title", this.type = "COURSE"});
+  PlayList({@required this.playListArgs});
   @override
   _PlayListState createState() => _PlayListState();
 }
@@ -238,14 +238,14 @@ class _PlayListState extends State<PlayList>
                         padding: const EdgeInsets.only(top: 25.0, left: 10.0),
                         child: RichText(
                           text: TextSpan(
-                            text: '${widget.title}\n',
+                            text: '${widget.playListArgs.title}\n',
                             style: TextStyle(
                                 color: Color(0xff3F414E),
                                 fontSize: 34,
                                 fontWeight: FontWeight.bold),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: '${widget.type}\n',
+                                  text: '${widget.playListArgs.type}\n',
                                   style: TextStyle(
                                     height: 3.0,
                                     fontWeight: FontWeight.bold,

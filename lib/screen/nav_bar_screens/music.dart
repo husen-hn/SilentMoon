@@ -1,3 +1,4 @@
+import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:flutter/material.dart';
 
 class Music extends StatefulWidget {
@@ -18,13 +19,13 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
     {"name": "Body Scan", "time": "2 MIN"},
     {"name": "Making Happiness", "time": "7 MIN"},
     {"name": "Making Happiness", "time": "7 MIN"},
-    {"name": "Making Happiness", "time": "7 MIN"},
-    {"name": "Focus Attention", "time": "7 MIN"},
+    {"name": "7Making Happiness", "time": "7 MIN"},
+    {"name": "6Focus Attention", "time": "7 MIN"},
     {"name": "5Body Scan", "time": "7 MIN"},
     {"name": "4Body Scan", "time": "7 MIN"},
     {"name": "3Body Scan", "time": "7 MIN"},
     {"name": "2Body Scan", "time": "7 MIN"},
-    {"name": "11Body Scan", "time": "7 MIN"},
+    {"name": "1Body Scan", "time": "7 MIN"},
   ];
   List<Map> favMusics = [
     {"name": "Body Scan", "time": "10 MIN"},
@@ -138,7 +139,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                 expandedHeight: 30,
               ),
             ),
-            //Voice List
+            //Voice & Favorite List
             SliverFillRemaining(
                 child: TabBarView(
               controller: _tabController,
@@ -149,6 +150,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
+                      padding: EdgeInsets.only(bottom: 50.0),
                       itemCount: musics.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
@@ -209,7 +211,10 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                                   ],
                                 ),
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/sound_player');
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: SoundPlayModel(
+                                          title: musics[index]["name"],
+                                          boxTitle: 'MUSIC'));
                                 },
                               ),
                             ],

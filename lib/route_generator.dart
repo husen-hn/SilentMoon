@@ -1,3 +1,5 @@
+import 'package:SilentMoon/data/model/play_list_model.dart';
+import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:SilentMoon/screen/main_screen.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/about_us.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/onBoarding/onboarding_page_view.dart';
@@ -9,15 +11,15 @@ import 'package:flutter/widgets.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    Map arguament = settings.arguments;
+    var arguament = settings.arguments;
+
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => MainScreen());
       case '/play_list':
         return MaterialPageRoute(
             builder: (_) => PlayList(
-                  title: arguament["title"],
-                  type: arguament["type"],
+                  playListArgs: arguament,
                 ));
       case '/profile_recent_changes':
         return MaterialPageRoute(builder: (_) => RecentChanges());
@@ -26,7 +28,10 @@ class RouteGenerator {
       case '/profile_introduction':
         return MaterialPageRoute(builder: (_) => OnBoardingPageView());
       case '/sound_player':
-        return MaterialPageRoute(builder: (_) => SoundPlayer());
+        return MaterialPageRoute(
+            builder: (_) => SoundPlayer(
+                  soundPlayArgs: arguament,
+                ));
 
       default:
         return MaterialPageRoute(builder: (_) => MainScreen());
