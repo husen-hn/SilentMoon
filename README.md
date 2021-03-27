@@ -4,6 +4,8 @@
 meditation app, Explore the app, Find some peace of mind to prepare for meditation.
 using [Flutter](https://flutter.dev) and [MUSOPEN](https://musopen.org/) music services.
 
+[<img src="preview/direct-apk-download.webp" alt="Direct apk download"  height="51.5">](https://github.com/husen-hn/SilentMoon/releases/latest)
+
 *ui designed by [Afsar](https://www.figma.com/community/file/882888114457713282)*
 
 ## Features ⌑
