@@ -1,4 +1,5 @@
 import 'package:SilentMoon/data/model/music_box_model.dart';
+import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:SilentMoon/widget/banner_box.dart';
 import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
@@ -132,79 +133,85 @@ class _HomeState extends State<Home> {
           Padding(
             padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
             child: FittedBox(
-              child: Container(
-                width: 374,
-                height: 95,
-                decoration: BoxDecoration(
-                    color: Color(0xff333242),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    image:
-                        DecorationImage(image: AssetImage("images/boxbg.png"))),
+              child: InkWell(
                 child: Container(
-                  padding: EdgeInsets.all(25.0),
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Daily Thought',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'MEDITATION',
-                                style: TextStyle(
-                                    color: Color(0xffEBEAEC), fontSize: 14.0),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Container(
-                                  padding: EdgeInsets.all(3.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xffEBEAEC),
+                  width: 374,
+                  height: 95,
+                  decoration: BoxDecoration(
+                      color: Color(0xff333242),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      image: DecorationImage(
+                          image: AssetImage("images/boxbg.png"))),
+                  child: Container(
+                    padding: EdgeInsets.all(25.0),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Daily Thought',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'MEDITATION',
+                                  style: TextStyle(
+                                      color: Color(0xffEBEAEC), fontSize: 14.0),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Container(
+                                    padding: EdgeInsets.all(3.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      color: Color(0xffEBEAEC),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Text(
-                                '3-10 MIN',
-                                style: TextStyle(
-                                    color: Color(0xffEBEAEC), fontSize: 14.0),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      Expanded(child: Container()),
-                      Container(
-                        decoration: const ShapeDecoration(
-                          color: Colors.white,
-                          shape: CircleBorder(),
+                                Text(
+                                  '3-10 MIN',
+                                  style: TextStyle(
+                                      color: Color(0xffEBEAEC), fontSize: 14.0),
+                                )
+                              ],
+                            )
+                          ],
                         ),
-                        child: IconButton(
-                          autofocus: true,
-                          icon: Image(
-                            image: AssetImage("images/play.png"),
-                            width: 12.0,
+                        Expanded(child: Container()),
+                        Container(
+                          decoration: const ShapeDecoration(
+                            color: Colors.white,
+                            shape: CircleBorder(),
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/play_list',
-                                arguments: {
-                                  "title": "Daily Thought",
-                                  "type": "MEDITATION"
-                                });
-                          },
+                          child: IconButton(
+                            autofocus: true,
+                            icon: Image(
+                              image: AssetImage("images/play.png"),
+                              width: 12.0,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/play_list',
+                                  arguments: PlayListModel(
+                                      title: "Daily Thought",
+                                      type: "MEDITATION"));
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/play_list',
+                      arguments: PlayListModel(
+                          title: "Daily Thought", type: "MEDITATION"));
+                },
               ),
             ),
           ),
@@ -257,16 +264,16 @@ class _HomeState extends State<Home> {
 
   _basicsBannerBoxTap(String title, String type) {
     Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": title, "type": type});
+        arguments: PlayListModel(title: title, type: type));
   }
 
   _relaxationBannerBoxTap(String title, String type) {
     Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": title, "type": type});
+        arguments: PlayListModel(title: title, type: type));
   }
 
   _musicBoxTap(String title, String type) {
     Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": title, "type": type});
+        arguments: PlayListModel(title: title, type: type));
   }
 }

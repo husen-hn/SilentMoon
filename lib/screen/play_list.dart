@@ -1,4 +1,5 @@
 import 'package:SilentMoon/data/model/play_list_model.dart';
+import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:flutter/material.dart';
 
 class PlayList extends StatefulWidget {
@@ -12,16 +13,20 @@ class PlayList extends StatefulWidget {
 class _PlayListState extends State<PlayList>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  Map recivedData;
   List<Map> musics = [
     {"name": "Focus Attention", "time": "10 MIN"},
     {"name": "Body Scan", "time": "4 MIN"},
     {"name": "Making Happiness ", "time": "3 MIN"},
     {"name": "Focus Attention", "time": "6 MIN"},
     {"name": "Body Scan", "time": "2 MIN"},
+    {"name": "Body Scan", "time": "2 MIN"},
+    {"name": "Body Scan", "time": "2 MIN"},
+    {"name": "Body Scan", "time": "2 MIN"},
     {"name": "Making Happiness", "time": "7 MIN"},
     {"name": "Focus Attention", "time": "7 MIN"},
     {"name": "Body Scan", "time": "7 MIN"},
+    {"name": "Body Scan", "time": "7 MIN"},
+    {"name": "Body Scan1", "time": "7 MIN"},
   ];
   List<Map> favMusics = [
     {"name": "Body Scan", "time": "10 MIN"},
@@ -35,7 +40,6 @@ class _PlayListState extends State<PlayList>
 
   @override
   Widget build(BuildContext context) {
-    recivedData = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: DefaultTabController(
         length: 2,
@@ -46,7 +50,7 @@ class _PlayListState extends State<PlayList>
               data: Theme.of(context).copyWith(
                   accentColor: Color(0xff8E97FD), primaryColor: Colors.white),
               child: SliverAppBar(
-                expandedHeight: 490,
+                expandedHeight: 430,
                 automaticallyImplyLeading: false,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Column(
@@ -309,22 +313,28 @@ class _PlayListState extends State<PlayList>
                 expandedHeight: 30,
               ),
             ),
-            //Voice List
-            SliverFixedExtentList(
-              itemExtent: 70.0,
-              delegate:
-                  SliverChildBuilderDelegate((BuildContext context, int index) {
-                return TabBarView(
-                  controller: _tabController,
-                  children: [
-                    // Voice Tab
-                    Container(
-                      padding: EdgeInsets.only(bottom: 10, left: 10, top: 10),
-                      color: Colors.white,
-                      child: InkWell(
-                        child: Column(
-                          children: [
-                            Row(
+            //Voice & Favorite List
+            SliverFillRemaining(
+                child: TabBarView(
+              controller: _tabController,
+              children: [
+                // Voice Tab
+                Container(
+                  color: Colors.white,
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      padding: EdgeInsets.only(bottom: 50.0),
+                      itemCount: musics.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              bottom: 10,
+                              left: 10,
+                              top: 10,
+                            ),
+                            child: Row(
                               children: [
                                 // play btn
                                 Container(
@@ -341,7 +351,15 @@ class _PlayListState extends State<PlayList>
                                       color: Color(0xffA1A4B2),
                                       width: 12.0,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, '/sound_player',
+                                          arguments: SoundPlayModel(
+                                              title: musics[index]["name"],
+                                              boxTitle: widget
+                                                  .playListArgs.title
+                                                  .toString()));
+                                    },
                                   ),
                                 ),
                                 // voice title & time
@@ -369,18 +387,30 @@ class _PlayListState extends State<PlayList>
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    // Favorite Tab
-                    Container(
-                      padding: EdgeInsets.only(bottom: 10, left: 10, top: 10),
-                      color: Colors.white,
-                      child: InkWell(
-                        child: Column(
-                          children: [
-                            Row(
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/sound_player',
+                                arguments: SoundPlayModel(
+                                    title: musics[index]["name"],
+                                    boxTitle:
+                                        widget.playListArgs.title.toString()));
+                          },
+                        );
+                      }),
+                ),
+                // Favorite Tab
+                Container(
+                  color: Colors.white,
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: favMusics.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          child: Container(
+                            padding:
+                                EdgeInsets.only(bottom: 10, left: 10, top: 10),
+                            child: Row(
                               children: [
                                 // play btn
                                 Container(
@@ -397,7 +427,15 @@ class _PlayListState extends State<PlayList>
                                       color: Color(0xffA1A4B2),
                                       width: 12.0,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, '/sound_player',
+                                          arguments: SoundPlayModel(
+                                              title: musics[index]["name"],
+                                              boxTitle: widget
+                                                  .playListArgs.title
+                                                  .toString()));
+                                    },
                                   ),
                                 ),
                                 // voice title & time
@@ -425,14 +463,19 @@ class _PlayListState extends State<PlayList>
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              }, childCount: favMusics.length),
-            ),
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/sound_player',
+                                arguments: SoundPlayModel(
+                                    title: musics[index]["name"],
+                                    boxTitle:
+                                        widget.playListArgs.title.toString()));
+                          },
+                        );
+                      }),
+                ),
+              ],
+            )),
           ],
         ),
       ),

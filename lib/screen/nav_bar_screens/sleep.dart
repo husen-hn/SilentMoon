@@ -1,4 +1,5 @@
 import 'package:SilentMoon/data/model/music_box_model.dart';
+import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:SilentMoon/widget/banner_night.dart';
 import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
@@ -454,11 +455,11 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
 
   _onBannerNightPress(String title) {
     Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": title, "type": 'MUSIC'});
+        arguments: PlayListModel(title: title, type: 'MUSIC'));
   }
 
   _musicBoxTap(String title, String type) {
     Navigator.pushNamed(context, '/play_list',
-        arguments: {"title": title, "type": type});
+        arguments: PlayListModel(title: title, type: type));
   }
 }

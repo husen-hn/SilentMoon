@@ -15,7 +15,7 @@ class _SoundPlayerState extends State<SoundPlayer>
   AnimationController _animationController;
   bool _isPlaying = false;
   double _sliderValue = 0;
-  double musicSeconds = 1200;
+  double musicSeconds = 120;
 
   @override
   void initState() {
@@ -237,7 +237,7 @@ class _SoundPlayerState extends State<SoundPlayer>
                     children: [
                       Text(_secondToMinuteFormatter(_sliderValue)),
                       Expanded(child: Container()),
-                      Text('00:55'),
+                      Text('02:00'),
                     ],
                   ),
                 )

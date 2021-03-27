@@ -22,24 +22,23 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // prevent device orientation changes
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
     return Scaffold(
-      body: Center(
-        child: _selectedIndex == 0
-            ? Home()
-            : _selectedIndex == 1
-                ? Sleep()
-                : _selectedIndex == 2
-                    ? Meditate()
-                    : _selectedIndex == 3
-                        ? Music()
-                        : _selectedIndex == 4
-                            ? Profile()
-                            : Container(),
-      ),
+      body: _selectedIndex == 0
+          ? Home()
+          : _selectedIndex == 1
+              ? Sleep()
+              : _selectedIndex == 2
+                  ? Meditate()
+                  : _selectedIndex == 3
+                      ? Music()
+                      : _selectedIndex == 4
+                          ? Profile()
+                          : Container(),
       bottomNavigationBar: NavigationBar(
         onTap: this._onTap,
       ),
