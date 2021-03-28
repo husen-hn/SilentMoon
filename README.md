@@ -22,8 +22,8 @@ Feel free to Fork, edit, then pull!
 ## Feature roadmap ⌲
 * [x] UI
 * [ ] MVVM
-* [x] BloC
-* [ ] Accessibility
+* [ ] BloC
+* [x] Accessibility
 * [ ] Provider
 * [ ] Dark Mode
 * [ ] Animation
