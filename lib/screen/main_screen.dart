@@ -37,12 +37,6 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   checkFirstSeen();
-  //   super.didChangeDependencies();
-  // }
-
   @override
   Widget build(BuildContext context) {
     // prevent device orientation changes

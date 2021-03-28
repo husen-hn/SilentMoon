@@ -1,5 +1,6 @@
 import 'package:SilentMoon/data/model/music_box_model.dart';
 import 'package:SilentMoon/data/model/play_list_model.dart';
+import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/widget/banner_box.dart';
 import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +15,20 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     // used in Recomended List
     List<MusicBoxModel> musicBoxs = [
-      MusicBoxModel("images/nature.png", Color(0xfff8bbd0), 'Nature',
-          '3-10 MIN', 'MEDITATION'),
-      MusicBoxModel("images/focus.png", Color(0xffAFDBC5), 'Focus', '3-10 MIN',
-          'MEDITATION'),
-      MusicBoxModel("images/happiness.png", Color(0xffFFC97E), 'Happiness',
-          '3-10 MIN', 'MEDITATION'),
+      MusicBoxModel(
+          "images/nature.png",
+          Color(0xfff8bbd0),
+          S.of(context).nature,
+          S.of(context).natureTime,
+          S.of(context).natureType),
+      MusicBoxModel("images/focus.png", Color(0xffAFDBC5), S.of(context).focus,
+          S.of(context).focusTime, S.of(context).focusType),
+      MusicBoxModel(
+          "images/happiness.png",
+          Color(0xffFFC97E),
+          S.of(context).happiness,
+          S.of(context).happinessTime,
+          S.of(context).happinessType),
     ];
     //hours to say welcome
     List morning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -32,36 +41,39 @@ class _HomeState extends State<Home> {
           // Title
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Silent',
-                  style: TextStyle(
-                      fontSize: 18.0,
-                      letterSpacing: 2.0,
-                      color: Color(0xff3F414E),
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * .1,
-                    height: MediaQuery.of(context).size.height * .1,
-                    child: Image(
-                      image: AssetImage("images/logo.png"),
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Silent',
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        letterSpacing: 2.0,
+                        color: Color(0xff3F414E),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * .1,
+                      height: MediaQuery.of(context).size.height * .1,
+                      child: Image(
+                        image: AssetImage("images/logo.png"),
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  'Moon',
-                  style: TextStyle(
-                      fontSize: 18.0,
-                      letterSpacing: 2.0,
-                      color: Color(0xff3F414E),
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+                  Text(
+                    'Moon',
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        letterSpacing: 2.0,
+                        color: Color(0xff3F414E),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
           ),
           // Welcome
@@ -69,10 +81,10 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.all(12.0),
             child: Text(
                 morning.contains(DateTime.now().hour)
-                    ? 'Good Morning,'
+                    ? S.of(context).goodMorning
                     : afternoon.contains(DateTime.now().hour)
-                        ? 'Good Afternoon'
-                        : 'Good Evening',
+                        ? S.of(context).goodAfternoon
+                        : S.of(context).goodEvening,
                 style: TextStyle(
                     fontSize: 28.0,
                     fontWeight: FontWeight.bold,
@@ -83,8 +95,8 @@ class _HomeState extends State<Home> {
                 top: 8.0, right: 8.0, left: 12.0, bottom: 12.0),
             child: Text(
                 night.contains(DateTime.now().hour)
-                    ? 'We Wish you have a good night'
-                    : 'We Wish you have a good day',
+                    ? S.of(context).weWishNight
+                    : S.of(context).weWishDay,
                 style: TextStyle(fontSize: 20.0, color: Color(0xffA1A4B2))),
           ),
           // Basics & Relaxation
@@ -97,11 +109,11 @@ class _HomeState extends State<Home> {
                   bgColor: Color(0xff8E97FD),
                   iconLocalPath: "images/apple.png",
                   iconWidth: MediaQuery.of(context).size.width * .3,
-                  title: 'Basics',
+                  title: S.of(context).basic,
                   titleColor: Color(0xffFFECCC),
-                  type: 'COURSE',
+                  type: S.of(context).basicType,
                   typeColor: Color(0xffF7E8D0),
-                  time: '3-10 MIN',
+                  time: S.of(context).basicTime,
                   timeColor: Color(0xffEBEAEC),
                   btnColor: Color(0xffEBEAEC),
                   btnTxtColor: Color(0xff3F414E),
@@ -115,11 +127,11 @@ class _HomeState extends State<Home> {
                     bgColor: Color(0xffFFDB9D),
                     iconLocalPath: "images/listen.png",
                     iconWidth: MediaQuery.of(context).size.width * .4,
-                    title: 'Relaxation',
+                    title: S.of(context).relaxation,
                     titleColor: Color(0xff3F414E),
-                    type: 'MUSIC',
+                    type: S.of(context).relaxationType,
                     typeColor: Color(0xff524F53),
-                    time: '3-10 MIN',
+                    time: S.of(context).relaxationTime,
                     timeColor: Color(0xff524F53),
                     btnColor: Color(0xff3F414E),
                     btnTxtColor: Color(0xffFEFFFE),
@@ -143,14 +155,15 @@ class _HomeState extends State<Home> {
                       image: DecorationImage(
                           image: AssetImage("images/boxbg.png"))),
                   child: Container(
-                    padding: EdgeInsets.all(25.0),
+                    padding:
+                        EdgeInsets.only(top: 20.0, right: 20.0, left: 20.0),
                     child: Row(
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Daily Thought',
+                              S.of(context).dailyThought,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24.0,
@@ -159,12 +172,13 @@ class _HomeState extends State<Home> {
                             Row(
                               children: [
                                 Text(
-                                  'MEDITATION',
+                                  S.of(context).meditate,
                                   style: TextStyle(
                                       color: Color(0xffEBEAEC), fontSize: 14.0),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(5.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 5.0, right: 5.0),
                                   child: Container(
                                     padding: EdgeInsets.all(3.0),
                                     decoration: BoxDecoration(
@@ -175,7 +189,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 Text(
-                                  '3-10 MIN',
+                                  S.of(context).meditationTime,
                                   style: TextStyle(
                                       color: Color(0xffEBEAEC), fontSize: 14.0),
                                 )
@@ -184,23 +198,26 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                         Expanded(child: Container()),
-                        Container(
-                          decoration: const ShapeDecoration(
-                            color: Colors.white,
-                            shape: CircleBorder(),
-                          ),
-                          child: IconButton(
-                            autofocus: true,
-                            icon: Image(
-                              image: AssetImage("images/play.png"),
-                              width: 12.0,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Container(
+                            decoration: const ShapeDecoration(
+                              color: Colors.white,
+                              shape: CircleBorder(),
                             ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/play_list',
-                                  arguments: PlayListModel(
-                                      title: "Daily Thought",
-                                      type: "MEDITATION"));
-                            },
+                            child: IconButton(
+                              autofocus: true,
+                              icon: Image(
+                                image: AssetImage("images/play.png"),
+                                width: 12.0,
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/play_list',
+                                    arguments: PlayListModel(
+                                        title: S.of(context).dailyThought,
+                                        type: S.of(context).meditate));
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -210,15 +227,17 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   Navigator.pushNamed(context, '/play_list',
                       arguments: PlayListModel(
-                          title: "Daily Thought", type: "MEDITATION"));
+                          title: S.of(context).dailyThought,
+                          type: S.of(context).meditate));
                 },
               ),
             ),
           ),
           // Recomended List
           Padding(
-            padding: const EdgeInsets.only(left: 12.0, top: 30.0, bottom: 15.0),
-            child: Text('Recomended for you',
+            padding: const EdgeInsets.only(
+                left: 12.0, right: 12.0, top: 30.0, bottom: 15.0),
+            child: Text(S.of(context).recomended,
                 style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
@@ -254,7 +273,7 @@ class _HomeState extends State<Home> {
               },
             ),
           ),
-          Container(
+          SizedBox(
             height: 15.0,
           )
         ],

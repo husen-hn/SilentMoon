@@ -1,8 +1,13 @@
+import 'package:SilentMoon/data/model/language_code.dart';
+import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/widget/lang_btn.dart';
+import 'package:SilentMoon/widget/lang_dialog.dart';
 import 'package:SilentMoon/widget/profile_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -11,9 +16,31 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   bool _switchValue = false;
-  List<bool> choosedLang = [true, false, false, false];
+  String lang = '';
+
+  void _getLang() async {
+    try {
+      String data = await getLang();
+      setState(() {
+        lang = data;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getLang();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (lang == '' || lang == null) {
+      lang = 'English';
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -184,25 +211,31 @@ class _ProfileState extends State<Profile> {
                   LangBtn(
                     btnTitle: 'English',
                     imgAsset: AssetImage("images/united_states.png"),
-                    isActive: choosedLang[0],
+                    isActive: lang == 'English' ? true : false,
                     onTap: this._chooseLanguage,
                   ),
                   LangBtn(
                     btnTitle: 'Germany',
                     imgAsset: AssetImage("images/germany.png"),
-                    isActive: choosedLang[1],
+                    isActive: lang == 'Germany' ? true : false,
                     onTap: this._chooseLanguage,
                   ),
                   LangBtn(
                     btnTitle: 'Russia',
                     imgAsset: AssetImage("images/russia.png"),
-                    isActive: choosedLang[2],
+                    isActive: lang == 'Russia' ? true : false,
                     onTap: this._chooseLanguage,
                   ),
                   LangBtn(
                     btnTitle: 'United Arab Emirates',
                     imgAsset: AssetImage("images/united_arab_emirates.png"),
-                    isActive: choosedLang[3],
+                    isActive: lang == 'United Arab Emirates' ? true : false,
+                    onTap: this._chooseLanguage,
+                  ),
+                  LangBtn(
+                    btnTitle: 'Iran',
+                    imgAsset: AssetImage("images/iran.png"),
+                    isActive: lang == 'Iran' ? true : false,
                     onTap: this._chooseLanguage,
                   ),
                 ],
@@ -213,27 +246,89 @@ class _ProfileState extends State<Profile> {
   }
 
   _chooseLanguage(String btnTitle) {
+    _showDialog(btnTitle);
+  }
+
+  _showDialog(String title) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return LangDialog(
+            dialogIcon: Lottie.asset(
+              'assets/translate.json',
+              height: 100,
+            ),
+            title: 'Are you sure to change application language to $title\n?',
+            btn: Padding(
+              padding: const EdgeInsets.only(top: 6.0, bottom: 6.0),
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _changeLanguage(title);
+                  },
+                  child: Text('Done',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal))),
+            ),
+          );
+        });
+  }
+
+  _changeLanguage(String btnTitle) {
     if (btnTitle == 'English') {
-      setState(() {
-        choosedLang = [true, false, false, false];
-      });
-      Navigator.pop(context);
+      setLang('English');
+      _languageChoose(
+        LanguageCode(
+          language: 'English',
+          locale: Locale('en'),
+        ),
+      );
+      Navigator.pushNamed(context, '/restart');
     } else if (btnTitle == 'Germany') {
-      setState(() {
-        choosedLang = [false, true, false, false];
-      });
-      Navigator.pop(context);
+      setLang('Germany');
+      _languageChoose(
+        LanguageCode(
+          language: 'Germany',
+          locale: Locale('de'),
+        ),
+      );
+      Navigator.pushNamed(context, '/restart');
     } else if (btnTitle == 'Russia') {
-      setState(() {
-        choosedLang = [false, false, true, false];
-      });
-      Navigator.pop(context);
+      setLang('Russia');
+      _languageChoose(
+        LanguageCode(
+          language: 'Russia',
+          locale: Locale('ru'),
+        ),
+      );
+      Navigator.pushNamed(context, '/restart');
     } else if (btnTitle == 'United Arab Emirates') {
-      setState(() {
-        choosedLang = [false, false, false, true];
-      });
-      Navigator.pop(context);
+      setLang('United Arab Emirates');
+      _languageChoose(
+        LanguageCode(
+          language: 'United Arab Emirates',
+          locale: Locale('ar'),
+        ),
+      );
+      Navigator.pushNamed(context, '/restart');
+    } else if (btnTitle == 'Iran') {
+      setLang('Iran');
+      _languageChoose(
+        LanguageCode(
+          language: 'Iran',
+          locale: Locale('fa'),
+        ),
+      );
+      Navigator.pushNamed(context, '/restart');
     }
+  }
+
+  _languageChoose(LanguageCode languageCode) {
+    setState(() {
+      S.load(languageCode.locale);
+    });
   }
 
   _onShare() async {
@@ -242,5 +337,21 @@ class _ProfileState extends State<Profile> {
     await Share.share('check out my app',
         subject: 'Look what I made!',
         sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
+  }
+
+  setLang(String lang) async {
+    Future<SharedPreferences> _langPrefs = SharedPreferences.getInstance();
+    SharedPreferences prefs = await _langPrefs;
+    prefs.setString("lang", lang);
+  }
+
+  Future<String> getLang() async {
+    Future<SharedPreferences> _langPrefs = SharedPreferences.getInstance();
+    SharedPreferences prefs = await _langPrefs;
+    var lang = prefs.getString("lang");
+    if (lang == null) {
+      return null;
+    }
+    return lang;
   }
 }

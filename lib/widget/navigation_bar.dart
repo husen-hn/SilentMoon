@@ -1,3 +1,4 @@
+import 'package:SilentMoon/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -25,15 +26,17 @@ class _NavigationBarState extends State<NavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    // S.of(context).login;
     return BottomNavigationBar(
       showUnselectedLabels: widget.showUnselectedLabels,
       unselectedItemColor: widget.unselectedLabelColor,
       items: <BottomNavigationBarItem>[
-        btmNvBarItem(icon: "images/home.png", title: 'Home'),
-        btmNvBarItem(icon: "images/sleep.png", title: 'Sleep'),
-        btmNvBarItem(icon: "images/meditate.png", title: 'Meditate'),
-        btmNvBarItem(icon: "images/music.png", title: 'Music'),
-        btmNvBarItem(icon: "images/profile.png", title: 'Profile'),
+        btmNvBarItem(icon: "images/home.png", title: S.of(context).home),
+        btmNvBarItem(icon: "images/sleep.png", title: S.of(context).sleep),
+        btmNvBarItem(
+            icon: "images/meditate.png", title: S.of(context).meditate),
+        btmNvBarItem(icon: "images/music.png", title: S.of(context).music),
+        btmNvBarItem(icon: "images/profile.png", title: S.of(context).profile),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: Color(0xff8E97FD),

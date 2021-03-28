@@ -1,5 +1,6 @@
 import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:SilentMoon/data/model/sound_play_model.dart';
+import 'package:SilentMoon/main.dart';
 import 'package:SilentMoon/screen/main_screen.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/about_us.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/onBoarding/onboarding_page_view.dart';
@@ -14,6 +15,8 @@ class RouteGenerator {
     var arguament = settings.arguments;
 
     switch (settings.name) {
+      case '/restart':
+        return MaterialPageRoute(builder: (_) => SilentMoonApp());
       case '/':
         return MaterialPageRoute(builder: (_) => MainScreen());
       case '/play_list':
