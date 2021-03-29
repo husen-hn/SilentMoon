@@ -21,6 +21,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
+//title
+        "title1": MessageLookupByLibrary.simpleMessage('خاموش'),
+        "title2": MessageLookupByLibrary.simpleMessage('ماه'),
+
         "home": MessageLookupByLibrary.simpleMessage('خانه'),
         "sleep": MessageLookupByLibrary.simpleMessage('خواب'),
         "meditate": MessageLookupByLibrary.simpleMessage('مراقبه'),
@@ -63,5 +67,80 @@ class MessageLookup extends MessageLookupByLibrary {
         "happiness": MessageLookupByLibrary.simpleMessage('خوشبختی'),
         "happinessType": MessageLookupByLibrary.simpleMessage('مراقبه'),
         "happinessTime": MessageLookupByLibrary.simpleMessage('۳-۱۰ دقیقه'),
+
+        // Play List
+        "voices": MessageLookupByLibrary.simpleMessage('صداها'),
+        "favorite": MessageLookupByLibrary.simpleMessage('مورد علاقه'),
+        "narrator": MessageLookupByLibrary.simpleMessage('راوی را انتخاب کنید'),
+
+        // Sleep
+        "sleepTitle": MessageLookupByLibrary.simpleMessage('داستان های خواب'),
+        "sleepDesc": MessageLookupByLibrary.simpleMessage(
+            'داستان های آرامش بخش قبل از خواب برای کمک به شما در خواب عمیق و طبیعی'),
+        "sleepTabAll": MessageLookupByLibrary.simpleMessage('همه'),
+        "sleepTabMy": MessageLookupByLibrary.simpleMessage('من'),
+        "sleepTabAnxious": MessageLookupByLibrary.simpleMessage('مشتاق'),
+        "sleepTabSleep": MessageLookupByLibrary.simpleMessage('خواب'),
+        "sleepTabKids": MessageLookupByLibrary.simpleMessage('بچه ها'),
+        "sleepBannerNightTitle":
+            MessageLookupByLibrary.simpleMessage('ماه اقیانوس'),
+        "sleepBannerNightDesc": MessageLookupByLibrary.simpleMessage(
+            'بدون توقف 8 ساعت ترکیبی از محبوب ترین صدای خواب ما'),
+        "sleepMusicBoxTitle": MessageLookupByLibrary.simpleMessage('جزیره شب'),
+        "sleepMusicBoxType":
+            MessageLookupByLibrary.simpleMessage('موسیقی خواب'),
+        "sleepMusicBoxTime": MessageLookupByLibrary.simpleMessage('۴۵ دقیقه'),
+
+        //Meditate
+        "meditateTitle": MessageLookupByLibrary.simpleMessage('مراقبه کنید'),
+        "meditateDesc": MessageLookupByLibrary.simpleMessage(
+            'داستان های آرامش بخش قبل از خواب برای کمک به شما در خواب عمیق و طبیعی'),
+        "meditateTabAll": MessageLookupByLibrary.simpleMessage('همه'),
+        "meditateTabMy": MessageLookupByLibrary.simpleMessage('من'),
+        "meditateTabAnxious": MessageLookupByLibrary.simpleMessage('مشتاق'),
+        "meditateTabSleep": MessageLookupByLibrary.simpleMessage('خواب'),
+        "meditateTabKids": MessageLookupByLibrary.simpleMessage('بچه ها'),
+        "meditateBox7Days":
+            MessageLookupByLibrary.simpleMessage('روزهای آرامش 7'),
+        "meditateBoxAnxiet1":
+            MessageLookupByLibrary.simpleMessage('آزادی اضطراب'),
+        "meditateBoxAnxiet2":
+            MessageLookupByLibrary.simpleMessage('آزادی اضطراب'),
+        "meditateBoxAnxiet3":
+            MessageLookupByLibrary.simpleMessage('آزادی اضطراب'),
+
+        // Music
+        "musicTitle": MessageLookupByLibrary.simpleMessage('موسیقی'),
+        "musicType": MessageLookupByLibrary.simpleMessage('موسیقی'),
+
+        //Profile
+        "profileDesc": MessageLookupByLibrary.simpleMessage(
+            'برنامه مدیتیشن ، برنامه را کاوش کنید ، برای آمادگی برای مراقبه ، آرامش خاطر پیدا کنید.'),
+
+        "language": MessageLookupByLibrary.simpleMessage('زبان'),
+        "aboutUs": MessageLookupByLibrary.simpleMessage('درباره ما'),
+        "aboutUsDesc": MessageLookupByLibrary.simpleMessage(
+            'برنامه مدیتیشن ، برنامه را کاوش کنید ، برای آمادگی برای مراقبه ، آرامش خاطر پیدا کنید. با استفاده از خدمات موسیقی Flutter و MUSOPEN.'),
+        "share": MessageLookupByLibrary.simpleMessage('اشتراک گذاری'),
+        "recentchanges": MessageLookupByLibrary.simpleMessage('تغییرات اخیر'),
+        "darkMode": MessageLookupByLibrary.simpleMessage('حالت تاریک'),
+
+        // Choose Language
+        "chooseLanguage":
+            MessageLookupByLibrary.simpleMessage('زبان را انتخاب کنید'),
+        "english": MessageLookupByLibrary.simpleMessage('انگلیسی'),
+        "germany": MessageLookupByLibrary.simpleMessage('آلمان'),
+        "russia": MessageLookupByLibrary.simpleMessage('روسیه'),
+        "unitedArabEmirates":
+            MessageLookupByLibrary.simpleMessage('امارات متحده عربی'),
+        "iran": MessageLookupByLibrary.simpleMessage('ایران'),
+
+        //change lang dialog ques
+        "changeLangQues": MessageLookupByLibrary.simpleMessage(
+            'آیا مطمئن هستید که زبان برنامه را تغییر می دهید؟'),
+        "changeLangWarning": MessageLookupByLibrary.simpleMessage(
+            'اگر بله را فشار دهید به صفحه اصلی منتقل خواهید شد.'),
+        "changeLangDone": MessageLookupByLibrary.simpleMessage('بله'),
+        "changeLangCancel": MessageLookupByLibrary.simpleMessage('لغو'),
       };
 }

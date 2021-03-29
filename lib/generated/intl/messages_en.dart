@@ -21,6 +21,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
+//title
+        "title1": MessageLookupByLibrary.simpleMessage('Silent'),
+        "title2": MessageLookupByLibrary.simpleMessage('Moon'),
+
         "home": MessageLookupByLibrary.simpleMessage('Home'),
         "sleep": MessageLookupByLibrary.simpleMessage('Sleep'),
         "meditate": MessageLookupByLibrary.simpleMessage('Meditate'),
@@ -63,5 +67,81 @@ class MessageLookup extends MessageLookupByLibrary {
         "happiness": MessageLookupByLibrary.simpleMessage('Happiness'),
         "happinessType": MessageLookupByLibrary.simpleMessage('MEDITATION'),
         "happinessTime": MessageLookupByLibrary.simpleMessage('3-10 MIN'),
+
+        // Play List
+        "voices": MessageLookupByLibrary.simpleMessage('VOICES'),
+        "favorite": MessageLookupByLibrary.simpleMessage('FAVORITE'),
+        "narrator": MessageLookupByLibrary.simpleMessage('Pick a Narrator'),
+
+        // Sleep
+        "sleepTitle": MessageLookupByLibrary.simpleMessage('Sleep Stories'),
+        "sleepDesc": MessageLookupByLibrary.simpleMessage(
+            'Soothing bedtime stories to help you fall into a deep and natural sleep'),
+        "sleepTabAll": MessageLookupByLibrary.simpleMessage('All'),
+        "sleepTabMy": MessageLookupByLibrary.simpleMessage('My'),
+        "sleepTabAnxious": MessageLookupByLibrary.simpleMessage('Anxious'),
+        "sleepTabSleep": MessageLookupByLibrary.simpleMessage('Sleep'),
+        "sleepTabKids": MessageLookupByLibrary.simpleMessage('Kids'),
+        "sleepBannerNightTitle":
+            MessageLookupByLibrary.simpleMessage('The Ocean Moon'),
+        "sleepBannerNightDesc": MessageLookupByLibrary.simpleMessage(
+            'Non-stop 8- hour mixes of our most popular sleep audio'),
+        "sleepMusicBoxTitle":
+            MessageLookupByLibrary.simpleMessage('Night Island'),
+        "sleepMusicBoxType":
+            MessageLookupByLibrary.simpleMessage('SLEEP MUSIC'),
+        "sleepMusicBoxTime": MessageLookupByLibrary.simpleMessage('45 MIN'),
+
+        //Meditate
+        "meditateTitle": MessageLookupByLibrary.simpleMessage('Meditate'),
+        "meditateDesc": MessageLookupByLibrary.simpleMessage(
+            'Soothing bedtime stories to help you fall into a deep and natural sleep'),
+        "meditateTabAll": MessageLookupByLibrary.simpleMessage('All'),
+        "meditateTabMy": MessageLookupByLibrary.simpleMessage('My'),
+        "meditateTabAnxious": MessageLookupByLibrary.simpleMessage('Anxious'),
+        "meditateTabSleep": MessageLookupByLibrary.simpleMessage('Sleep'),
+        "meditateTabKids": MessageLookupByLibrary.simpleMessage('Kids'),
+        "meditateBox7Days":
+            MessageLookupByLibrary.simpleMessage('Days of Calm 7'),
+        "meditateBoxAnxiet1":
+            MessageLookupByLibrary.simpleMessage('Anxiet Release'),
+        "meditateBoxAnxiet2":
+            MessageLookupByLibrary.simpleMessage('Anxiet Release'),
+        "meditateBoxAnxiet3":
+            MessageLookupByLibrary.simpleMessage('Anxiet Release'),
+
+        // Music
+        "musicTitle": MessageLookupByLibrary.simpleMessage('Music'),
+        "musicType": MessageLookupByLibrary.simpleMessage('music'),
+
+        //Profile
+        "profileDesc": MessageLookupByLibrary.simpleMessage(
+            'Meditation App, Explore the app, Find some peace of mind to prepare for meditation.'),
+
+        "language": MessageLookupByLibrary.simpleMessage('Language'),
+        "aboutUs": MessageLookupByLibrary.simpleMessage('About Us'),
+        "aboutUsDesc": MessageLookupByLibrary.simpleMessage(
+            'meditation app, Explore the app, Find some peace of mind to prepare for meditation. using Flutter and MUSOPEN music services.'),
+        "share": MessageLookupByLibrary.simpleMessage('Share'),
+        "recentchanges": MessageLookupByLibrary.simpleMessage('Recent changes'),
+        "darkMode": MessageLookupByLibrary.simpleMessage('Dark Mode'),
+
+        // Choose Language
+        "chooseLanguage":
+            MessageLookupByLibrary.simpleMessage('Choose Language'),
+        "english": MessageLookupByLibrary.simpleMessage('English'),
+        "germany": MessageLookupByLibrary.simpleMessage('Germany'),
+        "russia": MessageLookupByLibrary.simpleMessage('Russia'),
+        "unitedArabEmirates":
+            MessageLookupByLibrary.simpleMessage('United Arab Emirates'),
+        "iran": MessageLookupByLibrary.simpleMessage('Iran'),
+
+        //change lang dialog ques
+        "changeLangQues": MessageLookupByLibrary.simpleMessage(
+            'Are you sure to change application language?'),
+        "changeLangWarning": MessageLookupByLibrary.simpleMessage(
+            'If you press yes you will be taken to the main screen.'),
+        "changeLangDone": MessageLookupByLibrary.simpleMessage('Yes'),
+        "changeLangCancel": MessageLookupByLibrary.simpleMessage('Cancel'),
       };
 }

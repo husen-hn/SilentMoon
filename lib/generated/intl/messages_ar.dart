@@ -21,6 +21,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
+        //title
+        "title1": MessageLookupByLibrary.simpleMessage('القمر'),
+        "title2": MessageLookupByLibrary.simpleMessage('الصامت'),
+
         "home": MessageLookupByLibrary.simpleMessage('الصفحة الرئيسية'),
         "sleep": MessageLookupByLibrary.simpleMessage('نايم'),
         "meditate": MessageLookupByLibrary.simpleMessage('تأمل'),
@@ -62,5 +66,81 @@ class MessageLookup extends MessageLookupByLibrary {
         "happiness": MessageLookupByLibrary.simpleMessage('سعادة'),
         "happinessType": MessageLookupByLibrary.simpleMessage('تأمل'),
         "happinessTime": MessageLookupByLibrary.simpleMessage('۳-۱۰ دقيقة'),
+
+        // Play List
+        "voices": MessageLookupByLibrary.simpleMessage('أصوات'),
+        "favorite": MessageLookupByLibrary.simpleMessage('المفضل'),
+        "narrator": MessageLookupByLibrary.simpleMessage('اختر الراوي'),
+
+        // Sleep
+        "sleepTitle": MessageLookupByLibrary.simpleMessage('قصص النوم'),
+        "sleepDesc": MessageLookupByLibrary.simpleMessage(
+            'قصص ما قبل النوم المهدئة لمساعدتك على النوم العميق والطبيعي'),
+        "sleepTabAll": MessageLookupByLibrary.simpleMessage('الجميع'),
+        "sleepTabMy": MessageLookupByLibrary.simpleMessage('لي'),
+        "sleepTabAnxious": MessageLookupByLibrary.simpleMessage('قلق'),
+        "sleepTabSleep": MessageLookupByLibrary.simpleMessage('نايم'),
+        "sleepTabKids": MessageLookupByLibrary.simpleMessage('أطفال'),
+        "sleepBannerNightTitle":
+            MessageLookupByLibrary.simpleMessage('قمر المحيط'),
+        "sleepBannerNightDesc": MessageLookupByLibrary.simpleMessage(
+            'مزيج متواصلة من 8 ساعات لأشهر\nأصوات النوم '),
+        "sleepMusicBoxTitle":
+            MessageLookupByLibrary.simpleMessage('جزيرة الليل'),
+        "sleepMusicBoxType":
+            MessageLookupByLibrary.simpleMessage('موسيقى النوم'),
+        "sleepMusicBoxTime": MessageLookupByLibrary.simpleMessage('۴۵ دقيقة'),
+
+        //Meditate
+        "meditateTitle": MessageLookupByLibrary.simpleMessage('يتأمل'),
+        "meditateDesc": MessageLookupByLibrary.simpleMessage(
+            'قصص ما قبل النوم المهدئة لمساعدتك على النوم العميق والطبيعي'),
+        "meditateTabAll": MessageLookupByLibrary.simpleMessage('الجميع'),
+        "meditateTabMy": MessageLookupByLibrary.simpleMessage('لي'),
+        "meditateTabAnxious": MessageLookupByLibrary.simpleMessage('قلق'),
+        "meditateTabSleep": MessageLookupByLibrary.simpleMessage('نايم'),
+        "meditateTabKids": MessageLookupByLibrary.simpleMessage('أطفال'),
+        "meditateBox7Days":
+            MessageLookupByLibrary.simpleMessage('أيام الهدوء 7'),
+        "meditateBoxAnxiet1":
+            MessageLookupByLibrary.simpleMessage('الافراج عن القلق'),
+        "meditateBoxAnxiet2":
+            MessageLookupByLibrary.simpleMessage('الافراج عن القلق'),
+        "meditateBoxAnxiet3":
+            MessageLookupByLibrary.simpleMessage('الافراج عن القلق'),
+
+        // Music
+        "musicTitle": MessageLookupByLibrary.simpleMessage('موسيقى'),
+        "musicType": MessageLookupByLibrary.simpleMessage('موسيقى'),
+
+        //Profile
+        "profileDesc": MessageLookupByLibrary.simpleMessage(
+            'تطبيق التأمل ، استكشف التطبيق ، ابحث عن بعض راحة البال للاستعداد للتأمل.'),
+
+        "language": MessageLookupByLibrary.simpleMessage('لغة'),
+        "aboutUs": MessageLookupByLibrary.simpleMessage('معلومات عنا'),
+        "aboutUsDesc": MessageLookupByLibrary.simpleMessage(
+            'تطبيق التأمل ، استكشف التطبيق ، ابحث عن بعض راحة البال للاستعداد للتأمل. باستخدام خدمات الموسيقى Flutter و MUSOPEN.'),
+        "share": MessageLookupByLibrary.simpleMessage('يشارك'),
+        "recentchanges":
+            MessageLookupByLibrary.simpleMessage('التغييرات الأخيرة'),
+        "darkMode": MessageLookupByLibrary.simpleMessage('الوضع المظلم'),
+
+        // Choose Language
+        "chooseLanguage": MessageLookupByLibrary.simpleMessage('اختر اللغة'),
+        "english": MessageLookupByLibrary.simpleMessage('الإنجليزية'),
+        "germany": MessageLookupByLibrary.simpleMessage('ألمانيا'),
+        "russia": MessageLookupByLibrary.simpleMessage('روسيا'),
+        "unitedArabEmirates":
+            MessageLookupByLibrary.simpleMessage('الإمارات العربية المتحدة'),
+        "iran": MessageLookupByLibrary.simpleMessage('إيران'),
+
+//change lang dialog ques
+        "changeLangQues": MessageLookupByLibrary.simpleMessage(
+            'هل أنت متأكد من تغيير لغة التطبيق؟'),
+        "changeLangWarning": MessageLookupByLibrary.simpleMessage(
+            'إذا ضغطت "نعم" ، فسيتم نقلك إلى الشاشة الرئيسية.'),
+        "changeLangDone": MessageLookupByLibrary.simpleMessage('نعم'),
+        "changeLangCancel": MessageLookupByLibrary.simpleMessage('يلغي'),
       };
 }

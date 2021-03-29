@@ -1,6 +1,9 @@
 import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:SilentMoon/data/model/sound_play_model.dart';
+import 'package:SilentMoon/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:math' as Math;
 
 class PlayList extends StatefulWidget {
   final PlayListModel playListArgs;
@@ -32,14 +35,40 @@ class _PlayListState extends State<PlayList>
     {"name": "Body Scan", "time": "10 MIN"},
   ];
   bool isFavorite = false;
+  String lang = '';
+  bool isRtl = false;
+
+  void _getLang() async {
+    try {
+      String data = await getLang();
+      setState(() {
+        lang = data;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void initState() {
     _tabController = new TabController(length: 2, vsync: this);
+    _getLang();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (lang == 'Iran' ||
+        lang == 'إيران' ||
+        lang == 'ایران' ||
+        lang == 'Иран' ||
+        lang == 'United Arab Emirates' ||
+        lang == 'الإمارات العربية المتحدة' ||
+        lang == 'Vereinigte Arabische Emirate' ||
+        lang == 'امارات متحده عربی' ||
+        lang == 'Объединенные Арабские Эмираты') {
+      isRtl = true;
+    }
     return Scaffold(
       body: DefaultTabController(
         length: 2,
@@ -47,10 +76,9 @@ class _PlayListState extends State<PlayList>
           slivers: [
             //top images & actions
             Theme(
-              data: Theme.of(context).copyWith(
-                  accentColor: Color(0xff8E97FD), primaryColor: Colors.white),
+              data: Theme.of(context).copyWith(primaryColor: Colors.white),
               child: SliverAppBar(
-                expandedHeight: 430,
+                expandedHeight: 480,
                 automaticallyImplyLeading: false,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Column(
@@ -58,38 +86,66 @@ class _PlayListState extends State<PlayList>
                     children: [
                       //top image
                       Container(
-                        height: 250.0,
+                        height: 270.0,
                         decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(10),
                                 bottomRight: Radius.circular(10)),
                             image: DecorationImage(
-                                image: AssetImage("images/daily_thought.png"),
-                                fit: BoxFit.fill)),
+                              image: AssetImage("images/daily_thought.png"),
+                              fit: BoxFit.fitWidth,
+                            )),
                         child: Stack(
                           children: [
-                            // action buttons
-                            Positioned(
-                              top: 40,
-                              left: 30,
-                              child: //back
-                                  Container(
-                                      decoration: ShapeDecoration(
-                                        color: const Color(0xffF2F2F2),
-                                        shape: const CircleBorder(),
-                                      ),
-                                      child: IconButton(
-                                        autofocus: true,
-                                        icon: Image(
-                                          image: AssetImage("images/back.png"),
-                                          color: Color(0xff3F414E),
-                                          width: 18.0,
-                                        ),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                      )),
-                            ),
+                            // back button
+                            isRtl
+                                ? Positioned(
+                                    top: 40,
+                                    right: 30,
+                                    child: //back
+                                        Container(
+                                            decoration: ShapeDecoration(
+                                              color: const Color(0xffF2F2F2),
+                                              shape: const CircleBorder(),
+                                            ),
+                                            child: IconButton(
+                                              autofocus: true,
+                                              icon: Transform.rotate(
+                                                angle: Math.pi / 180 * 180,
+                                                child: Image(
+                                                  image: AssetImage(
+                                                      "images/back.png"),
+                                                  color: Color(0xff3F414E),
+                                                  width: 18.0,
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            )),
+                                  )
+                                : Positioned(
+                                    top: 40,
+                                    left: 30,
+                                    child: //back
+                                        Container(
+                                            decoration: ShapeDecoration(
+                                              color: const Color(0xffF2F2F2),
+                                              shape: const CircleBorder(),
+                                            ),
+                                            child: IconButton(
+                                              autofocus: true,
+                                              icon: Image(
+                                                image: AssetImage(
+                                                    "images/back.png"),
+                                                color: Color(0xff3F414E),
+                                                width: 18.0,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            )),
+                                  ),
                             //cloud
                             Positioned(
                                 top: 10.0,
@@ -121,27 +177,20 @@ class _PlayListState extends State<PlayList>
                             ),
                             Align(
                               alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 0.0),
-                                child: Image(
-                                  image: AssetImage('images/cloud_center.png'),
-                                  width: MediaQuery.of(context).size.width,
-                                ),
+                              child: Image(
+                                image: AssetImage('images/cloud_center.png'),
+                                width: MediaQuery.of(context).size.width,
                               ),
                             ),
                             Align(
                               alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10),
-                                      bottomRight: Radius.circular(10)),
-                                  child: Image(
-                                    image:
-                                        AssetImage('images/cloud_bottom.png'),
-                                    width: MediaQuery.of(context).size.width,
-                                  ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10)),
+                                child: Image(
+                                  image: AssetImage('images/cloud_bottom.png'),
+                                  width: MediaQuery.of(context).size.width,
                                 ),
                               ),
                             ),
@@ -184,7 +233,8 @@ class _PlayListState extends State<PlayList>
                       ),
                       //title & description
                       Padding(
-                        padding: const EdgeInsets.only(top: 25.0, left: 10.0),
+                        padding: const EdgeInsets.only(
+                            top: 25.0, left: 10.0, right: 10.0),
                         child: RichText(
                           text: TextSpan(
                             text: '${widget.playListArgs.title}\n',
@@ -208,9 +258,8 @@ class _PlayListState extends State<PlayList>
                                       fontSize: 13.0,
                                       color: Color(0xffA1A4B2))),
                               TextSpan(
-                                  text: '\n\nPick a Narrator',
+                                  text: '\n\n${S.of(context).narrator}',
                                   style: TextStyle(
-                                      // fontWeight: FontWeight.normal,
                                       fontSize: 20.0,
                                       color: Color(0xff3F414E))),
                             ],
@@ -243,13 +292,13 @@ class _PlayListState extends State<PlayList>
                   tabs: [
                     Tab(
                       child: Text(
-                        'VOICES',
+                        S.of(context).voices,
                         style: TextStyle(letterSpacing: 1.0),
                       ),
                     ),
                     Tab(
                       child: Text(
-                        "FAVORITE",
+                        S.of(context).favorite,
                         style: TextStyle(letterSpacing: 1.0),
                       ),
                     ),
@@ -266,158 +315,167 @@ class _PlayListState extends State<PlayList>
                 // Voice Tab
                 Container(
                   color: Colors.white,
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      padding: EdgeInsets.only(bottom: 50.0),
-                      itemCount: musics.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              bottom: 10,
-                              left: 10,
-                              top: 10,
-                            ),
-                            child: Row(
-                              children: [
-                                // play btn
-                                Container(
-                                  width: 40.0,
-                                  height: 40.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
-                                      border: Border.all(
-                                          width: 1, color: Color(0xffA1A4B2))),
-                                  child: IconButton(
-                                    autofocus: true,
-                                    icon: Image(
-                                      image: AssetImage("images/play.png"),
-                                      color: Color(0xffA1A4B2),
-                                      width: 12.0,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/sound_player',
-                                          arguments: SoundPlayModel(
-                                              title: musics[index]["name"],
-                                              boxTitle: widget
-                                                  .playListArgs.title
-                                                  .toString()));
-                                    },
-                                  ),
-                                ),
-                                // voice title & time
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        musics[index]["name"],
-                                        style: TextStyle(
-                                            color: Color(0xff3F414E),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.0),
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: musics.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                bottom: 10,
+                                left: 10,
+                                top: 10,
+                              ),
+                              child: Row(
+                                children: [
+                                  // play btn
+                                  Container(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Color(0xffA1A4B2))),
+                                    child: IconButton(
+                                      autofocus: true,
+                                      icon: Image(
+                                        image: AssetImage("images/play.png"),
+                                        color: Color(0xffA1A4B2),
+                                        width: 12.0,
                                       ),
-                                      Text(
-                                        musics[index]["time"],
-                                        style: TextStyle(
-                                            color: Color(0xffA1A4B2),
-                                            fontSize: 11.0),
-                                      )
-                                    ],
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/sound_player',
+                                            arguments: SoundPlayModel(
+                                                title: musics[index]["name"],
+                                                boxTitle: widget
+                                                    .playListArgs.title
+                                                    .toString()));
+                                      },
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  // voice title & time
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          musics[index]["name"],
+                                          style: TextStyle(
+                                              color: Color(0xff3F414E),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0),
+                                        ),
+                                        Text(
+                                          musics[index]["time"],
+                                          style: TextStyle(
+                                              color: Color(0xffA1A4B2),
+                                              fontSize: 11.0),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/sound_player',
-                                arguments: SoundPlayModel(
-                                    title: musics[index]["name"],
-                                    boxTitle:
-                                        widget.playListArgs.title.toString()));
-                          },
-                        );
-                      }),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/sound_player',
+                                  arguments: SoundPlayModel(
+                                      title: musics[index]["name"],
+                                      boxTitle: widget.playListArgs.title
+                                          .toString()));
+                            },
+                          );
+                        }),
+                  ),
                 ),
                 // Favorite Tab
                 Container(
                   color: Colors.white,
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: favMusics.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          child: Container(
-                            padding:
-                                EdgeInsets.only(bottom: 10, left: 10, top: 10),
-                            child: Row(
-                              children: [
-                                // play btn
-                                Container(
-                                  width: 40.0,
-                                  height: 40.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
-                                      border: Border.all(
-                                          width: 1, color: Color(0xffA1A4B2))),
-                                  child: IconButton(
-                                    autofocus: true,
-                                    icon: Image(
-                                      image: AssetImage("images/play.png"),
-                                      color: Color(0xffA1A4B2),
-                                      width: 12.0,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/sound_player',
-                                          arguments: SoundPlayModel(
-                                              title: musics[index]["name"],
-                                              boxTitle: widget
-                                                  .playListArgs.title
-                                                  .toString()));
-                                    },
-                                  ),
-                                ),
-                                // voice title & time
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        favMusics[index]["name"],
-                                        style: TextStyle(
-                                            color: Color(0xff3F414E),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.0),
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: favMusics.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  bottom: 10, left: 10, top: 10),
+                              child: Row(
+                                children: [
+                                  // play btn
+                                  Container(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Color(0xffA1A4B2))),
+                                    child: IconButton(
+                                      autofocus: true,
+                                      icon: Image(
+                                        image: AssetImage("images/play.png"),
+                                        color: Color(0xffA1A4B2),
+                                        width: 12.0,
                                       ),
-                                      Text(
-                                        favMusics[index]["time"],
-                                        style: TextStyle(
-                                            color: Color(0xffA1A4B2),
-                                            fontSize: 11.0),
-                                      )
-                                    ],
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/sound_player',
+                                            arguments: SoundPlayModel(
+                                                title: musics[index]["name"],
+                                                boxTitle: widget
+                                                    .playListArgs.title
+                                                    .toString()));
+                                      },
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  // voice title & time
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          favMusics[index]["name"],
+                                          style: TextStyle(
+                                              color: Color(0xff3F414E),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0),
+                                        ),
+                                        Text(
+                                          favMusics[index]["time"],
+                                          style: TextStyle(
+                                              color: Color(0xffA1A4B2),
+                                              fontSize: 11.0),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/sound_player',
-                                arguments: SoundPlayModel(
-                                    title: musics[index]["name"],
-                                    boxTitle:
-                                        widget.playListArgs.title.toString()));
-                          },
-                        );
-                      }),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/sound_player',
+                                  arguments: SoundPlayModel(
+                                      title: musics[index]["name"],
+                                      boxTitle: widget.playListArgs.title
+                                          .toString()));
+                            },
+                          );
+                        }),
+                  ),
                 ),
               ],
             )),
@@ -425,5 +483,15 @@ class _PlayListState extends State<PlayList>
         ),
       ),
     );
+  }
+
+  Future<String> getLang() async {
+    Future<SharedPreferences> _langPrefs = SharedPreferences.getInstance();
+    SharedPreferences prefs = await _langPrefs;
+    var lang = prefs.getString("lang");
+    if (lang == null) {
+      return null;
+    }
+    return lang;
   }
 }

@@ -50,15 +50,15 @@ class _SoundPlayerState extends State<SoundPlayer>
               alignment: Alignment.bottomLeft,
               child: Image(
                 image: AssetImage('images/player_bg_three.png'),
-                width: 272.14,
-                height: 481.72,
+                width: 262.14,
+                height: 400.72,
               )),
           // bg
           Align(
               alignment: Alignment.bottomRight,
               child: Image(
                 image: AssetImage('images/player_bg_four.png'),
-                width: 209.91,
+                width: 180.91,
                 height: 209.91,
               )),
           // actions
@@ -163,82 +163,92 @@ class _SoundPlayerState extends State<SoundPlayer>
                   ),
                 ),
                 // Play buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // rewind btn
-                    IconButton(
-                        icon: Icon(
-                          Icons.fast_rewind,
-                          color: Color(0xffA0A3B1),
-                          size: 30.0,
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // rewind btn
+                      IconButton(
+                          icon: Icon(
+                            Icons.fast_rewind,
+                            color: Color(0xffA0A3B1),
+                            size: 30.0,
+                          ),
+                          onPressed: () {}),
+                      // play btn
+                      Container(
+                        width: 109.05,
+                        height: 109.05,
+                        margin: EdgeInsets.only(
+                          left: 40.0,
+                          right: 40.0,
                         ),
-                        onPressed: () {}),
-                    // play btn
-                    Container(
-                      width: 109.05,
-                      height: 109.05,
-                      margin: EdgeInsets.only(
-                        left: 40.0,
-                        right: 40.0,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                          color: Color(0xffBABCC6)),
-                      child: InkWell(
-                        child: Container(
-                          margin: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100)),
-                              color: Color(0xff3F414E)),
-                          child: Center(
-                            child: AnimatedIcon(
-                              icon: AnimatedIcons.play_pause,
-                              progress: _animationController,
-                              color: Color(0xffFBFBFB),
-                              size: 50.0,
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100)),
+                            color: Color(0xffBABCC6)),
+                        child: InkWell(
+                          child: Container(
+                            margin: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100)),
+                                color: Color(0xff3F414E)),
+                            child: Center(
+                              child: AnimatedIcon(
+                                icon: AnimatedIcons.play_pause,
+                                progress: _animationController,
+                                color: Color(0xffFBFBFB),
+                                size: 50.0,
+                              ),
                             ),
                           ),
+                          onTap: () => _handleOnPlayPressed(),
                         ),
-                        onTap: () => _handleOnPlayPressed(),
                       ),
-                    ),
-                    // forward btn
-                    IconButton(
-                        icon: Icon(
-                          Icons.fast_forward,
-                          color: Color(0xffA0A3B1),
-                          size: 30.0,
-                        ),
-                        onPressed: () {})
-                  ],
+                      // forward btn
+                      IconButton(
+                          icon: Icon(
+                            Icons.fast_forward,
+                            color: Color(0xffA0A3B1),
+                            size: 30.0,
+                          ),
+                          onPressed: () {})
+                    ],
+                  ),
                 ),
                 // slider
                 Container(
                   margin: EdgeInsets.only(top: 70.0),
-                  child: Slider(
-                    min: 0,
-                    max: musicSeconds,
-                    value: _sliderValue,
-                    activeColor: Color(0xff3F414E),
-                    inactiveColor: Color(0xffA0A3B1),
-                    onChanged: (value) {
-                      setState(() {
-                        _sliderValue = value;
-                      });
-                    },
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Slider(
+                      min: 0,
+                      max: musicSeconds,
+                      value: _sliderValue,
+                      activeColor: Color(0xff3F414E),
+                      inactiveColor: Color(0xffA0A3B1),
+                      onChanged: (value) {
+                        setState(() {
+                          _sliderValue = value;
+                        });
+                      },
+                    ),
                   ),
                 ),
                 // music times
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Row(
-                    children: [
-                      Text(_secondToMinuteFormatter(_sliderValue)),
-                      Expanded(child: Container()),
-                      Text('02:00'),
-                    ],
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Row(
+                      children: [
+                        Text(_secondToMinuteFormatter(_sliderValue)),
+                        Expanded(child: Container()),
+                        Text('02:00'),
+                      ],
+                    ),
                   ),
                 )
               ],

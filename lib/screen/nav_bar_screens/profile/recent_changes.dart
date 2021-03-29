@@ -1,4 +1,5 @@
 import 'package:SilentMoon/data/model/recent_changes_model.dart';
+import 'package:SilentMoon/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class RecentChanges extends StatefulWidget {
@@ -13,20 +14,20 @@ class _RecentChangesState extends State<RecentChanges> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Recent Changes',
-            style: TextStyle(color: const Color(0xff3F414E)),
-          ),
-          iconTheme: IconThemeData(color: const Color(0xff3F414E)),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.grey[50],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          S.of(context).recentchanges,
+          style: TextStyle(color: const Color(0xff3F414E)),
         ),
-        body: ListView.builder(
+        iconTheme: IconThemeData(color: const Color(0xff3F414E)),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.grey[50],
+      ),
+      body: Directionality(
+        textDirection: TextDirection.ltr,
+        child: ListView.builder(
             itemCount: changesList.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(

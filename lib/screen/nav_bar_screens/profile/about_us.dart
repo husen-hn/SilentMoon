@@ -1,3 +1,4 @@
+import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/widget/profile_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,7 +14,7 @@ class _AboutUsState extends State<AboutUs> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'About us',
+          S.of(context).aboutUs,
           style: TextStyle(color: const Color(0xff3F414E)),
         ),
         iconTheme: IconThemeData(color: const Color(0xff3F414E)),
@@ -26,34 +27,46 @@ class _AboutUsState extends State<AboutUs> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              'meditation app, Explore the app, Find some peace of mind to prepare for meditation. using Flutter and MUSOPEN music services.',
+              S.of(context).aboutUsDesc,
               style: TextStyle(fontSize: 14.0),
             ),
           ),
-          ProfileBtn(
-              btnTitle: 'MUSOPEN',
-              btnColor: const Color(0xffB6B8BF),
-              btnTxtColor: const Color(0xff3F414E),
-              icon: Icons.keyboard_arrow_right,
-              onTap: this._onBtnTap),
-          ProfileBtn(
-              btnTitle: 'GitHub',
-              btnColor: const Color(0xffB6B8BF),
-              btnTxtColor: const Color(0xff3F414E),
-              icon: Icons.keyboard_arrow_right,
-              onTap: this._onBtnTap),
-          ProfileBtn(
-              btnTitle: 'Twitter',
-              btnColor: const Color(0xffB6B8BF),
-              btnTxtColor: const Color(0xff3F414E),
-              icon: Icons.keyboard_arrow_right,
-              onTap: this._onBtnTap),
-          ProfileBtn(
-              btnTitle: 'LICENSE',
-              btnColor: const Color(0xffB6B8BF),
-              btnTxtColor: const Color(0xff3F414E),
-              icon: Icons.keyboard_arrow_right,
-              onTap: this._onBtnTap)
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: ProfileBtn(
+                btnTitle: 'MUSOPEN',
+                btnColor: const Color(0xffB6B8BF),
+                btnTxtColor: const Color(0xff3F414E),
+                icon: Icons.keyboard_arrow_right,
+                onTap: this._onBtnTap),
+          ),
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: ProfileBtn(
+                btnTitle: 'GitHub',
+                btnColor: const Color(0xffB6B8BF),
+                btnTxtColor: const Color(0xff3F414E),
+                icon: Icons.keyboard_arrow_right,
+                onTap: this._onBtnTap),
+          ),
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: ProfileBtn(
+                btnTitle: 'Twitter',
+                btnColor: const Color(0xffB6B8BF),
+                btnTxtColor: const Color(0xff3F414E),
+                icon: Icons.keyboard_arrow_right,
+                onTap: this._onBtnTap),
+          ),
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: ProfileBtn(
+                btnTitle: 'LICENSE',
+                btnColor: const Color(0xffB6B8BF),
+                btnTxtColor: const Color(0xff3F414E),
+                icon: Icons.keyboard_arrow_right,
+                onTap: this._onBtnTap),
+          )
         ],
       ),
     );

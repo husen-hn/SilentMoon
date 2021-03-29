@@ -36,6 +36,7 @@ class _MyAppState extends State<SilentMoonApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,

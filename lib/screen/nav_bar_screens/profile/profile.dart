@@ -17,6 +17,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   bool _switchValue = false;
   String lang = '';
+  bool isRtl = false;
 
   void _getLang() async {
     try {
@@ -40,7 +41,17 @@ class _ProfileState extends State<Profile> {
     if (lang == '' || lang == null) {
       lang = 'English';
     }
-
+    if (lang == 'Iran' ||
+        lang == 'إيران' ||
+        lang == 'ایران' ||
+        lang == 'Иран' ||
+        lang == 'United Arab Emirates' ||
+        lang == 'الإمارات العربية المتحدة' ||
+        lang == 'Vereinigte Arabische Emirate' ||
+        lang == 'امارات متحده عربی' ||
+        lang == 'Объединенные Арабские Эмираты') {
+      isRtl = true;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -48,41 +59,46 @@ class _ProfileState extends State<Profile> {
         // Title
         Padding(
           padding: EdgeInsets.only(top: 30.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Silent',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    letterSpacing: 2.0,
-                    color: Color(0xff3F414E),
-                    fontWeight: FontWeight.bold),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * .1,
-                height: MediaQuery.of(context).size.height * .1,
-                padding: const EdgeInsets.all(3.0),
-                child: Image(
-                  image: AssetImage("images/logo.png"),
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  S.of(context).title1,
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      letterSpacing: 2.0,
+                      color: Color(0xff3F414E),
+                      fontWeight: FontWeight.bold),
                 ),
-              ),
-              Text(
-                'Moon',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    letterSpacing: 2.0,
-                    color: Color(0xff3F414E),
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * .1,
+                    height: MediaQuery.of(context).size.height * .1,
+                    child: Image(
+                      image: AssetImage("images/logo.png"),
+                    ),
+                  ),
+                ),
+                Text(
+                  S.of(context).title2,
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      letterSpacing: 2.0,
+                      color: Color(0xff3F414E),
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
         ),
         // Description
         Padding(
           padding: const EdgeInsets.only(left: 50.0, right: 50.0, bottom: 30.0),
           child: Text(
-            'Meditation App, Explore the app, Find some peace of mind to prepare for meditation.',
+            S.of(context).profileDesc,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 12.0,
@@ -92,17 +108,9 @@ class _ProfileState extends State<Profile> {
             ),
           ),
         ), // Introduction
-        // Introduction
-        ProfileBtn(
-          btnTitle: 'Introduction',
-          btnColor: Color(0xffFFDB9D),
-          btnTxtColor: Color(0xff565D70),
-          icon: Icons.keyboard_arrow_right,
-          onTap: this._onItemPress,
-        ),
         // Language
         ProfileBtn(
-          btnTitle: 'Language',
+          btnTitle: S.of(context).language,
           btnColor: Color(0xff8E97FD),
           btnTxtColor: Color(0xffFFECCC),
           icon: Icons.translate,
@@ -110,15 +118,15 @@ class _ProfileState extends State<Profile> {
         ),
         // AboutUs
         ProfileBtn(
-          btnTitle: 'About us',
+          btnTitle: S.of(context).aboutUs,
           btnColor: Color(0xffFA6E5A),
           btnTxtColor: Color(0xffFFECCC),
-          icon: Icons.keyboard_arrow_right,
+          icon: isRtl ? Icons.keyboard_arrow_left : Icons.keyboard_arrow_right,
           onTap: this._onItemPress,
         ),
         // Share
         ProfileBtn(
-          btnTitle: 'Share',
+          btnTitle: S.of(context).share,
           btnColor: Color(0xff6CB28E),
           btnTxtColor: Color(0xffFFECCC),
           icon: Icons.share,
@@ -126,10 +134,10 @@ class _ProfileState extends State<Profile> {
         ),
         // Recent changes
         ProfileBtn(
-          btnTitle: 'Recent changes',
+          btnTitle: S.of(context).recentchanges,
           btnColor: Color(0xffD9A5B5),
           btnTxtColor: Color(0xffFFECCC),
-          icon: Icons.keyboard_arrow_right,
+          icon: isRtl ? Icons.keyboard_arrow_left : Icons.keyboard_arrow_right,
           onTap: this._onItemPress,
         ),
         // DayMode/NightMode
@@ -139,7 +147,7 @@ class _ProfileState extends State<Profile> {
             child: Row(
               children: [
                 Text(
-                  'Dark Mode',
+                  S.of(context).darkMode,
                 ),
                 Expanded(child: Container()),
                 Container(
@@ -175,16 +183,14 @@ class _ProfileState extends State<Profile> {
   }
 
   _onItemPress(String title) {
-    if (title == 'Share') {
+    if (title == S.of(context).share) {
       _onShare();
-    } else if (title == 'Recent changes') {
+    } else if (title == S.of(context).recentchanges) {
       Navigator.pushNamed(context, '/profile_recent_changes');
-    } else if (title == 'About us') {
+    } else if (title == S.of(context).aboutUs) {
       Navigator.pushNamed(context, '/profile_about_us');
-    } else if (title == 'Language') {
+    } else if (title == S.of(context).language) {
       _langBottomSheet();
-    } else if (title == 'Introduction') {
-      Navigator.pushNamed(context, '/profile_introduction');
     }
   }
 
@@ -204,36 +210,36 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Center(
                       child: Text(
-                    'Choose Language\n',
+                    '${S.of(context).chooseLanguage}\n',
                     style: TextStyle(
                         fontSize: 18.0, color: const Color(0xff3F414E)),
                   )),
                   LangBtn(
-                    btnTitle: 'English',
+                    btnTitle: S.of(context).english,
                     imgAsset: AssetImage("images/united_states.png"),
                     isActive: lang == 'English' ? true : false,
                     onTap: this._chooseLanguage,
                   ),
                   LangBtn(
-                    btnTitle: 'Germany',
+                    btnTitle: S.of(context).germany,
                     imgAsset: AssetImage("images/germany.png"),
                     isActive: lang == 'Germany' ? true : false,
                     onTap: this._chooseLanguage,
                   ),
                   LangBtn(
-                    btnTitle: 'Russia',
+                    btnTitle: S.of(context).russia,
                     imgAsset: AssetImage("images/russia.png"),
                     isActive: lang == 'Russia' ? true : false,
                     onTap: this._chooseLanguage,
                   ),
                   LangBtn(
-                    btnTitle: 'United Arab Emirates',
+                    btnTitle: S.of(context).unitedArabEmirates,
                     imgAsset: AssetImage("images/united_arab_emirates.png"),
                     isActive: lang == 'United Arab Emirates' ? true : false,
                     onTap: this._chooseLanguage,
                   ),
                   LangBtn(
-                    btnTitle: 'Iran',
+                    btnTitle: S.of(context).iran,
                     imgAsset: AssetImage("images/iran.png"),
                     isActive: lang == 'Iran' ? true : false,
                     onTap: this._chooseLanguage,
@@ -258,7 +264,8 @@ class _ProfileState extends State<Profile> {
               'assets/translate.json',
               height: 100,
             ),
-            title: 'Are you sure to change application language to $title\n?',
+            title: S.of(context).changeLangQues,
+            warning: S.of(context).changeLangWarning,
             btn: Padding(
               padding: const EdgeInsets.only(top: 6.0, bottom: 6.0),
               child: TextButton(
@@ -266,7 +273,7 @@ class _ProfileState extends State<Profile> {
                     Navigator.pop(context);
                     _changeLanguage(title);
                   },
-                  child: Text('Done',
+                  child: Text(S.of(context).changeLangDone,
                       style: TextStyle(
                           color: Colors.blue,
                           fontSize: 16.0,
@@ -277,7 +284,11 @@ class _ProfileState extends State<Profile> {
   }
 
   _changeLanguage(String btnTitle) {
-    if (btnTitle == 'English') {
+    if (btnTitle == 'English' ||
+        btnTitle == 'الإنجليزية' ||
+        btnTitle == 'Englisch' ||
+        btnTitle == 'انگلیسی' ||
+        btnTitle == 'английский') {
       setLang('English');
       _languageChoose(
         LanguageCode(
@@ -286,7 +297,11 @@ class _ProfileState extends State<Profile> {
         ),
       );
       Navigator.pushNamed(context, '/restart');
-    } else if (btnTitle == 'Germany') {
+    } else if (btnTitle == 'Germany' ||
+        btnTitle == 'ألمانيا' ||
+        btnTitle == 'Deutschland' ||
+        btnTitle == 'آلمان' ||
+        btnTitle == 'Германия') {
       setLang('Germany');
       _languageChoose(
         LanguageCode(
@@ -295,7 +310,11 @@ class _ProfileState extends State<Profile> {
         ),
       );
       Navigator.pushNamed(context, '/restart');
-    } else if (btnTitle == 'Russia') {
+    } else if (btnTitle == 'Russia' ||
+        btnTitle == 'روسيا' ||
+        btnTitle == 'Russland' ||
+        btnTitle == 'روسیه' ||
+        btnTitle == 'Россия') {
       setLang('Russia');
       _languageChoose(
         LanguageCode(
@@ -304,7 +323,11 @@ class _ProfileState extends State<Profile> {
         ),
       );
       Navigator.pushNamed(context, '/restart');
-    } else if (btnTitle == 'United Arab Emirates') {
+    } else if (btnTitle == 'United Arab Emirates' ||
+        btnTitle == 'الإمارات العربية المتحدة' ||
+        btnTitle == 'Vereinigte Arabische Emirate' ||
+        btnTitle == 'امارات متحده عربی' ||
+        btnTitle == 'Объединенные Арабские Эмираты') {
       setLang('United Arab Emirates');
       _languageChoose(
         LanguageCode(
@@ -313,7 +336,10 @@ class _ProfileState extends State<Profile> {
         ),
       );
       Navigator.pushNamed(context, '/restart');
-    } else if (btnTitle == 'Iran') {
+    } else if (btnTitle == 'Iran' ||
+        btnTitle == 'إيران' ||
+        btnTitle == 'ایران' ||
+        btnTitle == 'Иран') {
       setLang('Iran');
       _languageChoose(
         LanguageCode(

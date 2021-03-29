@@ -1,12 +1,14 @@
+import 'package:SilentMoon/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class LangDialog extends StatelessWidget {
   final LottieBuilder dialogIcon;
   final String title;
-
+  final String warning;
   final Widget btn;
-  LangDialog({this.dialogIcon, this.title, this.btn});
+
+  LangDialog({this.dialogIcon, this.title, this.warning, this.btn});
   _dialogContent(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -26,8 +28,12 @@ class LangDialog extends StatelessWidget {
         children: <Widget>[
           // top image
           Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: dialogIcon,
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Container(
+                padding: EdgeInsets.all(15.0),
+                decoration: BoxDecoration(
+                    color: Colors.grey[300], shape: BoxShape.circle),
+                child: dialogIcon),
           ),
           // title
           Padding(
@@ -45,7 +51,7 @@ class LangDialog extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 36.0, left: 22.0, right: 22.0),
             child: Text(
-              'If you press on Done you will navigating to the Home page',
+              warning,
               style: TextStyle(
                   fontSize: 11.0,
                   color: const Color(0xffFA6E5A),
@@ -54,13 +60,13 @@ class LangDialog extends StatelessWidget {
             ),
           ),
           // divider
-          Padding(
-            padding: const EdgeInsets.only(top: 6.0),
-            child: Divider(
-              color: Colors.grey,
-              height: 1,
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 6.0),
+          //   child: Divider(
+          //     color: Colors.grey,
+          //     height: 1,
+          //   ),
+          // ),
           // buttom botton
           Row(
             children: [
@@ -70,18 +76,18 @@ class LangDialog extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Cancel',
+                  child: Text(S.of(context).changeLangCancel,
                       style: TextStyle(
                           color: Colors.blue,
                           fontSize: 16.0,
                           fontWeight: FontWeight.normal))),
 
               Expanded(child: Container()),
-              Container(
-                width: 1.0,
-                height: 60.0,
-                color: Colors.grey,
-              ),
+              // Container(
+              //   width: 1.0,
+              //   height: 60.0,
+              //   color: Colors.grey,
+              // ),
               Expanded(child: Container()),
               btn,
               Expanded(child: Container()),

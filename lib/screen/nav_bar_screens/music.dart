@@ -1,4 +1,5 @@
 import 'package:SilentMoon/data/model/sound_play_model.dart';
+import 'package:SilentMoon/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class Music extends StatefulWidget {
@@ -39,112 +40,112 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
-      child: DefaultTabController(
-        length: 2,
-        child: CustomScrollView(
-          slivers: [
-            //top images
-            Theme(
-              data: Theme.of(context).copyWith(
-                  accentColor: Color(0xff8E97FD), primaryColor: Colors.white),
-              child: SliverAppBar(
-                expandedHeight: 330,
-                automaticallyImplyLeading: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      //top image
-                      Container(
-                        height: 250.0,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                          image: DecorationImage(
-                              image: AssetImage("images/man_meditation.png"),
-                              fit: BoxFit.fill),
-                        ),
-                      ),
-                      //title & description
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5.0, left: 10.0),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'Music\n',
-                            style: TextStyle(
-                                color: Color(0xff3F414E),
-                                fontSize: 34,
-                                fontWeight: FontWeight.bold),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: 'music\n',
-                                  style: TextStyle(
-                                    height: 3.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14.0,
-                                    color: Color(0xffA1A4B2),
-                                  )),
-                              TextSpan(
-                                  text: 'Description',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 13.0,
-                                      color: Color(0xffA1A4B2))),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            //TabBar
-            Theme(
-              data: Theme.of(context).copyWith(
-                  accentColor: Color(0xff8E97FD), primaryColor: Colors.white),
-              child: SliverAppBar(
-                elevation: 0,
-                snap: false,
-                pinned: true,
-                floating: true,
-                expandedHeight: 0,
-                bottom: TabBar(
-                  controller: _tabController,
-                  isScrollable: false,
-                  labelColor: Color(0xff8E97FD),
-                  unselectedLabelColor: Color(0xffA1A4B2),
-                  indicator: UnderlineTabIndicator(
-                      borderSide:
-                          BorderSide(width: 2.0, color: Color(0xff8E97FD)),
-                      insets: EdgeInsets.symmetric(horizontal: 70.0)),
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        'VOICES',
-                        style: TextStyle(letterSpacing: 1.0),
+    return DefaultTabController(
+      length: 2,
+      child: CustomScrollView(
+        slivers: [
+          //top images
+          Theme(
+            data: Theme.of(context).copyWith(
+                accentColor: Color(0xff8E97FD), primaryColor: Colors.white),
+            child: SliverAppBar(
+              expandedHeight: 350,
+              automaticallyImplyLeading: false,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //top image
+                    Container(
+                      height: 250.0,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
+                        image: DecorationImage(
+                            image: AssetImage("images/man_meditation.png"),
+                            fit: BoxFit.fill),
                       ),
                     ),
-                    Tab(
-                      child: Text(
-                        "FAVORITE",
-                        style: TextStyle(letterSpacing: 1.0),
+                    //title & description
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, left: 10.0, right: 10.0),
+                      child: RichText(
+                        text: TextSpan(
+                          text: '${S.of(context).musicTitle}\n',
+                          style: TextStyle(
+                              color: Color(0xff3F414E),
+                              fontSize: 34,
+                              fontWeight: FontWeight.bold),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: '${S.of(context).musicType}\n',
+                                style: TextStyle(
+                                  height: 3.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0,
+                                  color: Color(0xffA1A4B2),
+                                )),
+                            TextSpan(
+                                text: 'Description',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13.0,
+                                    color: Color(0xffA1A4B2))),
+                          ],
+                        ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
             ),
-            //Voice & Favorite List
-            SliverFillRemaining(
-                child: TabBarView(
-              controller: _tabController,
-              children: [
-                // Voice Tab
-                Container(
+          ),
+          //TabBar
+          Theme(
+            data: Theme.of(context).copyWith(primaryColor: Colors.white),
+            child: SliverAppBar(
+              elevation: 0,
+              snap: false,
+              pinned: true,
+              floating: true,
+              expandedHeight: 0,
+              bottom: TabBar(
+                controller: _tabController,
+                isScrollable: false,
+                labelColor: Color(0xff8E97FD),
+                unselectedLabelColor: Color(0xffA1A4B2),
+                indicator: UnderlineTabIndicator(
+                    borderSide:
+                        BorderSide(width: 2.0, color: Color(0xff8E97FD)),
+                    insets: EdgeInsets.symmetric(horizontal: 70.0)),
+                tabs: [
+                  Tab(
+                    child: Text(
+                      S.of(context).voices,
+                      style: TextStyle(letterSpacing: 1.0),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      S.of(context).favorite,
+                      style: TextStyle(letterSpacing: 1.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          //Voice & Favorite List
+          SliverFillRemaining(
+              child: TabBarView(
+            controller: _tabController,
+            children: [
+              // Voice Tab
+              Directionality(
+                textDirection: TextDirection.ltr,
+                child: Container(
                   color: Colors.white,
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -181,7 +182,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                                           context, '/sound_player',
                                           arguments: SoundPlayModel(
                                               title: musics[index]["name"],
-                                              boxTitle: 'MUSIC'));
+                                              boxTitle: S.of(context).music));
                                     },
                                   ),
                                 ),
@@ -215,13 +216,16 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                             Navigator.pushNamed(context, '/sound_player',
                                 arguments: SoundPlayModel(
                                     title: musics[index]["name"],
-                                    boxTitle: 'MUSIC'));
+                                    boxTitle: S.of(context).music));
                           },
                         );
                       }),
                 ),
-                // Favorite Tab
-                Container(
+              ),
+              // Favorite Tab
+              Directionality(
+                textDirection: TextDirection.ltr,
+                child: Container(
                   color: Colors.white,
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -255,7 +259,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                                           context, '/sound_player',
                                           arguments: SoundPlayModel(
                                               title: musics[index]["name"],
-                                              boxTitle: 'MUSIC'));
+                                              boxTitle: S.of(context).music));
                                     },
                                   ),
                                 ),
@@ -289,15 +293,15 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                             Navigator.pushNamed(context, '/sound_player',
                                 arguments: SoundPlayModel(
                                     title: musics[index]["name"],
-                                    boxTitle: 'MUSIC'));
+                                    boxTitle: S.of(context).music));
                           },
                         );
                       }),
                 ),
-              ],
-            ))
-          ],
-        ),
+              ),
+            ],
+          ))
+        ],
       ),
     );
   }

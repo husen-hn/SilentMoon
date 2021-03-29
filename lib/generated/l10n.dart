@@ -36,6 +36,25 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Title`
+  String get title1 {
+    return Intl.message(
+      'English',
+      name: 'title1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get title2 {
+    return Intl.message(
+      'English',
+      name: 'title2',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `home`
   String get home {
     return Intl.message(
@@ -317,6 +336,418 @@ class S {
     return Intl.message(
       'English',
       name: 'happinessTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Play List`
+  String get voices {
+    return Intl.message(
+      'English',
+      name: 'voices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get favorite {
+    return Intl.message(
+      'English',
+      name: 'favorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get narrator {
+    return Intl.message(
+      'English',
+      name: 'narrator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sleep`
+  String get sleepTitle {
+    return Intl.message(
+      'English',
+      name: 'sleepTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepDesc {
+    return Intl.message(
+      'English',
+      name: 'sleepDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepTabAll {
+    return Intl.message(
+      'English',
+      name: 'sleepTabAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepTabMy {
+    return Intl.message(
+      'English',
+      name: 'sleepTabMy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepTabAnxious {
+    return Intl.message(
+      'English',
+      name: 'sleepTabAnxious',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepTabSleep {
+    return Intl.message(
+      'English',
+      name: 'sleepTabSleep',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepTabKids {
+    return Intl.message(
+      'English',
+      name: 'sleepTabKids',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepBannerNightTitle {
+    return Intl.message(
+      'English',
+      name: 'sleepBannerNightTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepBannerNightDesc {
+    return Intl.message(
+      'English',
+      name: 'sleepBannerNightDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepMusicBoxTitle {
+    return Intl.message(
+      'English',
+      name: 'sleepMusicBoxTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepMusicBoxType {
+    return Intl.message(
+      'English',
+      name: 'sleepMusicBoxType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sleepMusicBoxTime {
+    return Intl.message(
+      'English',
+      name: 'sleepMusicBoxTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meditate`
+  String get meditateTitle {
+    return Intl.message(
+      'English',
+      name: 'meditateTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateDesc {
+    return Intl.message(
+      'English',
+      name: 'meditateDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateTabAll {
+    return Intl.message(
+      'English',
+      name: 'meditateTabAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateTabMy {
+    return Intl.message(
+      'English',
+      name: 'meditateTabMy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateTabAnxious {
+    return Intl.message(
+      'English',
+      name: 'meditateTabAnxious',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateTabSleep {
+    return Intl.message(
+      'English',
+      name: 'meditateTabSleep',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateTabKids {
+    return Intl.message(
+      'English',
+      name: 'meditateTabKids',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateBox7Days {
+    return Intl.message(
+      'English',
+      name: 'meditateBox7Days',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateBoxAnxiet1 {
+    return Intl.message(
+      'English',
+      name: 'meditateBoxAnxiet1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateBoxAnxiet2 {
+    return Intl.message(
+      'English',
+      name: 'meditateBoxAnxiet2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get meditateBoxAnxiet3 {
+    return Intl.message(
+      'English',
+      name: 'meditateBoxAnxiet3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Music`
+  String get musicTitle {
+    return Intl.message(
+      'English',
+      name: 'musicTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get musicType {
+    return Intl.message(
+      'English',
+      name: 'musicType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profileDesc {
+    return Intl.message(
+      'English',
+      name: 'profileDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get language {
+    return Intl.message(
+      'English',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get aboutUs {
+    return Intl.message(
+      'English',
+      name: 'aboutUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get aboutUsDesc {
+    return Intl.message(
+      'English',
+      name: 'aboutUsDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get share {
+    return Intl.message(
+      'English',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get recentchanges {
+    return Intl.message(
+      'English',
+      name: 'recentchanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get darkMode {
+    return Intl.message(
+      'English',
+      name: 'darkMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Language`
+  String get chooseLanguage {
+    return Intl.message(
+      'English',
+      name: 'chooseLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get germany {
+    return Intl.message(
+      'English',
+      name: 'germany',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get russia {
+    return Intl.message(
+      'English',
+      name: 'russia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get unitedArabEmirates {
+    return Intl.message(
+      'English',
+      name: 'unitedArabEmirates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get iran {
+    return Intl.message(
+      'English',
+      name: 'iran',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `change lang dialog ques`
+  String get changeLangQues {
+    return Intl.message(
+      'English',
+      name: 'changeLangQues',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get changeLangWarning {
+    return Intl.message(
+      'English',
+      name: 'changeLangWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get changeLangDone {
+    return Intl.message(
+      'English',
+      name: 'changeLangDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get changeLangCancel {
+    return Intl.message(
+      'English',
+      name: 'changeLangCancel',
       desc: '',
       args: [],
     );

@@ -12,7 +12,6 @@ class _IntroductionWelcomeState extends State<IntroductionWelcome> {
     return Container(
       color: const Color(0xffA3ABFF),
       child: Stack(
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             children: [
