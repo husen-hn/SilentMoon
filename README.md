@@ -9,7 +9,7 @@ using [Flutter](https://flutter.dev) and [MUSOPEN](https://musopen.org/) music s
 *ui designed by [Afsar](https://www.figma.com/community/file/882888114457713282)*
 
 ## Features ⌑
-* Meditation Moods (sleep, relaxation, ...)
+* Available in five languages. (English, German, Russian, Arabic, Persian).
 
 ## Previews ⛶
 
