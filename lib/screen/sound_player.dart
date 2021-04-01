@@ -1,5 +1,10 @@
+import 'dart:ui';
+
 import 'package:SilentMoon/data/model/sound_play_model.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SoundPlayer extends StatefulWidget {
   final SoundPlayModel soundPlayArgs;
@@ -16,6 +21,7 @@ class _SoundPlayerState extends State<SoundPlayer>
   bool _isPlaying = false;
   double _sliderValue = 0;
   double musicSeconds = 120;
+  bool isDark;
 
   @override
   void initState() {
@@ -25,41 +31,125 @@ class _SoundPlayerState extends State<SoundPlayer>
   }
 
   @override
+  void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // bg
+          // bg topLeft light
           Align(
               alignment: Alignment.topLeft,
               child: Image(
-                image: AssetImage('images/player_bg_one.png'),
+                image: AssetImage(isDark ? '' : 'images/player_bg_one.png'),
                 width: 209.91,
-                height: 209.91,
+                height: 200.91,
               )),
-          // bg
+          // bg topRight light
           Align(
               alignment: Alignment.topRight,
               child: Image(
-                image: AssetImage('images/player_bg_two.png'),
-                width: 202.14,
-                height: 381.72,
+                image: AssetImage(isDark ? '' : 'images/player_bg_two.png'),
+                width: 200.14,
+                height: 341.72,
               )),
-          // bg
+          // bg bottomLeft light
           Align(
               alignment: Alignment.bottomLeft,
               child: Image(
-                image: AssetImage('images/player_bg_three.png'),
-                width: 262.14,
+                image: AssetImage(isDark ? '' : 'images/player_bg_three.png'),
+                width: 260.14,
                 height: 400.72,
               )),
-          // bg
+          // bg bottomRight light
           Align(
               alignment: Alignment.bottomRight,
               child: Image(
-                image: AssetImage('images/player_bg_four.png'),
-                width: 180.91,
+                image: AssetImage(isDark ? '' : 'images/player_bg_four.png'),
+                width: 160.91,
                 height: 209.91,
+              )),
+          // bg topright dark
+          Align(
+              alignment: Alignment.topRight,
+              child: Image(
+                image:
+                    AssetImage(isDark ? 'images/player_bg_night_two.png' : ''),
+                width: 220.91,
+                height: 310.91,
+              )),
+          // bg topright top dark
+          Align(
+              alignment: Alignment.topRight,
+              child: Image(
+                image:
+                    AssetImage(isDark ? 'images/player_bg_night_one.png' : ''),
+                width: 100.91,
+                height: 220.91,
+              )),
+          // bg bottomright  dark
+          Align(
+              alignment: Alignment.bottomRight,
+              child: Image(
+                image:
+                    AssetImage(isDark ? 'images/player_bg_night_four.png' : ''),
+                width: 190.91,
+                height: 230.91,
+              )),
+          // bg bottomleft  dark
+          Align(
+              alignment: Alignment.bottomLeft,
+              child: Image(
+                image: AssetImage(
+                    isDark ? 'images/player_bg_night_three.png' : ''),
+                width: 190.91,
+                height: 180.91,
+              )),
+          // bg centerleft  dark
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 150.0),
+                child: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 5,
+                      sigmaY: 5,
+                    ),
+                    child: Image(
+                      image: AssetImage(
+                          isDark ? 'images/player_bg_night_five.png' : ''),
+                      color: Color(0xFF1F265E).withOpacity(.5),
+                      width: 180.91,
+                      height: 280.91,
+                    ),
+                  ),
+                ),
+              )),
+          // bg centerright  dark
+          Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 90.0),
+                child: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 5,
+                      sigmaY: 5,
+                    ),
+                    child: Image(
+                      image: AssetImage(
+                          isDark ? 'images/player_bg_night_six.png' : ''),
+                      color: Color(0xFF1F265E).withOpacity(.5),
+                      width: 190.91,
+                      height: 310.91,
+                    ),
+                  ),
+                ),
               )),
           // actions
           Positioned(
@@ -79,7 +169,7 @@ class _SoundPlayerState extends State<SoundPlayer>
                       autofocus: true,
                       icon: Image(
                         image: AssetImage("images/cancel.png"),
-                        color: Color(0xff3F414E),
+                        color: const Color(0xff3F414E),
                         width: 18.0,
                       ),
                       onPressed: () {
@@ -94,7 +184,9 @@ class _SoundPlayerState extends State<SoundPlayer>
                   width: 55,
                   height: 55,
                   decoration: ShapeDecoration(
-                    color: const Color(0xffB6B8BF).withOpacity(0.5),
+                    color: isDark
+                        ? const Color(0xFF03174C).withOpacity(0.5)
+                        : const Color(0xffB6B8BF).withOpacity(0.5),
                     shape: const CircleBorder(),
                   ),
                   child: IconButton(
@@ -121,7 +213,9 @@ class _SoundPlayerState extends State<SoundPlayer>
                     width: 55,
                     height: 55,
                     decoration: ShapeDecoration(
-                      color: const Color(0xffB6B8BF).withOpacity(0.5),
+                      color: isDark
+                          ? const Color(0xFF03174C).withOpacity(0.5)
+                          : const Color(0xffB6B8BF).withOpacity(0.5),
                       shape: const CircleBorder(),
                     ),
                     child: IconButton(
@@ -135,7 +229,7 @@ class _SoundPlayerState extends State<SoundPlayer>
                     )),
               ],
             ),
-          ), // title and play music
+          ),
           // title and play
           Positioned(
             bottom: MediaQuery.of(context).size.height * .2,
@@ -149,7 +243,9 @@ class _SoundPlayerState extends State<SoundPlayer>
                   style: TextStyle(
                       fontSize: 34.0,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xff3F414E)),
+                      color: isDark
+                          ? const Color(0xFFE6E7F2)
+                          : const Color(0xff3F414E)),
                 ),
                 // Play Type
                 Padding(
@@ -159,7 +255,9 @@ class _SoundPlayerState extends State<SoundPlayer>
                     style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xffA0A3B1)),
+                        color: isDark
+                            ? const Color(0xFF98A1BD)
+                            : const Color(0xffA0A3B1)),
                   ),
                 ),
                 // Play buttons
@@ -172,7 +270,9 @@ class _SoundPlayerState extends State<SoundPlayer>
                       IconButton(
                           icon: Icon(
                             Icons.fast_rewind,
-                            color: Color(0xffA0A3B1),
+                            color: isDark
+                                ? const Color(0xFFE6E7F2)
+                                : const Color(0xffA0A3B1),
                             size: 30.0,
                           ),
                           onPressed: () {}),
@@ -187,19 +287,25 @@ class _SoundPlayerState extends State<SoundPlayer>
                         decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(100)),
-                            color: Color(0xffBABCC6)),
+                            color: isDark
+                                ? const Color(0xffBABCC6).withOpacity(.5)
+                                : const Color(0xffBABCC6)),
                         child: InkWell(
                           child: Container(
                             margin: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(100)),
-                                color: Color(0xff3F414E)),
+                                color: isDark
+                                    ? const Color(0xFFE6E7F2)
+                                    : const Color(0xff3F414E)),
                             child: Center(
                               child: AnimatedIcon(
                                 icon: AnimatedIcons.play_pause,
                                 progress: _animationController,
-                                color: Color(0xffFBFBFB),
+                                color: isDark
+                                    ? const Color(0xFF3F414E)
+                                    : const Color(0xffFBFBFB),
                                 size: 50.0,
                               ),
                             ),
@@ -211,7 +317,9 @@ class _SoundPlayerState extends State<SoundPlayer>
                       IconButton(
                           icon: Icon(
                             Icons.fast_forward,
-                            color: Color(0xffA0A3B1),
+                            color: isDark
+                                ? const Color(0xFFE6E7F2)
+                                : const Color(0xffA0A3B1),
                             size: 30.0,
                           ),
                           onPressed: () {})
@@ -227,8 +335,12 @@ class _SoundPlayerState extends State<SoundPlayer>
                       min: 0,
                       max: musicSeconds,
                       value: _sliderValue,
-                      activeColor: Color(0xff3F414E),
-                      inactiveColor: Color(0xffA0A3B1),
+                      activeColor: isDark
+                          ? const Color(0xFFE6E7F2)
+                          : const Color(0xff3F414E),
+                      inactiveColor: isDark
+                          ? const Color(0xFF47557E)
+                          : const Color(0xffA0A3B1),
                       onChanged: (value) {
                         setState(() {
                           _sliderValue = value;
@@ -244,9 +356,21 @@ class _SoundPlayerState extends State<SoundPlayer>
                     textDirection: TextDirection.ltr,
                     child: Row(
                       children: [
-                        Text(_secondToMinuteFormatter(_sliderValue)),
+                        Text(
+                          _secondToMinuteFormatter(_sliderValue),
+                          style: TextStyle(
+                              color: isDark
+                                  ? const Color(0xFFE6E7F2)
+                                  : Colors.black),
+                        ),
                         Expanded(child: Container()),
-                        Text('02:00'),
+                        Text(
+                          '02:00',
+                          style: TextStyle(
+                              color: isDark
+                                  ? const Color(0xFFE6E7F2)
+                                  : Colors.black),
+                        ),
                       ],
                     ),
                   ),

@@ -1,6 +1,9 @@
 import 'package:SilentMoon/data/model/recent_changes_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RecentChanges extends StatefulWidget {
   @override
@@ -8,9 +11,18 @@ class RecentChanges extends StatefulWidget {
 }
 
 class _RecentChangesState extends State<RecentChanges> {
+  bool isDark;
   List<RecentChangesModel> changesList = [
+    RecentChangesModel(version: '0.0.3 alpha', changes: ['Night/Day Mode']),
+    RecentChangesModel(version: '0.0.2 alpha', changes: ['Accessibility']),
     RecentChangesModel(version: '0.0.1 alpha', changes: ['UI completed']),
   ];
+
+  @override
+  void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +30,15 @@ class _RecentChangesState extends State<RecentChanges> {
       appBar: AppBar(
         title: Text(
           S.of(context).recentchanges,
-          style: TextStyle(color: const Color(0xff3F414E)),
+          style: TextStyle(
+              color:
+                  isDark ? const Color(0xFFE6E7F2) : const Color(0xff3F414E)),
         ),
-        iconTheme: IconThemeData(color: const Color(0xff3F414E)),
+        iconTheme: IconThemeData(
+            color: isDark ? const Color(0xFFE6E7F2) : const Color(0xff3F414E)),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.grey[50],
+        backgroundColor: isDark ? const Color(0xFF03174C) : Colors.grey[50],
       ),
       body: Directionality(
         textDirection: TextDirection.ltr,
@@ -44,13 +59,17 @@ class _RecentChangesState extends State<RecentChanges> {
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(100)),
-                              color: const Color(0xff3F414E)),
+                              color: isDark
+                                  ? const Color(0xFFE6E7F2)
+                                  : const Color(0xff3F414E)),
                         ),
                         // vertical line
                         Container(
-                          height: changesList[index].changes.length * 30.0,
+                          height: changesList[index].changes.length * 50.0,
                           width: 2.0,
-                          color: const Color(0xff3F414E),
+                          color: isDark
+                              ? const Color(0xFFE6E7F2)
+                              : const Color(0xff3F414E),
                         ),
                       ],
                     ),
@@ -62,11 +81,16 @@ class _RecentChangesState extends State<RecentChanges> {
                           padding: EdgeInsets.only(left: 10.0),
                           child: Text(
                             'version ${changesList[index].version}',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: isDark
+                                    ? const Color(0xFFE6E7F2)
+                                    : const Color(0xFF3F414E)),
                           ),
                         ),
                         Container(
-                          height: changesList[index].changes.length * 30.0,
+                          height: changesList[index].changes.length * 40.0,
                           width: MediaQuery.of(context).size.width * .8,
                           padding: EdgeInsets.only(left: 20.0, top: 10.0),
                           child: ListView.builder(
@@ -77,7 +101,13 @@ class _RecentChangesState extends State<RecentChanges> {
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 5.0),
                                   child: Text(
-                                      changesList[index].changes[subIndex]),
+                                    '${changesList[index].changes[subIndex]}',
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: isDark
+                                            ? const Color(0xFFE6E7F2)
+                                            : const Color(0xFF3F414E)),
+                                  ),
                                 );
                               }),
                         )

@@ -1,6 +1,9 @@
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:SilentMoon/widget/profile_btn.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutUs extends StatefulWidget {
@@ -9,18 +12,28 @@ class AboutUs extends StatefulWidget {
 }
 
 class _AboutUsState extends State<AboutUs> {
+  bool isDark;
+  @override
+  void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
           S.of(context).aboutUs,
-          style: TextStyle(color: const Color(0xff3F414E)),
+          style: TextStyle(
+              color:
+                  isDark ? const Color(0xFFE6E7F2) : const Color(0xff3F414E)),
         ),
-        iconTheme: IconThemeData(color: const Color(0xff3F414E)),
+        iconTheme: IconThemeData(
+            color: isDark ? const Color(0xFFE6E7F2) : const Color(0xff3F414E)),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.grey[50],
+        backgroundColor: isDark ? const Color(0xFF03174C) : Colors.grey[50],
       ),
       body: ListView(
         children: [
@@ -28,7 +41,11 @@ class _AboutUsState extends State<AboutUs> {
             padding: const EdgeInsets.all(15.0),
             child: Text(
               S.of(context).aboutUsDesc,
-              style: TextStyle(fontSize: 14.0),
+              style: TextStyle(
+                  fontSize: 14.0,
+                  color: isDark
+                      ? const Color(0xFFE6E7F2)
+                      : const Color(0xff3F414E)),
             ),
           ),
           Directionality(

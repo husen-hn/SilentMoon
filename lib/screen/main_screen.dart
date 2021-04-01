@@ -1,11 +1,14 @@
+import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/home.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/meditate.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/music.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/profile.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/sleep.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:SilentMoon/widget/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
@@ -44,6 +47,9 @@ class _MainScreenState extends State<MainScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    bool isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+
     return Scaffold(
       body: _selectedIndex == 0
           ? Home()
@@ -57,6 +63,9 @@ class _MainScreenState extends State<MainScreen> {
                           ? Profile()
                           : Container(),
       bottomNavigationBar: NavigationBar(
+        selectedItemColor:
+            isDark ? const Color(0xFFE6E7F2) : const Color(0xff8E97FD),
+        bgColor: isDark ? const Color(0xFF03174D) : Colors.white,
         onTap: this._onTap,
       ),
     );

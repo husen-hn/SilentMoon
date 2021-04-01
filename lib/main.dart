@@ -1,22 +1,42 @@
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:SilentMoon/route_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(SilentMoonApp());
-}
+void main() => runApp(SilentMoonApp());
 
-class SilentMoonApp extends StatefulWidget {
+class SilentMoonApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: SharedPreferences.getInstance(),
+        builder:
+            (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
+          if (snapshot.hasData) {
+            return ChangeNotifierProvider<ThemeChanger>(
+              create: (_) => ThemeChanger(snapshot.data),
+              child: new SilentMoonAppWithTheme(),
+            );
+          } else {
+            return Container();
+          }
+        });
+  }
 }
 
-class _MyAppState extends State<SilentMoonApp> {
+class SilentMoonAppWithTheme extends StatefulWidget {
+  @override
+  _SilentMoonAppWithThemeState createState() => _SilentMoonAppWithThemeState();
+}
+
+class _SilentMoonAppWithThemeState extends State<SilentMoonAppWithTheme> {
   String lang = '';
 
-  void _getLang() async {
+  _getLang() async {
     try {
       String data = await getLang();
       setState(() {
@@ -36,7 +56,7 @@ class _MyAppState extends State<SilentMoonApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: Theme.of(context).copyWith(accentColor: Color(0xff8E97FD)),
+      theme: Provider.of<ThemeChanger>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,

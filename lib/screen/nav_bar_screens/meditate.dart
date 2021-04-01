@@ -4,8 +4,11 @@ import 'package:SilentMoon/data/model/music_box_model.dart';
 import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 class Meditate extends StatefulWidget {
   @override
@@ -36,9 +39,16 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
     {"name": "Body Scan", "time": "7 MIN"},
   ];
   TabController _nestedTabController;
+  bool isDark;
+  @override
+  void initState() {
+    super.initState();
+    _nestedTabController = new TabController(length: 5, vsync: this);
+  }
 
   @override
   void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
     boxs = [
       {
         "img": "images/meditate_one.png",
@@ -61,13 +71,6 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    _nestedTabController = new TabController(length: 5, vsync: this);
-  }
-
-  @override
   void dispose() {
     super.dispose();
     _nestedTabController.dispose();
@@ -86,7 +89,11 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                 child: Center(
                   child: Text(
                     S.of(context).meditateTitle,
-                    style: TextStyle(fontSize: 28.0, color: Color(0xff3F414E)),
+                    style: TextStyle(
+                        fontSize: 28.0,
+                        color: isDark
+                            ? const Color(0xFFEBEAEC)
+                            : const Color(0xff3F414E)),
                   ),
                 ),
               ),
@@ -98,7 +105,11 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                   child: Text(
                     S.of(context).meditateDesc,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16.0, color: Color(0xffA0A3B1)),
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        color: isDark
+                            ? const Color(0xFFE6E7F2)
+                            : const Color(0xffA0A3B1)),
                   ),
                 ),
               ),
@@ -357,13 +368,17 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                                 BorderRadius.circular(100),
                                             border: Border.all(
                                                 width: 1,
-                                                color: Color(0xffA1A4B2))),
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2))),
                                         child: IconButton(
                                           autofocus: true,
                                           icon: Image(
                                             image:
                                                 AssetImage("images/play.png"),
-                                            color: Color(0xffA1A4B2),
+                                            color: isDark
+                                                ? const Color(0xFFEBEAEC)
+                                                : const Color(0xffA1A4B2),
                                             width: 12.0,
                                           ),
                                           onPressed: () {},
@@ -380,14 +395,18 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                             Text(
                                               musics[index]["name"],
                                               style: TextStyle(
-                                                  color: Color(0xff3F414E),
+                                                  color: isDark
+                                                      ? const Color(0xFFE6E7F2)
+                                                      : const Color(0xff3F414E),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16.0),
                                             ),
                                             Text(
                                               musics[index]["time"],
                                               style: TextStyle(
-                                                  color: Color(0xffA1A4B2),
+                                                  color: isDark
+                                                      ? const Color(0xFF98A1BD)
+                                                      : const Color(0xffA1A4B2),
                                                   fontSize: 11.0),
                                             )
                                           ],
@@ -400,7 +419,7 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                         context, '/sound_player',
                                         arguments: SoundPlayModel(
                                             title: musics[index]["name"],
-                                            boxTitle: S.of(context).sleep));
+                                            boxTitle: 'Sleep'));
                                   },
                                 ),
                               );
@@ -428,13 +447,17 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                                 BorderRadius.circular(100),
                                             border: Border.all(
                                                 width: 1,
-                                                color: Color(0xffA1A4B2))),
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2))),
                                         child: IconButton(
                                           autofocus: true,
                                           icon: Image(
                                             image:
                                                 AssetImage("images/play.png"),
-                                            color: Color(0xffA1A4B2),
+                                            color: isDark
+                                                ? const Color(0xFFEBEAEC)
+                                                : const Color(0xffA1A4B2),
                                             width: 12.0,
                                           ),
                                           onPressed: () {},
@@ -451,14 +474,18 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                             Text(
                                               musics[index]["name"],
                                               style: TextStyle(
-                                                  color: Color(0xff3F414E),
+                                                  color: isDark
+                                                      ? const Color(0xFFE6E7F2)
+                                                      : const Color(0xff3F414E),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16.0),
                                             ),
                                             Text(
                                               musics[index]["time"],
                                               style: TextStyle(
-                                                  color: Color(0xffA1A4B2),
+                                                  color: isDark
+                                                      ? const Color(0xFF98A1BD)
+                                                      : const Color(0xffA1A4B2),
                                                   fontSize: 11.0),
                                             )
                                           ],
@@ -471,7 +498,7 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                         context, '/sound_player',
                                         arguments: SoundPlayModel(
                                             title: musics[index]["name"],
-                                            boxTitle: S.of(context).sleep));
+                                            boxTitle: 'Sleep'));
                                   },
                                 ),
                               );
@@ -499,13 +526,17 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                                 BorderRadius.circular(100),
                                             border: Border.all(
                                                 width: 1,
-                                                color: Color(0xffA1A4B2))),
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2))),
                                         child: IconButton(
                                           autofocus: true,
                                           icon: Image(
                                             image:
                                                 AssetImage("images/play.png"),
-                                            color: Color(0xffA1A4B2),
+                                            color: isDark
+                                                ? const Color(0xFFEBEAEC)
+                                                : const Color(0xffA1A4B2),
                                             width: 12.0,
                                           ),
                                           onPressed: () {},
@@ -522,14 +553,18 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                             Text(
                                               musics[index]["name"],
                                               style: TextStyle(
-                                                  color: Color(0xff3F414E),
+                                                  color: isDark
+                                                      ? const Color(0xFFE6E7F2)
+                                                      : const Color(0xff3F414E),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16.0),
                                             ),
                                             Text(
                                               musics[index]["time"],
                                               style: TextStyle(
-                                                  color: Color(0xffA1A4B2),
+                                                  color: isDark
+                                                      ? const Color(0xFF98A1BD)
+                                                      : const Color(0xffA1A4B2),
                                                   fontSize: 11.0),
                                             )
                                           ],
@@ -542,7 +577,7 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                         context, '/sound_player',
                                         arguments: SoundPlayModel(
                                             title: musics[index]["name"],
-                                            boxTitle: S.of(context).sleep));
+                                            boxTitle: 'Sleep'));
                                   },
                                 ),
                               );
@@ -570,13 +605,17 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                                 BorderRadius.circular(100),
                                             border: Border.all(
                                                 width: 1,
-                                                color: Color(0xffA1A4B2))),
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2))),
                                         child: IconButton(
                                           autofocus: true,
                                           icon: Image(
                                             image:
                                                 AssetImage("images/play.png"),
-                                            color: Color(0xffA1A4B2),
+                                            color: isDark
+                                                ? const Color(0xFFEBEAEC)
+                                                : const Color(0xffA1A4B2),
                                             width: 12.0,
                                           ),
                                           onPressed: () {},
@@ -593,14 +632,18 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                             Text(
                                               musics[index]["name"],
                                               style: TextStyle(
-                                                  color: Color(0xff3F414E),
+                                                  color: isDark
+                                                      ? const Color(0xFFE6E7F2)
+                                                      : const Color(0xff3F414E),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16.0),
                                             ),
                                             Text(
                                               musics[index]["time"],
                                               style: TextStyle(
-                                                  color: Color(0xffA1A4B2),
+                                                  color: isDark
+                                                      ? const Color(0xFF98A1BD)
+                                                      : const Color(0xffA1A4B2),
                                                   fontSize: 11.0),
                                             )
                                           ],
@@ -613,12 +656,12 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                         context, '/sound_player',
                                         arguments: SoundPlayModel(
                                             title: musics[index]["name"],
-                                            boxTitle: S.of(context).sleep));
+                                            boxTitle: 'Sleep'));
                                   },
                                 ),
                               );
                             }),
-                      ),
+                      )
                     ]),
               )
             ],

@@ -1,9 +1,12 @@
 import 'package:SilentMoon/data/model/music_box_model.dart';
 import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:SilentMoon/widget/banner_box.dart';
 import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,6 +14,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool isDark;
+
+  @override
+  void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     // used in Recomended List
@@ -49,7 +60,9 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                       fontSize: 18.0,
                       letterSpacing: 2.0,
-                      color: Color(0xff3F414E),
+                      color: isDark
+                          ? const Color(0xFFE6E7F2)
+                          : const Color(0xff3F414E),
                       fontWeight: FontWeight.bold),
                 ),
                 Padding(
@@ -58,7 +71,8 @@ class _HomeState extends State<Home> {
                     width: MediaQuery.of(context).size.width * .1,
                     height: MediaQuery.of(context).size.height * .1,
                     child: Image(
-                      image: AssetImage("images/logo.png"),
+                      image: AssetImage(
+                          isDark ? "images/logo_two.png" : "images/logo.png"),
                     ),
                   ),
                 ),
@@ -67,7 +81,9 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                       fontSize: 18.0,
                       letterSpacing: 2.0,
-                      color: Color(0xff3F414E),
+                      color: isDark
+                          ? const Color(0xFFE6E7F2)
+                          : const Color(0xff3F414E),
                       fontWeight: FontWeight.bold),
                 ),
               ],
@@ -86,7 +102,9 @@ class _HomeState extends State<Home> {
               style: TextStyle(
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff3F414E))),
+                  color: isDark
+                      ? const Color(0xFF586894)
+                      : const Color(0xff3F414E))),
         ),
         Padding(
           padding: const EdgeInsets.only(
@@ -95,7 +113,11 @@ class _HomeState extends State<Home> {
               night.contains(DateTime.now().hour)
                   ? S.of(context).weWishNight
                   : S.of(context).weWishDay,
-              style: TextStyle(fontSize: 20.0, color: Color(0xffA1A4B2))),
+              style: TextStyle(
+                  fontSize: 20.0,
+                  color: isDark
+                      ? const Color(0xFFE6E7F2)
+                      : const Color(0xffA1A4B2))),
         ),
         // Basics & Relaxation
         Padding(
@@ -238,7 +260,9 @@ class _HomeState extends State<Home> {
               style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff3F414E))),
+                  color: isDark
+                      ? const Color(0xFFE6E7F2)
+                      : const Color(0xff3F414E))),
         ),
         Container(
           height: MediaQuery.of(context).size.height * .3,
@@ -250,16 +274,20 @@ class _HomeState extends State<Home> {
             itemBuilder: (BuildContext context, int index) {
               return MusicBox(
                 darkMood: false,
-                bgColor: Colors.grey[50],
+                bgColor: isDark ? const Color(0xFF03174C) : Colors.grey[50],
                 imgLocalPath: musicBoxs[index].img,
                 imgBg: musicBoxs[index].bgColor,
                 title: musicBoxs[index].title,
-                titleColor: Color(0xff3F414E),
+                titleColor:
+                    isDark ? const Color(0xFFE6E7F2) : const Color(0xff3F414E),
                 time: musicBoxs[index].time,
-                timeColor: Color(0xffA1A4B2),
-                dotColor: Color(0xffA1A4B2),
+                timeColor:
+                    isDark ? const Color(0xFF98A1BD) : const Color(0xffA1A4B2),
+                dotColor:
+                    isDark ? const Color(0xFF98A1BD) : const Color(0xffA1A4B2),
                 type: musicBoxs[index].type,
-                typeColor: Color(0xffA1A4B2),
+                typeColor:
+                    isDark ? const Color(0xFF98A1BD) : const Color(0xffA1A4B2),
                 onTap: this._musicBoxTap,
               );
             },

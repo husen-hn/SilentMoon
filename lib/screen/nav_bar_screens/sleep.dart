@@ -2,9 +2,13 @@ import 'package:SilentMoon/data/model/music_box_model.dart';
 import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:SilentMoon/widget/banner_night.dart';
 import 'package:SilentMoon/widget/music_box.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'dart:math' as Math;
 
 class Sleep extends StatefulWidget {
   @override
@@ -25,31 +29,33 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
     {"name": "Body Scan", "time": "7 MIN"},
   ];
   TabController _nestedTabController;
+  bool isDark;
 
   @override
   void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
     musicBoxs = [
       MusicBoxModel(
           "images/sleep_grid_banner_one.png",
-          Color(0xfff8bbd0),
+          const Color(0xfff8bbd0),
           S.of(context).sleepMusicBoxTitle,
           S.of(context).sleepMusicBoxTime,
           S.of(context).sleepMusicBoxType),
       MusicBoxModel(
           "images/sleep_grid_banner_two.png",
-          Color(0xffAFDBC5),
+          const Color(0xffAFDBC5),
           S.of(context).sleepMusicBoxTitle,
           S.of(context).sleepMusicBoxTime,
           S.of(context).sleepMusicBoxType),
       MusicBoxModel(
           "images/sleep_grid_banner_three.png",
-          Color(0xffFFC97E),
+          const Color(0xffFFC97E),
           S.of(context).sleepMusicBoxTitle,
           S.of(context).sleepMusicBoxTime,
           S.of(context).sleepMusicBoxType),
       MusicBoxModel(
           "images/sleep_grid_banner_four.png",
-          Color(0xffFFC97E),
+          const Color(0xffFFC97E),
           S.of(context).sleepMusicBoxTitle,
           S.of(context).sleepMusicBoxTime,
           S.of(context).sleepMusicBoxType),
@@ -60,7 +66,6 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-
     _nestedTabController = new TabController(length: 5, vsync: this);
   }
 
@@ -85,408 +90,587 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
               fit: BoxFit.contain,
             ),
           ),
-          child: Column(
+          child: Stack(
             children: [
-              // Title
-              Container(
-                margin: EdgeInsets.only(top: 70),
-                child: Center(
-                  child: Text(
-                    S.of(context).sleepTitle,
-                    style: TextStyle(fontSize: 28.0, color: Color(0xffE6E7F2)),
+              // Moon
+              Positioned(
+                top: 10.0,
+                left: 30.0,
+                child: Transform.rotate(
+                  angle: 5.0,
+                  child: Image(
+                    image: AssetImage('images/moon.png'),
+                    width: 70,
                   ),
                 ),
               ),
-              // Description
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 10.0),
-                child: Center(
-                  child: Text(
-                    S.of(context).sleepDesc,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16.0, color: Color(0xffEBEAEC)),
+              // Moon shadow
+              Positioned(
+                top: -10.0,
+                left: 50.0,
+                child: Transform.rotate(
+                  angle: 5.0,
+                  child: Image(
+                    image: AssetImage('images/moon_shadow.png'),
+                    width: 70,
                   ),
                 ),
               ),
-              // Tabbar
-              TabBar(
-                  controller: _nestedTabController,
-                  indicatorColor: Colors.transparent,
-                  isScrollable: true,
-                  physics: BouncingScrollPhysics(),
-                  tabs: [
-                    _horizonListViewItem(
-                        imgAsset: "images/all.png",
-                        title: S.of(context).sleepTabAll,
-                        bgColor: Color(0xff586894),
-                        titleColor: Color(0xff98A1BD)),
-                    _horizonListViewItem(
-                        imgAsset: "images/favorite.png",
-                        title: S.of(context).sleepTabMy,
-                        bgColor: Color(0xff586894),
-                        titleColor: Color(0xff98A1BD)),
-                    _horizonListViewItem(
-                        imgAsset: "images/anxious.png",
-                        title: S.of(context).sleepTabAnxious,
-                        bgColor: Color(0xff586894),
-                        titleColor: Color(0xff98A1BD)),
-                    _horizonListViewItem(
-                        imgAsset: "images/sleep_tab.png",
-                        title: S.of(context).sleepTabSleep,
-                        bgColor: Color(0xff586894),
-                        titleColor: Color(0xff98A1BD)),
-                    _horizonListViewItem(
-                        imgAsset: "images/kids.png",
-                        title: S.of(context).sleepTabKids,
-                        bgColor: Color(0xff586894),
-                        titleColor: Color(0xff98A1BD)),
-                  ]),
-              // Tabs Contents
-              Container(
-                //TODO set height size
-                height: MediaQuery.of(context).size.height * .85,
-                child: TabBarView(
-                    controller: _nestedTabController,
-                    physics: BouncingScrollPhysics(),
-                    children: [
-                      // Tab One (All)
-                      ListView(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+              // Star
+              Positioned(
+                top: 80.0,
+                left: 20.0,
+                child: Transform.rotate(
+                  angle: Math.pi / 180 * 180,
+                  child: Image(
+                    image: AssetImage('images/star.png'),
+                    width: 20,
+                  ),
+                ),
+              ),
+              // Star
+              Positioned(
+                top: 120.0,
+                left: 10.0,
+                child: Transform.rotate(
+                  angle: Math.pi / 180 * 180,
+                  child: Image(
+                    image: AssetImage('images/star.png'),
+                    width: 10,
+                    color: const Color(0xFF6D75B0),
+                  ),
+                ),
+              ),
+              // Star
+              Positioned(
+                top: 110.0,
+                left: 30.0,
+                child: Transform.rotate(
+                  angle: Math.pi / 180 * 180,
+                  child: Image(
+                    image: AssetImage('images/star.png'),
+                    width: 10,
+                    color: const Color(0xFF6D75B0),
+                  ),
+                ),
+              ),
+              // Star
+              Positioned(
+                top: 100.0,
+                right: 20.0,
+                child: Transform.rotate(
+                  angle: Math.pi / 180 * 180,
+                  child: Image(
+                    image: AssetImage('images/star.png'),
+                    width: 10,
+                    color: const Color(0xFF6D75B0),
+                  ),
+                ),
+              ),
+              // Star
+              Positioned(
+                top: 60.0,
+                right: 40.0,
+                child: Transform.rotate(
+                  angle: Math.pi / 180 * 90,
+                  child: Image(
+                    image: AssetImage('images/star.png'),
+                    width: 15,
+                  ),
+                ),
+              ),
+              // Star
+              Positioned(
+                top: 10.0,
+                right: 50.0,
+                child: Transform.rotate(
+                  angle: Math.pi / 180 * 180,
+                  child: Image(
+                    image: AssetImage('images/star.png'),
+                    width: 18,
+                    color: const Color(0xFF6D75B0),
+                  ),
+                ),
+              ),
+              Column(
+                children: [
+                  // Title
+
+                  Container(
+                    margin: EdgeInsets.only(top: 70),
+                    child: Center(
+                      child: Text(
+                        S.of(context).sleepTitle,
+                        style: TextStyle(
+                            fontSize: 28.0, color: const Color(0xFFE6E7F2)),
+                      ),
+                    ),
+                  ),
+                  // Description
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 50.0, right: 50.0, top: 10.0),
+                    child: Center(
+                      child: Text(
+                        S.of(context).sleepDesc,
+                        textAlign: TextAlign.center,
+                        style:
+                            TextStyle(fontSize: 16.0, color: Color(0xffEBEAEC)),
+                      ),
+                    ),
+                  ),
+                  // Tabbar
+                  TabBar(
+                      controller: _nestedTabController,
+                      indicatorColor: Colors.transparent,
+                      isScrollable: true,
+                      physics: BouncingScrollPhysics(),
+                      tabs: [
+                        _horizonListViewItem(
+                            imgAsset: "images/all.png",
+                            title: S.of(context).sleepTabAll,
+                            bgColor: Color(0xff586894),
+                            titleColor: Color(0xff98A1BD)),
+                        _horizonListViewItem(
+                            imgAsset: "images/favorite.png",
+                            title: S.of(context).sleepTabMy,
+                            bgColor: Color(0xff586894),
+                            titleColor: Color(0xff98A1BD)),
+                        _horizonListViewItem(
+                            imgAsset: "images/anxious.png",
+                            title: S.of(context).sleepTabAnxious,
+                            bgColor: Color(0xff586894),
+                            titleColor: Color(0xff98A1BD)),
+                        _horizonListViewItem(
+                            imgAsset: "images/sleep_tab.png",
+                            title: S.of(context).sleepTabSleep,
+                            bgColor: Color(0xff586894),
+                            titleColor: Color(0xff98A1BD)),
+                        _horizonListViewItem(
+                            imgAsset: "images/kids.png",
+                            title: S.of(context).sleepTabKids,
+                            bgColor: Color(0xff586894),
+                            titleColor: Color(0xff98A1BD)),
+                      ]),
+                  // Tabs Contents
+                  Container(
+                    //TODO set height size
+                    height: MediaQuery.of(context).size.height * .85,
+                    child: TabBarView(
+                        controller: _nestedTabController,
+                        physics: BouncingScrollPhysics(),
                         children: [
-                          // banner
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20.0,
-                                right: 20.0,
-                                top: 10.0,
-                                bottom: 10.0),
-                            child: BannerNight(
-                              bgImage: AssetImage("images/sleep_banner.png"),
-                              title: S.of(context).sleepBannerNightTitle,
-                              titleColor: Color(0xffFFE7BF),
-                              description: S.of(context).sleepBannerNightDesc,
-                              descriptionColor: Color(0xffF9F9FF),
-                              btnTitle: S.of(context).start,
-                              btnColor: Color(0xffEBEAEC),
-                              btnTxtColor: Color(0xff3F414E),
-                              onTap: this._onBannerNightPress,
-                            ),
-                          ),
-                          // Grid List
-                          GridView.count(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 5,
-                            mainAxisSpacing: 10,
-                            physics: NeverScrollableScrollPhysics(),
+                          // Tab One (All)
+                          ListView(
                             shrinkWrap: true,
-                            padding: EdgeInsets.all(10.0),
-                            children: musicBoxs.map((e) {
-                              return MusicBox(
-                                darkMood: false,
-                                bgColor: Colors.grey[50],
-                                imgLocalPath: e.img,
-                                imgBg: Color(0xff4C53B4),
-                                title: e.title,
-                                titleColor: Color(0xff3F414E),
-                                time: e.time,
-                                timeColor: Color(0xffA1A4B2),
-                                dotColor: Color(0xffA1A4B2),
-                                type: e.type,
-                                typeColor: Color(0xffA1A4B2),
-                                onTap: this._musicBoxTap,
-                              );
-                            }).toList(),
-                          )
-                        ],
-                      ),
-                      // Tab Two (My)
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: musics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
+                            children: [
+                              // banner
+                              Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 20.0, left: 30.0, right: 30.0),
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      // play btn
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: Color(0xffA1A4B2))),
-                                        child: IconButton(
-                                          autofocus: true,
-                                          icon: Image(
-                                            image:
-                                                AssetImage("images/play.png"),
-                                            color: Color(0xffA1A4B2),
-                                            width: 12.0,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      // voice title & time
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              musics[index]["name"],
-                                              style: TextStyle(
-                                                  color: Color(0xff3F414E),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0),
-                                            ),
-                                            Text(
-                                              musics[index]["time"],
-                                              style: TextStyle(
-                                                  color: Color(0xffA1A4B2),
-                                                  fontSize: 11.0),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/sound_player',
-                                        arguments: SoundPlayModel(
-                                            title: musics[index]["name"],
-                                            boxTitle: 'Sleep'));
-                                  },
+                                    left: 20.0,
+                                    right: 20.0,
+                                    top: 10.0,
+                                    bottom: 10.0),
+                                child: BannerNight(
+                                  bgImage:
+                                      AssetImage("images/sleep_banner.png"),
+                                  title: S.of(context).sleepBannerNightTitle,
+                                  titleColor: Color(0xffFFE7BF),
+                                  description:
+                                      S.of(context).sleepBannerNightDesc,
+                                  descriptionColor: Color(0xffF9F9FF),
+                                  btnTitle: S.of(context).start,
+                                  btnColor: Color(0xffEBEAEC),
+                                  btnTxtColor: Color(0xff3F414E),
+                                  onTap: this._onBannerNightPress,
                                 ),
-                              );
-                            }),
-                      ),
-                      // Tab Three (Anxios)
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: musics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20.0, left: 30.0, right: 30.0),
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      // play btn
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: Color(0xffA1A4B2))),
-                                        child: IconButton(
-                                          autofocus: true,
-                                          icon: Image(
-                                            image:
-                                                AssetImage("images/play.png"),
-                                            color: Color(0xffA1A4B2),
-                                            width: 12.0,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      // voice title & time
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              musics[index]["name"],
-                                              style: TextStyle(
-                                                  color: Color(0xff3F414E),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0),
+                              ),
+                              // Grid List
+                              GridView.count(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 5,
+                                mainAxisSpacing: 10,
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                padding: EdgeInsets.all(10.0),
+                                children: musicBoxs.map((e) {
+                                  return MusicBox(
+                                    darkMood: false,
+                                    bgColor: isDark
+                                        ? const Color(0xFF03174C)
+                                        : Colors.grey[50],
+                                    imgLocalPath: e.img,
+                                    imgBg: Color(0xff4C53B4),
+                                    title: e.title,
+                                    titleColor: isDark
+                                        ? const Color(0xFFE6E7F2)
+                                        : const Color(0xff3F414E),
+                                    time: e.time,
+                                    timeColor: isDark
+                                        ? const Color(0xFF98A1BD)
+                                        : const Color(0xffA1A4B2),
+                                    dotColor: isDark
+                                        ? const Color(0xFF98A1BD)
+                                        : const Color(0xffA1A4B2),
+                                    type: e.type,
+                                    typeColor: isDark
+                                        ? const Color(0xFF98A1BD)
+                                        : const Color(0xffA1A4B2),
+                                    onTap: this._musicBoxTap,
+                                  );
+                                }).toList(),
+                              )
+                            ],
+                          ),
+                          // Tab Two (My)
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: musics.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20.0, left: 30.0, right: 30.0),
+                                    child: InkWell(
+                                      child: Row(
+                                        children: [
+                                          // play btn
+                                          Container(
+                                            width: 40.0,
+                                            height: 40.0,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: isDark
+                                                        ? const Color(
+                                                            0xFFEBEAEC)
+                                                        : const Color(
+                                                            0xffA1A4B2))),
+                                            child: IconButton(
+                                              autofocus: true,
+                                              icon: Image(
+                                                image: AssetImage(
+                                                    "images/play.png"),
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2),
+                                                width: 12.0,
+                                              ),
+                                              onPressed: () {},
                                             ),
-                                            Text(
-                                              musics[index]["time"],
-                                              style: TextStyle(
-                                                  color: Color(0xffA1A4B2),
-                                                  fontSize: 11.0),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/sound_player',
-                                        arguments: SoundPlayModel(
-                                            title: musics[index]["name"],
-                                            boxTitle: 'Sleep'));
-                                  },
-                                ),
-                              );
-                            }),
-                      ),
-                      // Tab Four (Sleep)
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: musics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20.0, left: 30.0, right: 30.0),
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      // play btn
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: Color(0xffA1A4B2))),
-                                        child: IconButton(
-                                          autofocus: true,
-                                          icon: Image(
-                                            image:
-                                                AssetImage("images/play.png"),
-                                            color: Color(0xffA1A4B2),
-                                            width: 12.0,
                                           ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      // voice title & time
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              musics[index]["name"],
-                                              style: TextStyle(
-                                                  color: Color(0xff3F414E),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0),
+                                          // voice title & time
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  musics[index]["name"],
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFFE6E7F2)
+                                                          : const Color(
+                                                              0xff3F414E),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16.0),
+                                                ),
+                                                Text(
+                                                  musics[index]["time"],
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFF98A1BD)
+                                                          : const Color(
+                                                              0xffA1A4B2),
+                                                      fontSize: 11.0),
+                                                )
+                                              ],
                                             ),
-                                            Text(
-                                              musics[index]["time"],
-                                              style: TextStyle(
-                                                  color: Color(0xffA1A4B2),
-                                                  fontSize: 11.0),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/sound_player',
-                                        arguments: SoundPlayModel(
-                                            title: musics[index]["name"],
-                                            boxTitle: 'Sleep'));
-                                  },
-                                ),
-                              );
-                            }),
-                      ),
-                      // Tab Five (Kids)
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: musics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20.0, left: 30.0, right: 30.0),
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      // play btn
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: Color(0xffA1A4B2))),
-                                        child: IconButton(
-                                          autofocus: true,
-                                          icon: Image(
-                                            image:
-                                                AssetImage("images/play.png"),
-                                            color: Color(0xffA1A4B2),
-                                            width: 12.0,
                                           ),
-                                          onPressed: () {},
-                                        ),
+                                        ],
                                       ),
-                                      // voice title & time
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              musics[index]["name"],
-                                              style: TextStyle(
-                                                  color: Color(0xff3F414E),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0),
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/sound_player',
+                                            arguments: SoundPlayModel(
+                                                title: musics[index]["name"],
+                                                boxTitle: 'Sleep'));
+                                      },
+                                    ),
+                                  );
+                                }),
+                          ),
+                          // Tab Three (Anxios)
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: musics.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20.0, left: 30.0, right: 30.0),
+                                    child: InkWell(
+                                      child: Row(
+                                        children: [
+                                          // play btn
+                                          Container(
+                                            width: 40.0,
+                                            height: 40.0,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: isDark
+                                                        ? const Color(
+                                                            0xFFEBEAEC)
+                                                        : const Color(
+                                                            0xffA1A4B2))),
+                                            child: IconButton(
+                                              autofocus: true,
+                                              icon: Image(
+                                                image: AssetImage(
+                                                    "images/play.png"),
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2),
+                                                width: 12.0,
+                                              ),
+                                              onPressed: () {},
                                             ),
-                                            Text(
-                                              musics[index]["time"],
-                                              style: TextStyle(
-                                                  color: Color(0xffA1A4B2),
-                                                  fontSize: 11.0),
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                          // voice title & time
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  musics[index]["name"],
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFFE6E7F2)
+                                                          : const Color(
+                                                              0xff3F414E),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16.0),
+                                                ),
+                                                Text(
+                                                  musics[index]["time"],
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFF98A1BD)
+                                                          : const Color(
+                                                              0xffA1A4B2),
+                                                      fontSize: 11.0),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/sound_player',
-                                        arguments: SoundPlayModel(
-                                            title: musics[index]["name"],
-                                            boxTitle: 'Sleep'));
-                                  },
-                                ),
-                              );
-                            }),
-                      ),
-                    ]),
-              )
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/sound_player',
+                                            arguments: SoundPlayModel(
+                                                title: musics[index]["name"],
+                                                boxTitle: 'Sleep'));
+                                      },
+                                    ),
+                                  );
+                                }),
+                          ),
+                          // Tab Four (Sleep)
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: musics.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20.0, left: 30.0, right: 30.0),
+                                    child: InkWell(
+                                      child: Row(
+                                        children: [
+                                          // play btn
+                                          Container(
+                                            width: 40.0,
+                                            height: 40.0,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: isDark
+                                                        ? const Color(
+                                                            0xFFEBEAEC)
+                                                        : const Color(
+                                                            0xffA1A4B2))),
+                                            child: IconButton(
+                                              autofocus: true,
+                                              icon: Image(
+                                                image: AssetImage(
+                                                    "images/play.png"),
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2),
+                                                width: 12.0,
+                                              ),
+                                              onPressed: () {},
+                                            ),
+                                          ),
+                                          // voice title & time
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  musics[index]["name"],
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFFE6E7F2)
+                                                          : const Color(
+                                                              0xff3F414E),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16.0),
+                                                ),
+                                                Text(
+                                                  musics[index]["time"],
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFF98A1BD)
+                                                          : const Color(
+                                                              0xffA1A4B2),
+                                                      fontSize: 11.0),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/sound_player',
+                                            arguments: SoundPlayModel(
+                                                title: musics[index]["name"],
+                                                boxTitle: 'Sleep'));
+                                      },
+                                    ),
+                                  );
+                                }),
+                          ),
+                          // Tab Five (Kids)
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: musics.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20.0, left: 30.0, right: 30.0),
+                                    child: InkWell(
+                                      child: Row(
+                                        children: [
+                                          // play btn
+                                          Container(
+                                            width: 40.0,
+                                            height: 40.0,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: isDark
+                                                        ? const Color(
+                                                            0xFFEBEAEC)
+                                                        : const Color(
+                                                            0xffA1A4B2))),
+                                            child: IconButton(
+                                              autofocus: true,
+                                              icon: Image(
+                                                image: AssetImage(
+                                                    "images/play.png"),
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2),
+                                                width: 12.0,
+                                              ),
+                                              onPressed: () {},
+                                            ),
+                                          ),
+                                          // voice title & time
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  musics[index]["name"],
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFFE6E7F2)
+                                                          : const Color(
+                                                              0xff3F414E),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16.0),
+                                                ),
+                                                Text(
+                                                  musics[index]["time"],
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFF98A1BD)
+                                                          : const Color(
+                                                              0xffA1A4B2),
+                                                      fontSize: 11.0),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/sound_player',
+                                            arguments: SoundPlayModel(
+                                                title: musics[index]["name"],
+                                                boxTitle: 'Sleep'));
+                                      },
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ]),
+                  )
+                ],
+              ),
             ],
           ),
         ),

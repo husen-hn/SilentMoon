@@ -1,6 +1,9 @@
 import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Music extends StatefulWidget {
   @override
@@ -32,10 +35,18 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
     {"name": "Body Scan", "time": "10 MIN"},
   ];
   bool isFavorite = false;
+  bool isDark;
+
   @override
   void initState() {
     _tabController = new TabController(length: 2, vsync: this);
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+    super.didChangeDependencies();
   }
 
   @override
@@ -49,7 +60,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
             data: Theme.of(context).copyWith(
                 accentColor: Color(0xff8E97FD), primaryColor: Colors.white),
             child: SliverAppBar(
-              expandedHeight: 350,
+              expandedHeight: 380,
               automaticallyImplyLeading: false,
               flexibleSpace: FlexibleSpaceBar(
                 background: Column(
@@ -57,14 +68,20 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                   children: [
                     //top image
                     Container(
-                      height: 250.0,
-                      decoration: const BoxDecoration(
+                      height: 270.0,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10)),
+                        color: isDark
+                            ? Color(0xFF03174C)
+                            : Color(0xFFF59D0E).withOpacity(.1),
                         image: DecorationImage(
-                            image: AssetImage("images/man_meditation.png"),
-                            fit: BoxFit.fill),
+                          image: AssetImage(isDark
+                              ? "images/music_night_bg.png"
+                              : "images/what_we_do.png"),
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                     //title & description
@@ -75,7 +92,9 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                         text: TextSpan(
                           text: '${S.of(context).musicTitle}\n',
                           style: TextStyle(
-                              color: Color(0xff3F414E),
+                              color: isDark
+                                  ? const Color(0xFFE6E7F2)
+                                  : const Color(0xff3F414E),
                               fontSize: 34,
                               fontWeight: FontWeight.bold),
                           children: <TextSpan>[
@@ -85,14 +104,19 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                                   height: 3.0,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14.0,
-                                  color: Color(0xffA1A4B2),
+                                  color: isDark
+                                      ? const Color(0xFF98A1BD)
+                                      : const Color(0xffA1A4B2),
                                 )),
                             TextSpan(
                                 text: 'Description',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 13.0,
-                                    color: Color(0xffA1A4B2))),
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 13.0,
+                                  color: isDark
+                                      ? const Color(0xFF98A1BD)
+                                      : const Color(0xffA1A4B2),
+                                )),
                           ],
                         ),
                       ),
@@ -104,18 +128,20 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
           ),
           //TabBar
           Theme(
-            data: Theme.of(context).copyWith(primaryColor: Colors.white),
+            data: Theme.of(context).copyWith(
+                accentColor: Color(0xff8E97FD), primaryColor: Colors.white),
             child: SliverAppBar(
               elevation: 0,
               snap: false,
               pinned: true,
               floating: true,
-              expandedHeight: 0,
               bottom: TabBar(
                 controller: _tabController,
                 isScrollable: false,
-                labelColor: Color(0xff8E97FD),
-                unselectedLabelColor: Color(0xffA1A4B2),
+                labelColor:
+                    isDark ? const Color(0xFF8E97FD) : const Color(0xff8E97FD),
+                unselectedLabelColor:
+                    isDark ? const Color(0xFF98A1BD) : const Color(0xffA1A4B2),
                 indicator: UnderlineTabIndicator(
                     borderSide:
                         BorderSide(width: 2.0, color: Color(0xff8E97FD)),
@@ -135,6 +161,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                   ),
                 ],
               ),
+              expandedHeight: 30,
             ),
           ),
           //Voice & Favorite List
@@ -146,7 +173,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: Container(
-                  color: Colors.white,
+                  color: isDark ? const Color(0xFF03174D) : Colors.white,
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -169,21 +196,20 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
                                       border: Border.all(
-                                          width: 1, color: Color(0xffA1A4B2))),
+                                          width: 1,
+                                          color: isDark
+                                              ? const Color(0xFFEBEAEC)
+                                              : const Color(0xffA1A4B2))),
                                   child: IconButton(
                                     autofocus: true,
                                     icon: Image(
                                       image: AssetImage("images/play.png"),
-                                      color: Color(0xffA1A4B2),
+                                      color: isDark
+                                          ? const Color(0xFFEBEAEC)
+                                          : const Color(0xffA1A4B2),
                                       width: 12.0,
                                     ),
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/sound_player',
-                                          arguments: SoundPlayModel(
-                                              title: musics[index]["name"],
-                                              boxTitle: S.of(context).music));
-                                    },
+                                    onPressed: () {},
                                   ),
                                 ),
                                 // voice title & time
@@ -196,14 +222,18 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                                       Text(
                                         musics[index]["name"],
                                         style: TextStyle(
-                                            color: Color(0xff3F414E),
+                                            color: isDark
+                                                ? const Color(0xFFE6E7F2)
+                                                : const Color(0xff3F414E),
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16.0),
                                       ),
                                       Text(
                                         musics[index]["time"],
                                         style: TextStyle(
-                                            color: Color(0xffA1A4B2),
+                                            color: isDark
+                                                ? const Color(0xFF98A1BD)
+                                                : const Color(0xffA1A4B2),
                                             fontSize: 11.0),
                                       )
                                     ],
@@ -226,7 +256,7 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: Container(
-                  color: Colors.white,
+                  color: isDark ? const Color(0xFF03174D) : Colors.white,
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -246,21 +276,20 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
                                       border: Border.all(
-                                          width: 1, color: Color(0xffA1A4B2))),
+                                          width: 1,
+                                          color: isDark
+                                              ? const Color(0xFFEBEAEC)
+                                              : const Color(0xffA1A4B2))),
                                   child: IconButton(
                                     autofocus: true,
                                     icon: Image(
                                       image: AssetImage("images/play.png"),
-                                      color: Color(0xffA1A4B2),
+                                      color: isDark
+                                          ? const Color(0xFFEBEAEC)
+                                          : const Color(0xffA1A4B2),
                                       width: 12.0,
                                     ),
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/sound_player',
-                                          arguments: SoundPlayModel(
-                                              title: musics[index]["name"],
-                                              boxTitle: S.of(context).music));
-                                    },
+                                    onPressed: () {},
                                   ),
                                 ),
                                 // voice title & time
@@ -271,16 +300,20 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        favMusics[index]["name"],
+                                        musics[index]["name"],
                                         style: TextStyle(
-                                            color: Color(0xff3F414E),
+                                            color: isDark
+                                                ? const Color(0xFFE6E7F2)
+                                                : const Color(0xff3F414E),
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16.0),
                                       ),
                                       Text(
-                                        favMusics[index]["time"],
+                                        musics[index]["time"],
                                         style: TextStyle(
-                                            color: Color(0xffA1A4B2),
+                                            color: isDark
+                                                ? const Color(0xFF98A1BD)
+                                                : const Color(0xffA1A4B2),
                                             fontSize: 11.0),
                                       )
                                     ],

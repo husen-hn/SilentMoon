@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class NavigationBar extends StatefulWidget {
   Color unselectedLabelColor;
   bool showUnselectedLabels;
+  Color selectedItemColor;
   Color bgColor;
   Function onTap;
   NavigationBar(
       {this.unselectedLabelColor = const Color(0xffA0A3B1),
       this.showUnselectedLabels = true,
+      this.selectedItemColor,
       this.bgColor = Colors.white,
       this.onTap});
   @override
@@ -26,8 +28,8 @@ class _NavigationBarState extends State<NavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    // S.of(context).login;
     return BottomNavigationBar(
+      backgroundColor: widget.bgColor,
       showUnselectedLabels: widget.showUnselectedLabels,
       unselectedItemColor: widget.unselectedLabelColor,
       items: <BottomNavigationBarItem>[
@@ -39,7 +41,7 @@ class _NavigationBarState extends State<NavigationBar> {
         btmNvBarItem(icon: "images/profile.png", title: S.of(context).profile),
       ],
       currentIndex: _selectedIndex,
-      selectedItemColor: Color(0xff8E97FD),
+      selectedItemColor: widget.selectedItemColor,
       onTap: _onItemTapped,
     );
   }

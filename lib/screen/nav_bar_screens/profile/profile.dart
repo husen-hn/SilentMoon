@@ -1,11 +1,14 @@
 import 'package:SilentMoon/data/model/language_code.dart';
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:SilentMoon/widget/lang_btn.dart';
 import 'package:SilentMoon/widget/lang_dialog.dart';
 import 'package:SilentMoon/widget/profile_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,9 +18,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  bool _switchValue = false;
   String lang = '';
   bool isRtl = false;
+  bool isDark;
 
   void _getLang() async {
     try {
@@ -37,10 +40,17 @@ class _ProfileState extends State<Profile> {
   }
 
   @override
+  void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (lang == '' || lang == null) {
       lang = 'English';
     }
+    // check rtl/ltr
     if (lang == 'Iran' ||
         lang == 'إيران' ||
         lang == 'ایران' ||
@@ -52,13 +62,16 @@ class _ProfileState extends State<Profile> {
         lang == 'Объединенные Арабские Эмираты') {
       isRtl = true;
     }
+
+    ThemeChanger _themeChanger = Provider.of<ThemeChanger>(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         // Title
         Padding(
-          padding: EdgeInsets.only(top: 30.0),
+          padding: EdgeInsets.only(top: 32.0),
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: Row(
@@ -69,7 +82,9 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(
                       fontSize: 18.0,
                       letterSpacing: 2.0,
-                      color: Color(0xff3F414E),
+                      color: isDark
+                          ? const Color(0xFFE6E7F2)
+                          : const Color(0xff3F414E),
                       fontWeight: FontWeight.bold),
                 ),
                 Padding(
@@ -78,7 +93,8 @@ class _ProfileState extends State<Profile> {
                     width: MediaQuery.of(context).size.width * .1,
                     height: MediaQuery.of(context).size.height * .1,
                     child: Image(
-                      image: AssetImage("images/logo.png"),
+                      image: AssetImage(
+                          isDark ? "images/logo_two.png" : "images/logo.png"),
                     ),
                   ),
                 ),
@@ -87,7 +103,9 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(
                       fontSize: 18.0,
                       letterSpacing: 2.0,
-                      color: Color(0xff3F414E),
+                      color: isDark
+                          ? const Color(0xFFE6E7F2)
+                          : const Color(0xff3F414E),
                       fontWeight: FontWeight.bold),
                 ),
               ],
@@ -104,7 +122,7 @@ class _ProfileState extends State<Profile> {
               fontSize: 12.0,
               height: 1.5,
               letterSpacing: 1,
-              color: Color(0xff3F414E),
+              color: isDark ? const Color(0xFFEBEAEC) : const Color(0xff3F414E),
             ),
           ),
         ), // Introduction
@@ -153,16 +171,17 @@ class _ProfileState extends State<Profile> {
                 Container(
                   height: 30,
                   child: CupertinoSwitch(
-                    value: _switchValue,
-                    activeColor: Color(0xffFFCF86),
-                    trackColor: Color(0xff64637D),
-                    onChanged: (value) {
-                      setState(() {
-                        _switchValue = value;
-                      });
-                    },
-                  ),
-                ),
+                      value:
+                          _themeChanger.getTheme() == lightTheme ? false : true,
+                      activeColor: Color(0xffFFCF86),
+                      trackColor: Color(0xff64637D),
+                      onChanged: (value) {
+                        _themeChanger.setTheme(
+                            _themeChanger.getTheme() == lightTheme
+                                ? darkTheme
+                                : lightTheme);
+                      }),
+                )
               ],
             ),
             style: TextButton.styleFrom(
@@ -172,11 +191,20 @@ class _ProfileState extends State<Profile> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
             ),
             onPressed: () {
-              setState(() {
-                _switchValue = !_switchValue;
-              });
+              _themeChanger.setTheme(_themeChanger.getTheme() == lightTheme
+                  ? darkTheme
+                  : lightTheme);
             },
           ),
+        ),
+        // mediation animation
+        Center(
+          child: MediaQuery.of(context).size.height > 800
+              ? Lottie.asset(
+                  'assets/meditation.json',
+                  height: MediaQuery.of(context).size.height * .3,
+                )
+              : Container(),
         )
       ],
     );
@@ -197,7 +225,7 @@ class _ProfileState extends State<Profile> {
   _langBottomSheet() {
     showModalBottomSheet(
         context: context,
-        backgroundColor: Colors.white,
+        backgroundColor: isDark ? const Color(0xFF03174C) : Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
         ),
@@ -212,7 +240,10 @@ class _ProfileState extends State<Profile> {
                       child: Text(
                     '${S.of(context).chooseLanguage}\n',
                     style: TextStyle(
-                        fontSize: 18.0, color: const Color(0xff3F414E)),
+                        fontSize: 18.0,
+                        color: isDark
+                            ? const Color(0xFFE6E7F2)
+                            : const Color(0xff3F414E)),
                   )),
                   LangBtn(
                     btnTitle: S.of(context).english,

@@ -1,7 +1,10 @@
 import 'package:SilentMoon/data/model/play_list_model.dart';
 import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/provider/theme_changer.dart';
+import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math' as Math;
 
@@ -37,6 +40,7 @@ class _PlayListState extends State<PlayList>
   bool isFavorite = false;
   String lang = '';
   bool isRtl = false;
+  bool isDark;
 
   void _getLang() async {
     try {
@@ -54,6 +58,12 @@ class _PlayListState extends State<PlayList>
     _tabController = new TabController(length: 2, vsync: this);
     _getLang();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+    super.didChangeDependencies();
   }
 
   @override
@@ -87,12 +97,14 @@ class _PlayListState extends State<PlayList>
                       //top image
                       Container(
                         height: 270.0,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(10),
                                 bottomRight: Radius.circular(10)),
                             image: DecorationImage(
-                              image: AssetImage("images/daily_thought.png"),
+                              image: AssetImage(isDark
+                                  ? "images/nightly_thought.png"
+                                  : "images/daily_thought.png"),
                               fit: BoxFit.fitWidth,
                             )),
                         child: Stack(
@@ -151,7 +163,8 @@ class _PlayListState extends State<PlayList>
                                 top: 10.0,
                                 left: 20.0,
                                 child: Image(
-                                  image: AssetImage('images/cloud.png'),
+                                  image: AssetImage(
+                                      isDark ? '' : 'images/cloud.png'),
                                   width: 50,
                                   color: Color(0xff616077).withOpacity(.3),
                                 )),
@@ -160,7 +173,8 @@ class _PlayListState extends State<PlayList>
                                 top: 130.0,
                                 right: 20.0,
                                 child: Image(
-                                  image: AssetImage('images/cloud.png'),
+                                  image: AssetImage(
+                                      isDark ? '' : 'images/cloud.png'),
                                   width: 50,
                                   color: Color(0xff616077).withOpacity(.3),
                                 )),
@@ -170,7 +184,8 @@ class _PlayListState extends State<PlayList>
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 15.0),
                                 child: Image(
-                                  image: AssetImage('images/cloud_top.png'),
+                                  image: AssetImage(
+                                      isDark ? '' : 'images/cloud_top.png'),
                                   width: MediaQuery.of(context).size.width,
                                 ),
                               ),
@@ -201,7 +216,8 @@ class _PlayListState extends State<PlayList>
                               child: Transform.rotate(
                                 angle: 5.0,
                                 child: Image(
-                                  image: AssetImage('images/fin.png'),
+                                  image: AssetImage(
+                                      isDark ? '' : 'images/fin.png'),
                                   width: 70,
                                 ),
                               ),
@@ -212,7 +228,8 @@ class _PlayListState extends State<PlayList>
                               child: Transform.rotate(
                                 angle: 5.5,
                                 child: Image(
-                                  image: AssetImage('images/fin.png'),
+                                  image: AssetImage(
+                                      isDark ? '' : 'images/fin.png'),
                                   width: 70,
                                 ),
                               ),
@@ -223,7 +240,8 @@ class _PlayListState extends State<PlayList>
                               child: Transform.rotate(
                                 angle: 6.3,
                                 child: Image(
-                                  image: AssetImage('images/fin.png'),
+                                  image: AssetImage(
+                                      isDark ? '' : 'images/fin.png'),
                                   width: 70,
                                 ),
                               ),
@@ -239,7 +257,9 @@ class _PlayListState extends State<PlayList>
                           text: TextSpan(
                             text: '${widget.playListArgs.title}\n',
                             style: TextStyle(
-                                color: Color(0xff3F414E),
+                                color: isDark
+                                    ? const Color(0xFFE6E7F2)
+                                    : const Color(0xff3F414E),
                                 fontSize: 34,
                                 fontWeight: FontWeight.bold),
                             children: <TextSpan>[
@@ -249,7 +269,9 @@ class _PlayListState extends State<PlayList>
                                     height: 3.0,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14.0,
-                                    color: Color(0xffA1A4B2),
+                                    color: isDark
+                                        ? const Color(0xFF98A1BD)
+                                        : const Color(0xffA1A4B2),
                                   )),
                               TextSpan(
                                   text: 'Description',
@@ -261,7 +283,9 @@ class _PlayListState extends State<PlayList>
                                   text: '\n\n${S.of(context).narrator}',
                                   style: TextStyle(
                                       fontSize: 20.0,
-                                      color: Color(0xff3F414E))),
+                                      color: isDark
+                                          ? const Color(0xFFE6E7F2)
+                                          : const Color(0xff3F414E))),
                             ],
                           ),
                         ),
@@ -283,8 +307,12 @@ class _PlayListState extends State<PlayList>
                 bottom: TabBar(
                   controller: _tabController,
                   isScrollable: false,
-                  labelColor: Color(0xff8E97FD),
-                  unselectedLabelColor: Color(0xffA1A4B2),
+                  labelColor: isDark
+                      ? const Color(0xFF8E97FD)
+                      : const Color(0xff8E97FD),
+                  unselectedLabelColor: isDark
+                      ? const Color(0xFF98A1BD)
+                      : const Color(0xffA1A4B2),
                   indicator: UnderlineTabIndicator(
                       borderSide:
                           BorderSide(width: 2.0, color: Color(0xff8E97FD)),
@@ -314,7 +342,7 @@ class _PlayListState extends State<PlayList>
               children: [
                 // Voice Tab
                 Container(
-                  color: Colors.white,
+                  color: isDark ? const Color(0xFF03174D) : Colors.white,
                   child: Directionality(
                     textDirection: TextDirection.ltr,
                     child: ListView.builder(
@@ -340,23 +368,19 @@ class _PlayListState extends State<PlayList>
                                             BorderRadius.circular(100),
                                         border: Border.all(
                                             width: 1,
-                                            color: Color(0xffA1A4B2))),
+                                            color: isDark
+                                                ? const Color(0xFFEBEAEC)
+                                                : const Color(0xffA1A4B2))),
                                     child: IconButton(
                                       autofocus: true,
                                       icon: Image(
                                         image: AssetImage("images/play.png"),
-                                        color: Color(0xffA1A4B2),
+                                        color: isDark
+                                            ? const Color(0xFFEBEAEC)
+                                            : const Color(0xffA1A4B2),
                                         width: 12.0,
                                       ),
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/sound_player',
-                                            arguments: SoundPlayModel(
-                                                title: musics[index]["name"],
-                                                boxTitle: widget
-                                                    .playListArgs.title
-                                                    .toString()));
-                                      },
+                                      onPressed: () {},
                                     ),
                                   ),
                                   // voice title & time
@@ -369,14 +393,18 @@ class _PlayListState extends State<PlayList>
                                         Text(
                                           musics[index]["name"],
                                           style: TextStyle(
-                                              color: Color(0xff3F414E),
+                                              color: isDark
+                                                  ? const Color(0xFFE6E7F2)
+                                                  : const Color(0xff3F414E),
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16.0),
                                         ),
                                         Text(
                                           musics[index]["time"],
                                           style: TextStyle(
-                                              color: Color(0xffA1A4B2),
+                                              color: isDark
+                                                  ? const Color(0xFF98A1BD)
+                                                  : const Color(0xffA1A4B2),
                                               fontSize: 11.0),
                                         )
                                       ],
@@ -398,7 +426,7 @@ class _PlayListState extends State<PlayList>
                 ),
                 // Favorite Tab
                 Container(
-                  color: Colors.white,
+                  color: isDark ? const Color(0xFF03174D) : Colors.white,
                   child: Directionality(
                     textDirection: TextDirection.ltr,
                     child: ListView.builder(
@@ -421,23 +449,19 @@ class _PlayListState extends State<PlayList>
                                             BorderRadius.circular(100),
                                         border: Border.all(
                                             width: 1,
-                                            color: Color(0xffA1A4B2))),
+                                            color: isDark
+                                                ? const Color(0xFFEBEAEC)
+                                                : const Color(0xffA1A4B2))),
                                     child: IconButton(
                                       autofocus: true,
                                       icon: Image(
                                         image: AssetImage("images/play.png"),
-                                        color: Color(0xffA1A4B2),
+                                        color: isDark
+                                            ? const Color(0xFFEBEAEC)
+                                            : const Color(0xffA1A4B2),
                                         width: 12.0,
                                       ),
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/sound_player',
-                                            arguments: SoundPlayModel(
-                                                title: musics[index]["name"],
-                                                boxTitle: widget
-                                                    .playListArgs.title
-                                                    .toString()));
-                                      },
+                                      onPressed: () {},
                                     ),
                                   ),
                                   // voice title & time
@@ -448,16 +472,20 @@ class _PlayListState extends State<PlayList>
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          favMusics[index]["name"],
+                                          musics[index]["name"],
                                           style: TextStyle(
-                                              color: Color(0xff3F414E),
+                                              color: isDark
+                                                  ? const Color(0xFFE6E7F2)
+                                                  : const Color(0xff3F414E),
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16.0),
                                         ),
                                         Text(
-                                          favMusics[index]["time"],
+                                          musics[index]["time"],
                                           style: TextStyle(
-                                              color: Color(0xffA1A4B2),
+                                              color: isDark
+                                                  ? const Color(0xFF98A1BD)
+                                                  : const Color(0xffA1A4B2),
                                               fontSize: 11.0),
                                         )
                                       ],
