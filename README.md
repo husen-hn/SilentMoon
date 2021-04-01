@@ -24,14 +24,11 @@ Feel free to Fork, edit, then pull!
 * [ ] MVVM
 * [ ] BloC
 * [x] Accessibility
-* [ ] Provider
-* [ ] Dark Mode
+* [x] Provider
+* [x] Dark Mode
 * [ ] Animation
 * [ ] Google Sign in
 * [ ] Notification
-
-<!-- ## Download ⇣
-[<img src="preview/get-cafebazaar.webp" alt="Download from Cafebazaar" height="50">](https://cafebazaar.ir/app/com.husen.android.bitgram) [<img src="preview/direct-apk-download.webp" alt="Direct apk download"  height="51.5">](https://github.com/husen-hn/Bitgram/releases/latest) -->
 
 ## License ©
 ```
