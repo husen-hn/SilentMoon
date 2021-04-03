@@ -1,21 +1,20 @@
 import 'dart:ui';
 
-import 'package:SilentMoon/model/sound_play_model.dart';
+import 'package:SilentMoon/model/player_model.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SoundPlayer extends StatefulWidget {
-  final SoundPlayModel soundPlayArgs;
+class Player extends StatefulWidget {
+  final PlayerModel soundPlayArgs;
 
-  SoundPlayer({@required this.soundPlayArgs});
+  Player({@required this.soundPlayArgs});
   @override
-  _SoundPlayerState createState() => _SoundPlayerState();
+  _PlayerState createState() => _PlayerState();
 }
 
-class _SoundPlayerState extends State<SoundPlayer>
-    with SingleTickerProviderStateMixin {
+class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
   bool _isFavorite = false;
   AnimationController _animationController;
   bool _isPlaying = false;

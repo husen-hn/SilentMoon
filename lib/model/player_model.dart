@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-class SoundPlayModel {
+class PlayerModel {
   final String title;
   final String boxTitle;
 
-  SoundPlayModel({@required this.title, @required this.boxTitle});
+  PlayerModel({@required this.title, @required this.boxTitle});
 }

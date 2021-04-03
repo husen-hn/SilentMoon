@@ -1,6 +1,6 @@
 import 'package:SilentMoon/model/music_box_model.dart';
 import 'package:SilentMoon/model/play_list_model.dart';
-import 'package:SilentMoon/model/sound_play_model.dart';
+import 'package:SilentMoon/model/player_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
@@ -195,7 +195,6 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
               Column(
                 children: [
                   // Title
-
                   Container(
                     margin: EdgeInsets.only(top: 70),
                     child: Center(
@@ -401,7 +400,7 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, '/sound_player',
-                                            arguments: SoundPlayModel(
+                                            arguments: PlayerModel(
                                                 title: musics[index]["name"],
                                                 boxTitle: 'Sleep'));
                                       },
@@ -487,7 +486,7 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, '/sound_player',
-                                            arguments: SoundPlayModel(
+                                            arguments: PlayerModel(
                                                 title: musics[index]["name"],
                                                 boxTitle: 'Sleep'));
                                       },
@@ -573,7 +572,7 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, '/sound_player',
-                                            arguments: SoundPlayModel(
+                                            arguments: PlayerModel(
                                                 title: musics[index]["name"],
                                                 boxTitle: 'Sleep'));
                                       },
@@ -659,7 +658,7 @@ class _SleepState extends State<Sleep> with TickerProviderStateMixin {
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, '/sound_player',
-                                            arguments: SoundPlayModel(
+                                            arguments: PlayerModel(
                                                 title: musics[index]["name"],
                                                 boxTitle: 'Sleep'));
                                       },
