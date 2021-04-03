@@ -5,7 +5,7 @@ import 'package:SilentMoon/screen/nav_bar_screens/music.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/profile.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/sleep.dart';
 import 'package:SilentMoon/theme/style.dart';
-import 'package:SilentMoon/widget/navigation_bar.dart';
+import 'package:SilentMoon/component/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

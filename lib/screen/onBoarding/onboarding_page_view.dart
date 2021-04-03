@@ -1,6 +1,6 @@
-import 'package:SilentMoon/screen/nav_bar_screens/profile/onBoarding/introduction_user_brings.dart';
-import 'package:SilentMoon/screen/nav_bar_screens/profile/onBoarding/introduction_welcome.dart';
-import 'package:SilentMoon/screen/nav_bar_screens/profile/onBoarding/introduction_what_we_do.dart';
+import 'package:SilentMoon/screen/onBoarding/introduction_user_brings.dart';
+import 'package:SilentMoon/screen/onBoarding/introduction_welcome.dart';
+import 'package:SilentMoon/screen/onBoarding/introduction_what_we_do.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingPageView extends StatefulWidget {

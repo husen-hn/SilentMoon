@@ -1,10 +1,10 @@
-import 'package:SilentMoon/data/model/language_code.dart';
+import 'package:SilentMoon/model/language_code.dart';
 import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
-import 'package:SilentMoon/widget/lang_btn.dart';
-import 'package:SilentMoon/widget/lang_dialog.dart';
-import 'package:SilentMoon/widget/profile_btn.dart';
+import 'package:SilentMoon/component/lang_btn.dart';
+import 'package:SilentMoon/component/lang_dialog.dart';
+import 'package:SilentMoon/component/profile_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

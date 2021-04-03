@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:SilentMoon/data/model/sound_play_model.dart';
+import 'package:SilentMoon/model/sound_play_model.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';

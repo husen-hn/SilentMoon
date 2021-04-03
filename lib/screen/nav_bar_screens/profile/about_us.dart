@@ -1,7 +1,7 @@
 import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
-import 'package:SilentMoon/widget/profile_btn.dart';
+import 'package:SilentMoon/component/profile_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';

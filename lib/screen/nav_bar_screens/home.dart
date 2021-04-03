@@ -1,10 +1,10 @@
-import 'package:SilentMoon/data/model/music_box_model.dart';
-import 'package:SilentMoon/data/model/play_list_model.dart';
+import 'package:SilentMoon/model/music_box_model.dart';
+import 'package:SilentMoon/model/play_list_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
-import 'package:SilentMoon/widget/banner_box.dart';
-import 'package:SilentMoon/widget/music_box.dart';
+import 'package:SilentMoon/component/banner_box.dart';
+import 'package:SilentMoon/component/music_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

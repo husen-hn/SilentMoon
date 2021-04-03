@@ -1,9 +1,7 @@
-import 'package:SilentMoon/data/model/play_list_model.dart';
-import 'package:SilentMoon/data/model/sound_play_model.dart';
 import 'package:SilentMoon/main.dart';
 import 'package:SilentMoon/screen/main_screen.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/about_us.dart';
-import 'package:SilentMoon/screen/nav_bar_screens/profile/onBoarding/onboarding_page_view.dart';
+import 'package:SilentMoon/screen/onBoarding/onboarding_page_view.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/recent_changes.dart';
 import 'package:SilentMoon/screen/play_list.dart';
 import 'package:SilentMoon/screen/sound_player.dart';

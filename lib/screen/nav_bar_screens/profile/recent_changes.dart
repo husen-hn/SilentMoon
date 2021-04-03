@@ -1,4 +1,4 @@
-import 'package:SilentMoon/data/model/recent_changes_model.dart';
+import 'package:SilentMoon/model/recent_changes_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';

@@ -1,4 +1,4 @@
-import 'package:SilentMoon/data/model/user_brings_model.dart';
+import 'package:SilentMoon/model/user_brings_model.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionUserBrings extends StatefulWidget {
