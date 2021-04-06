@@ -1,4 +1,5 @@
 import 'package:SilentMoon/main.dart';
+import 'package:SilentMoon/screen/audio.dart';
 import 'package:SilentMoon/screen/main_screen.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/about_us.dart';
 import 'package:SilentMoon/screen/onBoarding/onboarding_page_view.dart';
@@ -30,7 +31,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OnBoardingPageView());
       case '/sound_player':
         return MaterialPageRoute(
-            builder: (_) => Player(
+            builder: (_) =>
+                // Audio()
+                Player(
                   soundPlayArgs: arguament,
                 ));
 

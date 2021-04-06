@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:audioplayers/audioplayers.dart';
 import 'package:SilentMoon/model/player_model.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
@@ -15,9 +15,15 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
+  AudioPlayer _audioplayer = AudioPlayer();
+  bool _isPlaying = false;
+  bool _played = false;
+  bool _isPlayingIcon = false;
+  bool _finished = false;
+  String _currenttime = "0:00:00";
+  String _completetime = "0:00:00";
   bool _isFavorite = false;
   AnimationController _animationController;
-  bool _isPlaying = false;
   double _sliderValue = 0;
   double musicSeconds = 120;
   bool isDark;
@@ -37,6 +43,31 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    _audioplayer.onAudioPositionChanged.listen((Duration duration) {
+      setState(() {
+        _currenttime = duration.toString().split(".")[0];
+        _sliderValue = _timeToSecondFormatter(duration.toString().split(".")[0])
+            .toDouble();
+      });
+    });
+    _audioplayer.onDurationChanged.listen((Duration duration) {
+      setState(() {
+        _completetime = duration.toString().split(".")[0];
+        musicSeconds = _timeToSecondFormatter(duration.toString().split(".")[0])
+            .toDouble();
+      });
+    });
+
+    //check if is audio finished?
+    if (_sliderValue == musicSeconds && _finished == false) {
+      _isPlaying = false;
+      _played = false;
+      _handleOnPlayPressed();
+      setState(() {
+        _finished == true;
+      });
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -172,6 +203,7 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                         width: 18.0,
                       ),
                       onPressed: () {
+                        _audioplayer.stop();
                         Navigator.pop(context);
                       },
                     )),
@@ -309,7 +341,37 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                               ),
                             ),
                           ),
-                          onTap: () => _handleOnPlayPressed(),
+                          onTap: () async {
+                            /** 
+                             * in the first time if u press btn : start to load music (check with _isPlaying)
+                             * in the second time if again press btn : resume/pause music (check with _played)
+                            */
+                            if (_isPlaying) {
+                              if (_played) {
+                                await _audioplayer.pause();
+                                setState(() {
+                                  _played = false;
+                                });
+                              } else {
+                                await _audioplayer.resume();
+                                setState(() {
+                                  _played = true;
+                                });
+                              }
+                            } else {
+                              int status = await _audioplayer.play(
+                                  "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3",
+                                  stayAwake: true);
+                              if (status == 1) {
+                                setState(() {
+                                  _isPlaying = true;
+                                  _played = true;
+                                  _finished = false;
+                                });
+                              }
+                            }
+                            _handleOnPlayPressed();
+                          },
                         ),
                       ),
                       // forward btn
@@ -341,9 +403,9 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                           ? const Color(0xFF47557E)
                           : const Color(0xffA0A3B1),
                       onChanged: (value) {
-                        setState(() {
-                          _sliderValue = value;
-                        });
+                        // setState(() {
+                        //   _sliderValue = value;
+                        // });
                       },
                     ),
                   ),
@@ -356,7 +418,8 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                     child: Row(
                       children: [
                         Text(
-                          _secondToMinuteFormatter(_sliderValue),
+                          // _secondToMinuteFormatter(_sliderValue),
+                          _currenttime,
                           style: TextStyle(
                               color: isDark
                                   ? const Color(0xFFE6E7F2)
@@ -364,7 +427,7 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                         ),
                         Expanded(child: Container()),
                         Text(
-                          '02:00',
+                          _completetime,
                           style: TextStyle(
                               color: isDark
                                   ? const Color(0xFFE6E7F2)
@@ -384,17 +447,22 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
 
   _handleOnPlayPressed() {
     setState(() {
-      _isPlaying = !_isPlaying;
-      _isPlaying
+      _isPlayingIcon = !_isPlayingIcon;
+      _isPlayingIcon
           ? _animationController.forward()
           : _animationController.reverse();
     });
   }
 
-  String _secondToMinuteFormatter(double seconds) {
-    String minutes = (seconds / 60).truncate().toString().padLeft(2, '0');
-    String second = (seconds.toInt() % 60).toString().padLeft(2, '0');
+  int _timeToSecondFormatter(String duration) {
+    List<String> times = duration.split(":");
 
-    return '$minutes:$second';
+    final int seconds = Duration(
+            hours: int.parse(times[0]),
+            minutes: int.parse(times[1]),
+            seconds: int.parse(times[2]))
+        .inSeconds;
+
+    return seconds;
   }
 }
