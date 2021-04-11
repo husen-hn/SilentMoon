@@ -1,5 +1,5 @@
+import 'package:SilentMoon/bloc/player_bloc.dart';
 import 'package:SilentMoon/main.dart';
-import 'package:SilentMoon/screen/audio.dart';
 import 'package:SilentMoon/screen/main_screen.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/about_us.dart';
 import 'package:SilentMoon/screen/onBoarding/onboarding_page_view.dart';
@@ -8,6 +8,7 @@ import 'package:SilentMoon/screen/play_list.dart';
 import 'package:SilentMoon/screen/player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -31,11 +32,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OnBoardingPageView());
       case '/sound_player':
         return MaterialPageRoute(
-            builder: (_) =>
-                // Audio()
-                Player(
+            builder: (_) => BlocProvider<PlayerBloc>(
+                create: (BuildContext context) => PlayerBloc(),
+                child: Player(
                   soundPlayArgs: arguament,
-                ));
+                )));
 
       default:
         return MaterialPageRoute(builder: (_) => MainScreen());
