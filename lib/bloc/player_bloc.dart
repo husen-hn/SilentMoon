@@ -50,6 +50,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     });
 
     _audioplayer.onPlayerCompletion.listen((event) {
+      _isPlaying = false;
       add(Completion(
           currentTime: _currenttime,
           completeTime: _completetime,
@@ -109,7 +110,9 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
               completeTime: _completetime,
               currentSecond: _currentSecond,
               completeSecond: _completeSecond));
+
           int status = await _audioplayer.play(event.url, stayAwake: true);
+
           if (status == 1) {
             _isPlaying = true;
             _played = true;

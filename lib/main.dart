@@ -22,7 +22,9 @@ class SilentMoonApp extends StatelessWidget {
               child: new SilentMoonAppWithTheme(),
             );
           } else {
-            return Container();
+            return Container(
+              color: Colors.white,
+            );
           }
         });
   }

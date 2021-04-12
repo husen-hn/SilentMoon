@@ -6,6 +6,7 @@ import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class Player extends StatefulWidget {
@@ -378,14 +379,21 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                                   ? const Color(0xFFE6E7F2)
                                   : const Color(0xff3F414E)),
                           child: Center(
-                            child: AnimatedIcon(
-                              icon: AnimatedIcons.play_pause,
-                              progress: _animationController,
-                              color: isDark
-                                  ? const Color(0xFF3F414E)
-                                  : const Color(0xffFBFBFB),
-                              size: 50.0,
-                            ),
+                            child: isLoading
+                                ? Lottie.asset(
+                                    isDark
+                                        ? 'assets/loading_music_in_dark.json'
+                                        : 'assets/loading_music_in_light.json',
+                                    height: 50.0,
+                                  )
+                                : AnimatedIcon(
+                                    icon: AnimatedIcons.play_pause,
+                                    progress: _animationController,
+                                    color: isDark
+                                        ? const Color(0xFF3F414E)
+                                        : const Color(0xffFBFBFB),
+                                    size: 50.0,
+                                  ),
                           ),
                         ),
                         onTap: () async {
