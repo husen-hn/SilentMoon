@@ -1,13 +1,23 @@
+import 'dart:io';
+
 import 'package:SilentMoon/generated/l10n.dart';
+import 'package:SilentMoon/model/audio.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
-import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:SilentMoon/route_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(SilentMoonApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+  Hive.registerAdapter(AudioAdapter());
+  runApp(SilentMoonApp());
+}
 
 class SilentMoonApp extends StatelessWidget {
   @override

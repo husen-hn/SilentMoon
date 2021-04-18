@@ -85,3 +85,8 @@ class PlayerError extends PlayerState {
     @required this.message,
   });
 }
+
+class FavoriteChecking extends PlayerState {
+  final bool isFav;
+  FavoriteChecking(this.isFav);
+}

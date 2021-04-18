@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:SilentMoon/bloc/player_bloc.dart';
+import 'package:SilentMoon/bloc/player_bloc/player_bloc.dart';
 import 'package:ftoast/ftoast.dart';
 import 'package:SilentMoon/model/player_model.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
@@ -21,7 +21,6 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
   bool _isFavorite = false;
   AnimationController _animationController;
   bool isDark;
-  String audioUrl;
 
   @override
   void initState() {
@@ -38,7 +37,6 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    audioUrl = "https://www.bensound.com/bensound-music/bensound-clearday.mp3";
     return Scaffold(
         body: BlocConsumer<PlayerBloc, PlayerState>(builder: (context, state) {
       if (state is PlayerInitial) {
@@ -88,7 +86,9 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
             completeSecond: 120);
       }
     }, listener: (context, state) {
-      if (state is PlayerError) {
+      if (state is FavoriteChecking) {
+        _isFavorite = state.isFav;
+      } else if (state is PlayerError) {
         FToast.toast(
           context,
           msg: "Warning",
@@ -278,9 +278,8 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                   ),
                   onPressed: () {
                     setState(() {
-                      _isFavorite == false
-                          ? _isFavorite = true
-                          : _isFavorite = false;
+                      _setPlayerEvent(context,
+                          SetFavorite(widget.soundPlayArgs, _isFavorite));
                     });
                   },
                 ),
@@ -397,7 +396,8 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                           ),
                         ),
                         onTap: () async {
-                          _setPlayerEvent(context, Play(audioUrl));
+                          _setPlayerEvent(
+                              context, Play(widget.soundPlayArgs.url));
                         },
                       ),
                     ),

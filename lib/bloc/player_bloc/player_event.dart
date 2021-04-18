@@ -44,3 +44,14 @@ class Error extends PlayerEvent {
   final String message;
   Error({@required this.message});
 }
+
+class CheckFavorite extends PlayerEvent {
+  final PlayerModel audioInfo;
+  CheckFavorite(this.audioInfo);
+}
+
+class SetFavorite extends PlayerEvent {
+  final PlayerModel audioInfo;
+  final bool isFav;
+  SetFavorite(this.audioInfo, this.isFav);
+}

@@ -1,9 +1,12 @@
+import 'package:SilentMoon/model/audio.dart';
 import 'package:SilentMoon/model/play_list_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/model/player_model.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math' as Math;
@@ -34,13 +37,18 @@ class _PlayListState extends State<PlayList>
     {"name": "Body Scan", "time": "7 MIN"},
     {"name": "Body Scan1", "time": "7 MIN"},
   ];
-  List<Map> favMusics = [
-    {"name": "Body Scan", "time": "10 MIN"},
-  ];
-  bool isFavorite = false;
+
   String lang = '';
   bool isRtl = false;
   bool isDark;
+  List<Audio> listFavAudio = [];
+
+  void getAudios() async {
+    final box = await Hive.openBox<Audio>('${widget.playListArgs.title}Fav');
+    setState(() {
+      listFavAudio = box.values.toList();
+    });
+  }
 
   void _getLang() async {
     try {
@@ -57,6 +65,7 @@ class _PlayListState extends State<PlayList>
   void initState() {
     _tabController = new TabController(length: 2, vsync: this);
     _getLang();
+    getAudios();
     super.initState();
   }
 
@@ -417,8 +426,10 @@ class _PlayListState extends State<PlayList>
                               Navigator.pushNamed(context, '/sound_player',
                                   arguments: PlayerModel(
                                       title: musics[index]["name"],
-                                      boxTitle: widget.playListArgs.title
-                                          .toString()));
+                                      boxTitle:
+                                          widget.playListArgs.title.toString(),
+                                      url:
+                                          'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
                             },
                           );
                         }),
@@ -429,80 +440,89 @@ class _PlayListState extends State<PlayList>
                   color: isDark ? const Color(0xFF03174D) : Colors.white,
                   child: Directionality(
                     textDirection: TextDirection.ltr,
-                    child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: favMusics.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  bottom: 10, left: 10, top: 10),
-                              child: Row(
-                                children: [
-                                  // play btn
-                                  Container(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        border: Border.all(
-                                            width: 1,
+                    child: listFavAudio.isEmpty
+                        ? Center(
+                            child: Lottie.asset(
+                              'assets/meditating_lady.json',
+                              height: 350.0,
+                            ),
+                          )
+                        : ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: listFavAudio.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 10, left: 10, top: 10),
+                                  child: Row(
+                                    children: [
+                                      // play btn
+                                      Container(
+                                        width: 40.0,
+                                        height: 40.0,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            border: Border.all(
+                                                width: 1,
+                                                color: isDark
+                                                    ? const Color(0xFFEBEAEC)
+                                                    : const Color(0xffA1A4B2))),
+                                        child: IconButton(
+                                          autofocus: true,
+                                          icon: Image(
+                                            image:
+                                                AssetImage("images/play.png"),
                                             color: isDark
                                                 ? const Color(0xFFEBEAEC)
-                                                : const Color(0xffA1A4B2))),
-                                    child: IconButton(
-                                      autofocus: true,
-                                      icon: Image(
-                                        image: AssetImage("images/play.png"),
-                                        color: isDark
-                                            ? const Color(0xFFEBEAEC)
-                                            : const Color(0xffA1A4B2),
-                                        width: 12.0,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  // voice title & time
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          musics[index]["name"],
-                                          style: TextStyle(
-                                              color: isDark
-                                                  ? const Color(0xFFE6E7F2)
-                                                  : const Color(0xff3F414E),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16.0),
+                                                : const Color(0xffA1A4B2),
+                                            width: 12.0,
+                                          ),
+                                          onPressed: () {},
                                         ),
-                                        Text(
-                                          musics[index]["time"],
-                                          style: TextStyle(
-                                              color: isDark
-                                                  ? const Color(0xFF98A1BD)
-                                                  : const Color(0xffA1A4B2),
-                                              fontSize: 11.0),
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                      // voice title & time
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              listFavAudio[index].audioName,
+                                              style: TextStyle(
+                                                  color: isDark
+                                                      ? const Color(0xFFE6E7F2)
+                                                      : const Color(0xff3F414E),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16.0),
+                                            ),
+                                            Text(
+                                              listFavAudio[index].audioName,
+                                              style: TextStyle(
+                                                  color: isDark
+                                                      ? const Color(0xFF98A1BD)
+                                                      : const Color(0xffA1A4B2),
+                                                  fontSize: 11.0),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.pushNamed(context, '/sound_player',
-                                  arguments: PlayerModel(
-                                      title: musics[index]["name"],
-                                      boxTitle: widget.playListArgs.title
-                                          .toString()));
-                            },
-                          );
-                        }),
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: PlayerModel(
+                                          title: listFavAudio[index].audioName,
+                                          boxTitle: widget.playListArgs.title
+                                              .toString()));
+                                },
+                              );
+                            }),
                   ),
                 ),
               ],

@@ -201,8 +201,8 @@ class _ProfileState extends State<Profile> {
         Center(
           child: MediaQuery.of(context).size.height > 800
               ? Lottie.asset(
-                  'assets/meditation.json',
-                  height: MediaQuery.of(context).size.height * .3,
+                  'assets/meditating_lady.json',
+                  height: 350.0,
                 )
               : Container(),
         )

@@ -1,4 +1,4 @@
-import 'package:SilentMoon/bloc/player_bloc.dart';
+import 'package:SilentMoon/bloc/player_bloc/player_bloc.dart';
 import 'package:SilentMoon/main.dart';
 import 'package:SilentMoon/screen/main_screen.dart';
 import 'package:SilentMoon/screen/nav_bar_screens/profile/about_us.dart';
@@ -33,7 +33,8 @@ class RouteGenerator {
       case '/sound_player':
         return MaterialPageRoute(
             builder: (_) => BlocProvider<PlayerBloc>(
-                create: (BuildContext context) => PlayerBloc(),
+                create: (BuildContext context) =>
+                    PlayerBloc()..add(CheckFavorite(arguament)),
                 child: Player(
                   soundPlayArgs: arguament,
                 )));

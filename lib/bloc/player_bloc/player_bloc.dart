@@ -1,15 +1,16 @@
 import 'dart:async';
 
+import 'package:SilentMoon/model/audio.dart';
+import 'package:SilentMoon/model/player_model.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 
 part 'player_event.dart';
 part 'player_state.dart';
 
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
-  PlayerBloc() : super(PlayerInitial());
-
   AudioPlayer _audioplayer = AudioPlayer();
 
   bool _isPlaying = false;
@@ -20,6 +21,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   String _completetime = "0:00:00";
   int _currentSecond = 0;
   int _completeSecond = 120;
+
+  PlayerBloc() : super(PlayerInitial());
   @override
   Stream<PlayerState> mapEventToState(
     PlayerEvent event,
@@ -161,6 +164,32 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
       }
     } else if (event is Error) {
       yield PlayerError(message: event.message);
+    }
+    // check the audio is favorite or not
+    else if (event is CheckFavorite) {
+      var box = await Hive.openBox<Audio>('${event.audioInfo.boxTitle}Fav');
+
+      List _audio = box.values
+          .where((item) => item.audioName == event.audioInfo.title)
+          .toList();
+
+      yield _audio.isEmpty ? FavoriteChecking(false) : FavoriteChecking(true);
+    }
+    // set audio to favorite list and if right now exist on this list so delete it from list.
+    else if (event is SetFavorite) {
+      var box = await Hive.openBox<Audio>('${event.audioInfo.boxTitle}Fav');
+
+      if (event.isFav) {
+        List _audio = box.values
+            .where((item) => item.audioName == event.audioInfo.title)
+            .toList();
+        _audio[0].delete();
+      } else {
+        Audio _audio = Audio(
+            audioName: event.audioInfo.title, audioUrl: event.audioInfo.url);
+        box.add(_audio);
+      }
+      yield FavoriteChecking(!event.isFav);
     }
   }
 
