@@ -8,13 +8,14 @@ class PlayerInitial extends PlayerState {
   final String completeTime;
   final int currentSecond;
   final int completeSecond;
+  final bool isFavorite;
 
-  PlayerInitial({
-    this.currentTime = "0:00:00",
-    this.completeTime = "0:00:00",
-    this.currentSecond = 0,
-    this.completeSecond = 120,
-  });
+  PlayerInitial(
+      {this.currentTime = "0:00:00",
+      this.completeTime = "0:00:00",
+      this.currentSecond = 0,
+      this.completeSecond = 120,
+      this.isFavorite = false});
 }
 
 class PlayerLoading extends PlayerState {
@@ -22,13 +23,14 @@ class PlayerLoading extends PlayerState {
   final String completeTime;
   final int currentSecond;
   final int completeSecond;
+  final bool isFavorite;
 
-  PlayerLoading({
-    @required this.currentTime,
-    @required this.completeTime,
-    @required this.currentSecond,
-    @required this.completeSecond,
-  });
+  PlayerLoading(
+      {@required this.currentTime,
+      @required this.completeTime,
+      @required this.currentSecond,
+      @required this.completeSecond,
+      this.isFavorite = false});
 }
 
 class PlayerRunning extends PlayerState {
@@ -38,6 +40,7 @@ class PlayerRunning extends PlayerState {
   final int completeSecond;
   final bool isComplete;
   final bool isPlaying;
+  final bool isFavorite;
 
   PlayerRunning(
       {@required this.currentTime,
@@ -45,7 +48,8 @@ class PlayerRunning extends PlayerState {
       @required this.currentSecond,
       @required this.completeSecond,
       @required this.isComplete,
-      this.isPlaying = false});
+      this.isPlaying = false,
+      this.isFavorite = false});
 }
 
 class PlayerPause extends PlayerState {
@@ -53,13 +57,14 @@ class PlayerPause extends PlayerState {
   final String completeTime;
   final int currentSecond;
   final int completeSecond;
+  final bool isFavorite;
 
-  PlayerPause({
-    @required this.currentTime,
-    @required this.completeTime,
-    @required this.currentSecond,
-    @required this.completeSecond,
-  });
+  PlayerPause(
+      {@required this.currentTime,
+      @required this.completeTime,
+      @required this.currentSecond,
+      @required this.completeSecond,
+      this.isFavorite = false});
 }
 
 class PlayerResume extends PlayerState {
@@ -67,13 +72,14 @@ class PlayerResume extends PlayerState {
   final String completeTime;
   final int currentSecond;
   final int completeSecond;
+  final bool isFavorite;
 
-  PlayerResume({
-    @required this.currentTime,
-    @required this.completeTime,
-    @required this.currentSecond,
-    @required this.completeSecond,
-  });
+  PlayerResume(
+      {@required this.currentTime,
+      @required this.completeTime,
+      @required this.currentSecond,
+      @required this.completeSecond,
+      this.isFavorite = false});
 }
 
 class PlayerStop extends PlayerState {}
@@ -87,6 +93,19 @@ class PlayerError extends PlayerState {
 }
 
 class FavoriteChecking extends PlayerState {
-  final bool isFav;
-  FavoriteChecking(this.isFav);
+  final String currentTime;
+  final String completeTime;
+  final int currentSecond;
+  final int completeSecond;
+  final bool isComplete;
+  final bool isPlaying;
+  final bool isFavorite;
+  FavoriteChecking(
+      {@required this.currentTime,
+      @required this.completeTime,
+      @required this.currentSecond,
+      @required this.completeSecond,
+      @required this.isComplete,
+      this.isPlaying = false,
+      this.isFavorite = false});
 }

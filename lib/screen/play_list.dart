@@ -2,6 +2,7 @@ import 'package:SilentMoon/model/audio.dart';
 import 'package:SilentMoon/model/play_list_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
 import 'package:SilentMoon/model/player_model.dart';
+import 'package:SilentMoon/provider/favorite.dart';
 import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
@@ -65,13 +66,13 @@ class _PlayListState extends State<PlayList>
   void initState() {
     _tabController = new TabController(length: 2, vsync: this);
     _getLang();
-    getAudios();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
     isDark = Provider.of<ThemeChanger>(context).getTheme() == darkTheme;
+    getAudios();
     super.didChangeDependencies();
   }
 
@@ -515,11 +516,16 @@ class _PlayListState extends State<PlayList>
                                   ),
                                 ),
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/sound_player',
-                                      arguments: PlayerModel(
-                                          title: listFavAudio[index].audioName,
-                                          boxTitle: widget.playListArgs.title
-                                              .toString()));
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/sound_player',
+                                    arguments: PlayerModel(
+                                        title: listFavAudio[index].audioName,
+                                        boxTitle: widget.playListArgs.title
+                                            .toString(),
+                                        url:
+                                            'https://www.bensound.com/bensound-music/bensound-clearday.mp3'),
+                                  );
                                 },
                               );
                             }),

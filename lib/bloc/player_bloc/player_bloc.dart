@@ -16,6 +16,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   bool _isPlaying = false;
   bool _played = false;
   bool _isComplete = false;
+  bool _isFavorite = false;
   String _currenttime = "0:00:00";
   String _beforeCurrentTime = "0:00:00";
   String _completetime = "0:00:00";
@@ -59,7 +60,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
           completeTime: _completetime,
           currentSecond: _currentSecond,
           completeSecond: _completeSecond,
-          isComplete: true));
+          isComplete: true,
+          isFavorite: _isFavorite));
     });
 
     _audioplayer.onPlayerError.listen((event) {
@@ -74,6 +76,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
       if (_isPlaying) {
         // pause
         if (_played) {
+          _isPlaying = false;
           try {
             int status = await _audioplayer.pause();
             if (status == 1) {
@@ -82,7 +85,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
                   completeTime: _completetime,
                   currentTime: _currenttime,
                   completeSecond: _completeSecond,
-                  currentSecond: _currentSecond);
+                  currentSecond: _currentSecond,
+                  isFavorite: _isFavorite);
             }
           } catch (e) {
             PlayerError(message: e.toString());
@@ -90,6 +94,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
         }
         // resume
         else {
+          _isPlaying = true;
           try {
             int status = await _audioplayer.resume();
             if (status == 1) {
@@ -98,7 +103,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
                   completeTime: _completetime,
                   currentTime: _currenttime,
                   completeSecond: _completeSecond,
-                  currentSecond: _currentSecond);
+                  currentSecond: _currentSecond,
+                  isFavorite: _isFavorite);
             }
           } catch (e) {
             PlayerError(message: e.toString());
@@ -112,7 +118,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
               currentTime: _currenttime,
               completeTime: _completetime,
               currentSecond: _currentSecond,
-              completeSecond: _completeSecond));
+              completeSecond: _completeSecond,
+              isFavorite: _isFavorite));
 
           int status = await _audioplayer.play(event.url, stayAwake: true);
 
@@ -126,7 +133,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
                 currentSecond: _currentSecond,
                 completeSecond: _completeSecond,
                 isComplete: false,
-                isPlaying: true));
+                isPlaying: true,
+                isFavorite: _isFavorite));
           }
         } catch (e) {
           PlayerError(message: e.toString());
@@ -142,7 +150,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
             currentSecond: event.currentSecond,
             completeSecond: event.completeSecond,
             isComplete: false,
-            isPlaying: true));
+            isPlaying: true,
+            isFavorite: _isFavorite));
       } catch (e) {
         PlayerError(message: e.toString());
       }
@@ -152,7 +161,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
           completeTime: event.completeTime,
           currentSecond: event.currentSecond,
           completeSecond: event.completeSecond,
-          isComplete: event.isComplete);
+          isComplete: event.isComplete,
+          isFavorite: _isFavorite);
     } else if (event is Stop) {
       try {
         int status = await _audioplayer.stop();
@@ -173,7 +183,24 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
           .where((item) => item.audioName == event.audioInfo.title)
           .toList();
 
-      yield _audio.isEmpty ? FavoriteChecking(false) : FavoriteChecking(true);
+      _isFavorite = _audio.isEmpty ? false : true;
+      yield _audio.isEmpty
+          ? FavoriteChecking(
+              completeTime: _completetime,
+              currentTime: _currenttime,
+              completeSecond: _completeSecond,
+              currentSecond: _currentSecond,
+              isComplete: _isComplete,
+              isPlaying: _isPlaying,
+              isFavorite: false)
+          : FavoriteChecking(
+              completeTime: _completetime,
+              currentTime: _currenttime,
+              completeSecond: _completeSecond,
+              currentSecond: _currentSecond,
+              isComplete: _isComplete,
+              isPlaying: _isPlaying,
+              isFavorite: true);
     }
     // set audio to favorite list and if right now exist on this list so delete it from list.
     else if (event is SetFavorite) {
@@ -189,7 +216,15 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
             audioName: event.audioInfo.title, audioUrl: event.audioInfo.url);
         box.add(_audio);
       }
-      yield FavoriteChecking(!event.isFav);
+      _isFavorite = !event.isFav;
+      yield FavoriteChecking(
+          completeTime: _completetime,
+          currentTime: _currenttime,
+          completeSecond: _completeSecond,
+          currentSecond: _currentSecond,
+          isComplete: _isComplete,
+          isPlaying: _isPlaying,
+          isFavorite: !event.isFav);
     }
   }
 

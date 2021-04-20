@@ -18,7 +18,6 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
-  bool _isFavorite = false;
   AnimationController _animationController;
   bool isDark;
 
@@ -39,56 +38,66 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         body: BlocConsumer<PlayerBloc, PlayerState>(builder: (context, state) {
-      if (state is PlayerInitial) {
+      if (state is FavoriteChecking) {
         return _bodyBuilder(
             currentTime: state.currentTime,
             completeTime: state.completeTime,
             currentSecond: state.currentSecond,
-            completeSecond: state.completeSecond);
+            completeSecond: state.completeSecond,
+            isComplete: state.isComplete,
+            isPlaying: state.isPlaying,
+            isFavorite: state.isFavorite);
+      } else if (state is PlayerInitial) {
+        return _bodyBuilder(
+            currentTime: state.currentTime,
+            completeTime: state.completeTime,
+            currentSecond: state.currentSecond,
+            completeSecond: state.completeSecond,
+            isFavorite: state.isFavorite);
       } else if (state is PlayerLoading) {
         return _bodyBuilder(
             isLoading: true,
             currentTime: state.currentTime,
             completeTime: state.completeTime,
             currentSecond: state.currentSecond,
-            completeSecond: state.completeSecond);
+            completeSecond: state.completeSecond,
+            isFavorite: state.isFavorite);
       } else if (state is PlayerRunning) {
         return _bodyBuilder(
-          currentTime: state.currentTime,
-          completeTime: state.completeTime,
-          currentSecond: state.currentSecond,
-          completeSecond: state.completeSecond,
-          isComplete: state.isComplete,
-          isPlaying: state.isPlaying,
-        );
+            currentTime: state.currentTime,
+            completeTime: state.completeTime,
+            currentSecond: state.currentSecond,
+            completeSecond: state.completeSecond,
+            isComplete: state.isComplete,
+            isPlaying: state.isPlaying,
+            isFavorite: state.isFavorite);
       } else if (state is PlayerPause) {
         return _bodyBuilder(
-          completeTime: state.completeTime,
-          currentTime: state.currentTime,
-          completeSecond: state.completeSecond,
-          currentSecond: state.currentSecond,
-          isPause: true,
-        );
+            completeTime: state.completeTime,
+            currentTime: state.currentTime,
+            completeSecond: state.completeSecond,
+            currentSecond: state.currentSecond,
+            isPause: true,
+            isFavorite: state.isFavorite);
       } else if (state is PlayerResume) {
         return _bodyBuilder(
-          completeTime: state.completeTime,
-          currentTime: state.currentTime,
-          completeSecond: state.completeSecond,
-          currentSecond: state.currentSecond,
-          isResume: true,
-        );
+            completeTime: state.completeTime,
+            currentTime: state.currentTime,
+            completeSecond: state.completeSecond,
+            currentSecond: state.currentSecond,
+            isResume: true,
+            isFavorite: state.isFavorite);
       } else {
         return _bodyBuilder(
             isLoading: false,
             currentTime: "0:00:00",
             completeTime: "0:00:00",
             currentSecond: 0,
-            completeSecond: 120);
+            completeSecond: 120,
+            isFavorite: false);
       }
     }, listener: (context, state) {
-      if (state is FavoriteChecking) {
-        _isFavorite = state.isFav;
-      } else if (state is PlayerError) {
+      if (state is PlayerError) {
         FToast.toast(
           context,
           msg: "Warning",
@@ -112,7 +121,8 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
       bool isComplete: false,
       bool isPlaying: false,
       bool isResume: false,
-      bool isPause: false}) {
+      bool isPause: false,
+      bool isFavorite: false}) {
     if (isComplete || isPause) {
       _handlePlayIcon(isPlaying: false);
     } else if (isPlaying || isResume) {
@@ -273,13 +283,13 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
                   autofocus: true,
                   icon: Image(
                     image: AssetImage("images/favorite.png"),
-                    color: _isFavorite ? Colors.pink : Colors.white,
+                    color: isFavorite ? Colors.pink : Colors.white,
                     width: 20.0,
                   ),
                   onPressed: () {
                     setState(() {
                       _setPlayerEvent(context,
-                          SetFavorite(widget.soundPlayArgs, _isFavorite));
+                          SetFavorite(widget.soundPlayArgs, isFavorite));
                     });
                   },
                 ),

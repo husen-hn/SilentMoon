@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:SilentMoon/model/audio.dart';
 import 'package:SilentMoon/model/music_box_model.dart';
 import 'package:SilentMoon/model/play_list_model.dart';
 import 'package:SilentMoon/generated/l10n.dart';
@@ -8,6 +9,8 @@ import 'package:SilentMoon/provider/theme_changer.dart';
 import 'package:SilentMoon/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:hive/hive.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class Meditate extends StatefulWidget {
@@ -40,6 +43,15 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
   ];
   TabController _nestedTabController;
   bool isDark;
+  List<Audio> listFavAudio = [];
+
+  void getAudios(BuildContext cntxt) async {
+    final box = await Hive.openBox<Audio>('${S.of(cntxt).meditate}Fav');
+    setState(() {
+      listFavAudio = box.values.toList();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -67,6 +79,7 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
         "title": S.of(context).meditateBoxAnxiet3,
       }
     ];
+    getAudios(context);
     super.didChangeDependencies();
   }
 
@@ -349,81 +362,99 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                       // Tab Two (My)
                       Directionality(
                         textDirection: TextDirection.ltr,
-                        child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: musics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20.0, left: 30.0, right: 30.0),
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      // play btn
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1,
+                        child: listFavAudio.isEmpty
+                            ? Center(
+                                child: Lottie.asset(
+                                  'assets/meditating_lady.json',
+                                  height: 350.0,
+                                ),
+                              )
+                            : ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: listFavAudio.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20.0, left: 30.0, right: 30.0),
+                                    child: InkWell(
+                                      child: Row(
+                                        children: [
+                                          // play btn
+                                          Container(
+                                            width: 40.0,
+                                            height: 40.0,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: isDark
+                                                        ? const Color(
+                                                            0xFFEBEAEC)
+                                                        : const Color(
+                                                            0xffA1A4B2))),
+                                            child: IconButton(
+                                              autofocus: true,
+                                              icon: Image(
+                                                image: AssetImage(
+                                                    "images/play.png"),
                                                 color: isDark
                                                     ? const Color(0xFFEBEAEC)
-                                                    : const Color(0xffA1A4B2))),
-                                        child: IconButton(
-                                          autofocus: true,
-                                          icon: Image(
-                                            image:
-                                                AssetImage("images/play.png"),
-                                            color: isDark
-                                                ? const Color(0xFFEBEAEC)
-                                                : const Color(0xffA1A4B2),
-                                            width: 12.0,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      // voice title & time
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              musics[index]["name"],
-                                              style: TextStyle(
-                                                  color: isDark
-                                                      ? const Color(0xFFE6E7F2)
-                                                      : const Color(0xff3F414E),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0),
+                                                    : const Color(0xffA1A4B2),
+                                                width: 12.0,
+                                              ),
+                                              onPressed: () {},
                                             ),
-                                            Text(
-                                              musics[index]["time"],
-                                              style: TextStyle(
-                                                  color: isDark
-                                                      ? const Color(0xFF98A1BD)
-                                                      : const Color(0xffA1A4B2),
-                                                  fontSize: 11.0),
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                          // voice title & time
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  listFavAudio[index].audioName,
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFFE6E7F2)
+                                                          : const Color(
+                                                              0xff3F414E),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16.0),
+                                                ),
+                                                Text(
+                                                  listFavAudio[index].audioName,
+                                                  style: TextStyle(
+                                                      color: isDark
+                                                          ? const Color(
+                                                              0xFF98A1BD)
+                                                          : const Color(
+                                                              0xffA1A4B2),
+                                                      fontSize: 11.0),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/sound_player',
-                                        arguments: PlayerModel(
-                                            title: musics[index]["name"],
-                                            boxTitle: 'Sleep'));
-                                  },
-                                ),
-                              );
-                            }),
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/sound_player',
+                                            arguments: PlayerModel(
+                                                title: listFavAudio[index]
+                                                    .audioName,
+                                                boxTitle:
+                                                    S.of(context).meditate,
+                                                url:
+                                                    'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
+                                      },
+                                    ),
+                                  );
+                                }),
                       ),
                       // Tab Three (Anxios)
                       Directionality(
@@ -498,7 +529,9 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                         context, '/sound_player',
                                         arguments: PlayerModel(
                                             title: musics[index]["name"],
-                                            boxTitle: 'Sleep'));
+                                            boxTitle: S.of(context).meditate,
+                                            url:
+                                                'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
                                   },
                                 ),
                               );
@@ -577,7 +610,9 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                         context, '/sound_player',
                                         arguments: PlayerModel(
                                             title: musics[index]["name"],
-                                            boxTitle: 'Sleep'));
+                                            boxTitle: S.of(context).meditate,
+                                            url:
+                                                'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
                                   },
                                 ),
                               );
@@ -656,7 +691,9 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                                         context, '/sound_player',
                                         arguments: PlayerModel(
                                             title: musics[index]["name"],
-                                            boxTitle: 'Sleep'));
+                                            boxTitle: S.of(context).meditate,
+                                            url:
+                                                'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
                                   },
                                 ),
                               );

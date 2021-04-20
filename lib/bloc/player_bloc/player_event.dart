@@ -28,14 +28,15 @@ class Completion extends PlayerEvent {
   final int currentSecond;
   final int completeSecond;
   final bool isComplete;
+  final bool isFavorite;
 
-  Completion({
-    @required this.currentTime,
-    @required this.completeTime,
-    @required this.currentSecond,
-    @required this.completeSecond,
-    @required this.isComplete,
-  });
+  Completion(
+      {@required this.currentTime,
+      @required this.completeTime,
+      @required this.currentSecond,
+      @required this.completeSecond,
+      @required this.isComplete,
+      this.isFavorite = false});
 }
 
 class Stop extends PlayerEvent {}
