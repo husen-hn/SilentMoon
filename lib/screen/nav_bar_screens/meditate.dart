@@ -160,547 +160,529 @@ class _MeditateState extends State<Meditate> with TickerProviderStateMixin {
                         titleColor: Color(0xffA0A3B1)),
                   ]),
               // Tabs Contents
-              Container(
-                //TODO set height size
-                height: MediaQuery.of(context).size.height * .8,
-                child: TabBarView(
-                    controller: _nestedTabController,
-                    physics: BouncingScrollPhysics(),
-                    children: [
-                      // Tab One (All)
-                      ListView(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          // Daily Calm
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 8.0, left: 8.0, right: 8.0),
-                            child: FittedBox(
-                              child: InkWell(
+              TabBarView(
+                  controller: _nestedTabController,
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    // Tab One (All)
+                    ListView(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        // Daily Calm
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                          child: FittedBox(
+                            child: InkWell(
+                              child: Container(
+                                width: 374,
+                                height: 95,
+                                decoration: BoxDecoration(
+                                    color: Color(0xfff9dfce),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "images/daily_calm.png"))),
                                 child: Container(
-                                  width: 374,
-                                  height: 95,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xfff9dfce),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              "images/daily_calm.png"))),
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                        top: 20.0, right: 20.0, left: 20.0),
-                                    child: Row(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              S.of(context).dailyThought,
-                                              style: TextStyle(
-                                                  color:
-                                                      const Color(0xff3F414E),
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  S.of(context).meditate,
-                                                  style: TextStyle(
-                                                      color: const Color(
-                                                          0xff3F414E),
-                                                      fontSize: 14.0),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 5.0,
-                                                          right: 5.0),
-                                                  child: Container(
-                                                    padding:
-                                                        EdgeInsets.all(3.0),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10)),
-                                                      color: const Color(
-                                                          0xff3F414E),
-                                                    ),
+                                  padding: EdgeInsets.only(
+                                      top: 20.0, right: 20.0, left: 20.0),
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            S.of(context).dailyThought,
+                                            style: TextStyle(
+                                                color: const Color(0xff3F414E),
+                                                fontSize: 24.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                S.of(context).meditate,
+                                                style: TextStyle(
+                                                    color:
+                                                        const Color(0xff3F414E),
+                                                    fontSize: 14.0),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 5.0, right: 5.0),
+                                                child: Container(
+                                                  padding: EdgeInsets.all(3.0),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                    color:
+                                                        const Color(0xff3F414E),
                                                   ),
                                                 ),
-                                                Text(
-                                                  S.of(context).meditationTime,
-                                                  style: TextStyle(
-                                                      color: const Color(
-                                                          0xff3F414E),
-                                                      fontSize: 14.0),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        Expanded(child: Container()),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 20.0),
-                                          child: Container(
-                                            decoration: const ShapeDecoration(
-                                              color: const Color(0xff3F414E),
-                                              shape: CircleBorder(),
-                                            ),
-                                            child: IconButton(
-                                              autofocus: true,
-                                              icon: Image(
-                                                image: AssetImage(
-                                                    "images/play.png"),
-                                                width: 12.0,
-                                                color: const Color(0xffF0F1F2),
                                               ),
-                                              onPressed: () {
-                                                Navigator.pushNamed(
-                                                    context, '/play_list',
-                                                    arguments: PlayListModel(
-                                                        title: S
-                                                            .of(context)
-                                                            .dailyThought,
-                                                        type: S
-                                                            .of(context)
-                                                            .meditate));
-                                              },
+                                              Text(
+                                                S.of(context).meditationTime,
+                                                style: TextStyle(
+                                                    color:
+                                                        const Color(0xff3F414E),
+                                                    fontSize: 14.0),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      Expanded(child: Container()),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 20.0),
+                                        child: Container(
+                                          decoration: const ShapeDecoration(
+                                            color: const Color(0xff3F414E),
+                                            shape: CircleBorder(),
+                                          ),
+                                          child: IconButton(
+                                            autofocus: true,
+                                            icon: Image(
+                                              image:
+                                                  AssetImage("images/play.png"),
+                                              width: 12.0,
+                                              color: const Color(0xffF0F1F2),
                                             ),
+                                            onPressed: () {
+                                              Navigator.pushNamed(
+                                                  context, '/play_list',
+                                                  arguments: PlayListModel(
+                                                      title: S
+                                                          .of(context)
+                                                          .dailyThought,
+                                                      type: S
+                                                          .of(context)
+                                                          .meditate));
+                                            },
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.pushNamed(context, '/play_list',
+                                    arguments: PlayListModel(
+                                        title: S.of(context).dailyThought,
+                                        type: S.of(context).meditate));
+                              },
+                            ),
+                          ),
+                        ),
+                        // Voice ListView
+                        Container(
+                            padding: EdgeInsets.only(
+                                top: 30.0, left: 8.0, right: 8.0),
+                            height: 400,
+                            child: StaggeredGridView.countBuilder(
+                              physics: NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              staggeredTileBuilder: (int index) =>
+                                  StaggeredTile.count(2, index.isEven ? 3 : 2),
+                              crossAxisSpacing: 20.0,
+                              mainAxisSpacing: 15.0,
+                              itemCount: boxs.length,
+                              itemBuilder: (BuildContext context, int index) =>
+                                  InkWell(
+                                child:
+                                    // item bg image
+                                    Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15.0)),
+                                      image: DecorationImage(
+                                        image: AssetImage(boxs[index]["img"]),
+                                        fit: BoxFit.fill,
+                                      )),
+                                  child:
+                                      // bottom Title
+                                      Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: Container(
+                                            height: 50,
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(15.0),
+                                                  bottomRight:
+                                                      Radius.circular(15.0)),
+                                              child: BackdropFilter(
+                                                  filter: ImageFilter.blur(
+                                                      sigmaX: 5, sigmaY: 5),
+                                                  child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Text(
+                                                        boxs[index]["title"],
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            letterSpacing: 1.0),
+                                                      ))),
+                                            ),
+                                          )),
                                 ),
                                 onTap: () {
                                   Navigator.pushNamed(context, '/play_list',
                                       arguments: PlayListModel(
-                                          title: S.of(context).dailyThought,
+                                          title: boxs[index]["title"],
                                           type: S.of(context).meditate));
                                 },
                               ),
-                            ),
-                          ),
-                          // Voice ListView
-                          Container(
-                              padding: EdgeInsets.only(
-                                  top: 30.0, left: 8.0, right: 8.0),
-                              height: 400,
-                              child: StaggeredGridView.countBuilder(
-                                physics: NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                staggeredTileBuilder: (int index) =>
-                                    StaggeredTile.count(
-                                        2, index.isEven ? 3 : 2),
-                                crossAxisSpacing: 20.0,
-                                mainAxisSpacing: 15.0,
-                                itemCount: boxs.length,
-                                itemBuilder:
-                                    (BuildContext context, int index) =>
-                                        InkWell(
-                                  child:
-                                      // item bg image
-                                      Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15.0)),
-                                        image: DecorationImage(
-                                          image: AssetImage(boxs[index]["img"]),
-                                          fit: BoxFit.fill,
-                                        )),
-                                    child:
-                                        // bottom Title
-                                        Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: Container(
-                                              height: 50,
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15.0),
-                                                    bottomRight:
-                                                        Radius.circular(15.0)),
-                                                child: BackdropFilter(
-                                                    filter: ImageFilter.blur(
-                                                        sigmaX: 5, sigmaY: 5),
-                                                    child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Text(
-                                                          boxs[index]["title"],
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 18.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              letterSpacing:
-                                                                  1.0),
-                                                        ))),
-                                              ),
-                                            )),
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/play_list',
-                                        arguments: PlayListModel(
-                                            title: boxs[index]["title"],
-                                            type: S.of(context).meditate));
-                                  },
-                                ),
-                              ))
-                        ],
-                      ),
-                      // Tab Two (My)
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: listFavAudio.isEmpty
-                            ? Center(
-                                child: Lottie.asset(
-                                  'assets/meditating_lady.json',
-                                  height: 350.0,
-                                ),
-                              )
-                            : ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: listFavAudio.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 20.0, left: 30.0, right: 30.0),
-                                    child: InkWell(
-                                      child: Row(
-                                        children: [
-                                          // play btn
-                                          Container(
-                                            width: 40.0,
-                                            height: 40.0,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                border: Border.all(
-                                                    width: 1,
+                            ))
+                      ],
+                    ),
+                    // Tab Two (My)
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: listFavAudio.isEmpty
+                          ? Center(
+                              child: Lottie.asset(
+                                'assets/meditating_lady.json',
+                                height: 350.0,
+                              ),
+                            )
+                          : ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: listFavAudio.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 20.0, left: 30.0, right: 30.0),
+                                  child: InkWell(
+                                    child: Row(
+                                      children: [
+                                        // play btn
+                                        Container(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: isDark
+                                                      ? const Color(0xFFEBEAEC)
+                                                      : const Color(
+                                                          0xffA1A4B2))),
+                                          child: IconButton(
+                                            autofocus: true,
+                                            icon: Image(
+                                              image:
+                                                  AssetImage("images/play.png"),
+                                              color: isDark
+                                                  ? const Color(0xFFEBEAEC)
+                                                  : const Color(0xffA1A4B2),
+                                              width: 12.0,
+                                            ),
+                                            onPressed: () {},
+                                          ),
+                                        ),
+                                        // voice title & time
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                listFavAudio[index].audioName,
+                                                style: TextStyle(
                                                     color: isDark
                                                         ? const Color(
-                                                            0xFFEBEAEC)
+                                                            0xFFE6E7F2)
                                                         : const Color(
-                                                            0xffA1A4B2))),
-                                            child: IconButton(
-                                              autofocus: true,
-                                              icon: Image(
-                                                image: AssetImage(
-                                                    "images/play.png"),
-                                                color: isDark
-                                                    ? const Color(0xFFEBEAEC)
-                                                    : const Color(0xffA1A4B2),
-                                                width: 12.0,
+                                                            0xff3F414E),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16.0),
                                               ),
-                                              onPressed: () {},
-                                            ),
+                                              Text(
+                                                listFavAudio[index].audioName,
+                                                style: TextStyle(
+                                                    color: isDark
+                                                        ? const Color(
+                                                            0xFF98A1BD)
+                                                        : const Color(
+                                                            0xffA1A4B2),
+                                                    fontSize: 11.0),
+                                              )
+                                            ],
                                           ),
-                                          // voice title & time
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
+                                        ),
+                                      ],
+                                    ),
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, '/sound_player',
+                                          arguments: PlayerModel(
+                                              title:
                                                   listFavAudio[index].audioName,
-                                                  style: TextStyle(
-                                                      color: isDark
-                                                          ? const Color(
-                                                              0xFFE6E7F2)
-                                                          : const Color(
-                                                              0xff3F414E),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 16.0),
-                                                ),
-                                                Text(
-                                                  listFavAudio[index].audioName,
-                                                  style: TextStyle(
-                                                      color: isDark
-                                                          ? const Color(
-                                                              0xFF98A1BD)
-                                                          : const Color(
-                                                              0xffA1A4B2),
-                                                      fontSize: 11.0),
-                                                )
-                                              ],
-                                            ),
+                                              boxTitle: S.of(context).meditate,
+                                              url:
+                                                  'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
+                                    },
+                                  ),
+                                );
+                              }),
+                    ),
+                    // Tab Three (Anxios)
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: musics.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20.0, left: 30.0, right: 30.0),
+                              child: InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: isDark
+                                                  ? const Color(0xFFEBEAEC)
+                                                  : const Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: isDark
+                                              ? const Color(0xFFEBEAEC)
+                                              : const Color(0xffA1A4B2),
+                                          width: 12.0,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[index]["name"],
+                                            style: TextStyle(
+                                                color: isDark
+                                                    ? const Color(0xFFE6E7F2)
+                                                    : const Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
                                           ),
+                                          Text(
+                                            musics[index]["time"],
+                                            style: TextStyle(
+                                                color: isDark
+                                                    ? const Color(0xFF98A1BD)
+                                                    : const Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
                                         ],
                                       ),
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, '/sound_player',
-                                            arguments: PlayerModel(
-                                                title: listFavAudio[index]
-                                                    .audioName,
-                                                boxTitle:
-                                                    S.of(context).meditate,
-                                                url:
-                                                    'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
-                                      },
                                     ),
-                                  );
-                                }),
-                      ),
-                      // Tab Three (Anxios)
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: musics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20.0, left: 30.0, right: 30.0),
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      // play btn
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: isDark
-                                                    ? const Color(0xFFEBEAEC)
-                                                    : const Color(0xffA1A4B2))),
-                                        child: IconButton(
-                                          autofocus: true,
-                                          icon: Image(
-                                            image:
-                                                AssetImage("images/play.png"),
-                                            color: isDark
-                                                ? const Color(0xFFEBEAEC)
-                                                : const Color(0xffA1A4B2),
-                                            width: 12.0,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      // voice title & time
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              musics[index]["name"],
-                                              style: TextStyle(
-                                                  color: isDark
-                                                      ? const Color(0xFFE6E7F2)
-                                                      : const Color(0xff3F414E),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0),
-                                            ),
-                                            Text(
-                                              musics[index]["time"],
-                                              style: TextStyle(
-                                                  color: isDark
-                                                      ? const Color(0xFF98A1BD)
-                                                      : const Color(0xffA1A4B2),
-                                                  fontSize: 11.0),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/sound_player',
-                                        arguments: PlayerModel(
-                                            title: musics[index]["name"],
-                                            boxTitle: S.of(context).meditate,
-                                            url:
-                                                'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
-                                  },
+                                  ],
                                 ),
-                              );
-                            }),
-                      ),
-                      // Tab Four (Sleep)
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: musics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20.0, left: 30.0, right: 30.0),
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      // play btn
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1,
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: PlayerModel(
+                                          title: musics[index]["name"],
+                                          boxTitle: S.of(context).meditate,
+                                          url:
+                                              'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
+                                },
+                              ),
+                            );
+                          }),
+                    ),
+                    // Tab Four (Sleep)
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: musics.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20.0, left: 30.0, right: 30.0),
+                              child: InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: isDark
+                                                  ? const Color(0xFFEBEAEC)
+                                                  : const Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: isDark
+                                              ? const Color(0xFFEBEAEC)
+                                              : const Color(0xffA1A4B2),
+                                          width: 12.0,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[index]["name"],
+                                            style: TextStyle(
                                                 color: isDark
-                                                    ? const Color(0xFFEBEAEC)
-                                                    : const Color(0xffA1A4B2))),
-                                        child: IconButton(
-                                          autofocus: true,
-                                          icon: Image(
-                                            image:
-                                                AssetImage("images/play.png"),
-                                            color: isDark
-                                                ? const Color(0xFFEBEAEC)
-                                                : const Color(0xffA1A4B2),
-                                            width: 12.0,
+                                                    ? const Color(0xFFE6E7F2)
+                                                    : const Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
                                           ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      // voice title & time
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              musics[index]["name"],
-                                              style: TextStyle(
-                                                  color: isDark
-                                                      ? const Color(0xFFE6E7F2)
-                                                      : const Color(0xff3F414E),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0),
-                                            ),
-                                            Text(
-                                              musics[index]["time"],
-                                              style: TextStyle(
-                                                  color: isDark
-                                                      ? const Color(0xFF98A1BD)
-                                                      : const Color(0xffA1A4B2),
-                                                  fontSize: 11.0),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/sound_player',
-                                        arguments: PlayerModel(
-                                            title: musics[index]["name"],
-                                            boxTitle: S.of(context).meditate,
-                                            url:
-                                                'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
-                                  },
-                                ),
-                              );
-                            }),
-                      ),
-                      // Tab Five (Kids)
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: musics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20.0, left: 30.0, right: 30.0),
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      // play btn
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1,
+                                          Text(
+                                            musics[index]["time"],
+                                            style: TextStyle(
                                                 color: isDark
-                                                    ? const Color(0xFFEBEAEC)
-                                                    : const Color(0xffA1A4B2))),
-                                        child: IconButton(
-                                          autofocus: true,
-                                          icon: Image(
-                                            image:
-                                                AssetImage("images/play.png"),
-                                            color: isDark
-                                                ? const Color(0xFFEBEAEC)
-                                                : const Color(0xffA1A4B2),
-                                            width: 12.0,
-                                          ),
-                                          onPressed: () {},
-                                        ),
+                                                    ? const Color(0xFF98A1BD)
+                                                    : const Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
                                       ),
-                                      // voice title & time
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              musics[index]["name"],
-                                              style: TextStyle(
-                                                  color: isDark
-                                                      ? const Color(0xFFE6E7F2)
-                                                      : const Color(0xff3F414E),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0),
-                                            ),
-                                            Text(
-                                              musics[index]["time"],
-                                              style: TextStyle(
-                                                  color: isDark
-                                                      ? const Color(0xFF98A1BD)
-                                                      : const Color(0xffA1A4B2),
-                                                  fontSize: 11.0),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/sound_player',
-                                        arguments: PlayerModel(
-                                            title: musics[index]["name"],
-                                            boxTitle: S.of(context).meditate,
-                                            url:
-                                                'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
-                                  },
+                                    ),
+                                  ],
                                 ),
-                              );
-                            }),
-                      )
-                    ]),
-              )
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: PlayerModel(
+                                          title: musics[index]["name"],
+                                          boxTitle: S.of(context).meditate,
+                                          url:
+                                              'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
+                                },
+                              ),
+                            );
+                          }),
+                    ),
+                    // Tab Five (Kids)
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: musics.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20.0, left: 30.0, right: 30.0),
+                              child: InkWell(
+                                child: Row(
+                                  children: [
+                                    // play btn
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1,
+                                              color: isDark
+                                                  ? const Color(0xFFEBEAEC)
+                                                  : const Color(0xffA1A4B2))),
+                                      child: IconButton(
+                                        autofocus: true,
+                                        icon: Image(
+                                          image: AssetImage("images/play.png"),
+                                          color: isDark
+                                              ? const Color(0xFFEBEAEC)
+                                              : const Color(0xffA1A4B2),
+                                          width: 12.0,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                    // voice title & time
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            musics[index]["name"],
+                                            style: TextStyle(
+                                                color: isDark
+                                                    ? const Color(0xFFE6E7F2)
+                                                    : const Color(0xff3F414E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                          Text(
+                                            musics[index]["time"],
+                                            style: TextStyle(
+                                                color: isDark
+                                                    ? const Color(0xFF98A1BD)
+                                                    : const Color(0xffA1A4B2),
+                                                fontSize: 11.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/sound_player',
+                                      arguments: PlayerModel(
+                                          title: musics[index]["name"],
+                                          boxTitle: S.of(context).meditate,
+                                          url:
+                                              'https://www.bensound.com/bensound-music/bensound-clearday.mp3'));
+                                },
+                              ),
+                            );
+                          }),
+                    )
+                  ]),
             ],
           ),
         ),

@@ -274,7 +274,7 @@ class _HomeState extends State<Home> {
             itemBuilder: (BuildContext context, int index) {
               return MusicBox(
                 darkMood: false,
-                bgColor: isDark ? const Color(0xFF03174C) : Colors.grey[50],
+                bgColor: isDark ? const Color(0xFF03174C) : Colors.white,
                 imgLocalPath: musicBoxs[index].img,
                 imgBg: musicBoxs[index].bgColor,
                 title: musicBoxs[index].title,
